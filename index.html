@@ -55,7 +55,7 @@
             font-family: ui-sans-serif, system-ui, sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            overscroll-behavior-y: none; /* Suaviza o bounce nativo que prejudica animações */
+            overscroll-behavior-y: none;
         }
 
         /* Splash Screen */
@@ -192,7 +192,6 @@
         }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        /* Slider touch aprimorado */
         .slider-container { position: relative; width: 100%; border-radius: 1.5rem; overflow: hidden; touch-action: pan-y; }
         .slider-image { display: block; width: 100%; height: 100%; object-fit: cover; }
         .slider-overlay { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; pointer-events: none; }
@@ -508,7 +507,7 @@
         <section id="diferenciais" class="py-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2 bg-choco-950">
-                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" loading="lazy" decoding="async" class="w-full h-auto rounded-xl shadow-inner">
+                    <img src="otacilia.jpeg" alt="Detalhes Cacau Bliss" loading="lazy" decoding="async" class="w-full h-auto rounded-xl shadow-inner">
                 </div>
                 <div class="order-1 lg:order-2 space-y-8">
                     <div>
@@ -699,7 +698,6 @@
         const splashScreen = document.getElementById('splash-screen');
         const progressBar = document.getElementById('splash-progress');
         
-        // Define o limite para destravar a tela (15% em 4G, 100% ideal)
         const thresholdToUnlock = isMobile ? Math.min(frameCount, 10) : frameCount;
         let isUnlocked = false;
 
@@ -709,7 +707,6 @@
             img.onload = () => {
                 loadedCount++;
                 
-                // Atualiza progresso visual na splash screen
                 if(progressBar) progressBar.style.width = `${(loadedCount / frameCount) * 100}%`;
 
                 if(loadedCount === 1) {
@@ -722,17 +719,15 @@
                     context.drawImage(images[0], 0, 0, images[0].width, images[0].height);
                 }
 
-                // Destrava interface sem esperar a rede lenta terminar todos os 120 frames
                 if(loadedCount >= thresholdToUnlock && !isUnlocked) {
                     isUnlocked = true;
                     setTimeout(() => {
                         splashScreen.style.opacity = '0';
                         splashScreen.style.transform = 'scale(1.05)';
                         setTimeout(() => splashScreen.remove(), 1000);
-                    }, 400); // Pequeno atraso para a barra de progresso ser vista
+                    }, 400); 
                 }
             };
-            // Fallback caso a rede falhe e a imagem dê erro: destrava mesmo assim
             img.onerror = () => {
                 if(!isUnlocked) {
                     isUnlocked = true;
@@ -851,7 +846,6 @@
             window.addEventListener('touchend', () => { isDragging = false; });
             window.addEventListener('touchmove', (e) => {
                 if (!isDragging) return;
-                // Deixa o evento passivo agir com o pan-y do CSS pra não brigar com scroll vertical
                 moveSlider(e.touches[0].clientX);
             }, {passive: true});
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
