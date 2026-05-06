@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Cestas artesanais, chocolates finos e arranjos florais preparados com dedicação.">
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://buildix-user-images.s3.us-east-2.amazonaws.com">
+
     <meta property="og:type" content="business.business">
     <meta property="og:title" content="Cacau Bliss">
 
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -31,6 +35,11 @@
     </style>
 
     <style>
+        /* Otimizações Touch "Apple-level" */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
         ::-webkit-scrollbar { display: none; }
         @media (min-width: 768px) { 
             ::-webkit-scrollbar { display: block; width: 6px; } 
@@ -46,6 +55,34 @@
             font-family: ui-sans-serif, system-ui, sans-serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            overscroll-behavior-y: none; /* Suaviza o bounce nativo que prejudica animações */
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed; inset: 0; z-index: 99999;
+            background-color: #0f0805;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .splash-logo {
+            font-family: 'Lora', serif; font-size: 2rem; font-weight: 700;
+            letter-spacing: 0.1em; color: #fff;
+            background: linear-gradient(105deg, #e8d5b0 0%, #c68b3f 50%, #ffffff 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            animation: pulse-glow 2s infinite;
+        }
+        .splash-bar-container {
+            width: 140px; height: 2px; background: rgba(255,255,255,0.1);
+            margin-top: 1.5rem; border-radius: 4px; overflow: hidden; position: relative;
+        }
+        #splash-progress {
+            position: absolute; top: 0; left: 0; height: 100%; width: 0%;
+            background: #c68b3f; transition: width 0.3s ease-out;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 8px rgba(198,139,63,0.3)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(198,139,63,0.6)); }
         }
 
         .bg-fixed-layer {
@@ -59,14 +96,13 @@
             background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%); z-index: -1;
         }
 
-        /* CORREÇÃO 1: Noise otimizado. Desligando eventos e limitando renderização */
         .noise-overlay {
             position: fixed; inset: 0; width: 100vw; height: 100vh;
             z-index: 9999; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay;
-            will-change: transform; transform: translateZ(0); /* Alivia a GPU */
+            will-change: transform; transform: translateZ(0);
         }
         @media (max-width: 768px) {
-            .noise-overlay { display: none; } /* Em mobile, o ruído em tela cheia custa frames demais. Desativado. */
+            .noise-overlay { display: none; } 
         }
 
         .grain-static {
@@ -76,17 +112,17 @@
             background-size: 180px 180px; opacity: 0.04; mix-blend-mode: soft-light;
         }
 
-        /* CORREÇÃO 2: Glassmorphism mais leve no mobile */
         .glass-nav {
-            background: rgba(26, 15, 10, 0.85); /* Fundo mais sólido */
+            background: rgba(26, 15, 10, 0.85); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.3s ease;
         }
         @media (min-width: 768px) {
             .glass-nav { background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         }
 
         .clay-glass-card {
-            background: rgba(255, 255, 255, 0.05); /* Mais opaco, sem blur no mobile */
+            background: rgba(255, 255, 255, 0.05); 
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 1.5rem; transition: transform 0.3s ease;
         }
@@ -156,7 +192,8 @@
         }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        .slider-container { position: relative; width: 100%; border-radius: 1.5rem; overflow: hidden; touch-action: none; }
+        /* Slider touch aprimorado */
+        .slider-container { position: relative; width: 100%; border-radius: 1.5rem; overflow: hidden; touch-action: pan-y; }
         .slider-image { display: block; width: 100%; height: 100%; object-fit: cover; }
         .slider-overlay { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; pointer-events: none; }
         .slider-overlay img { height: 100%; width: 100vw; max-width: none; object-fit: cover; }
@@ -192,13 +229,20 @@
                 flex-direction: column;
             }
             .backdrop-blur-md {
-                backdrop-filter: none !important; /* Corta os blurs in-line no mobile */
+                backdrop-filter: none !important;
                 background: rgba(0, 0, 0, 0.85) !important;
             }
         }
     </style>
 </head>
 <body class="antialiased selection:bg-gold-500/30 selection:text-gold-100 relative">
+
+    <div id="splash-screen">
+        <div class="splash-logo">CACAU BLISS</div>
+        <div class="splash-bar-container">
+            <div id="splash-progress"></div>
+        </div>
+    </div>
 
     <div class="grain-static"></div>
 
@@ -314,8 +358,8 @@
                         </div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/aurora materna.jpeg" alt="Aurora Materna" class="w-full h-full object-cover">
+                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                            <img src="produtos/aurora materna.jpeg" alt="Aurora Materna" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-gold-300">Premium</div>
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
@@ -347,8 +391,8 @@
                         </div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Essência Gourmet.jpeg" alt="Essência Gourmet" class="w-full h-full object-cover">
+                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                            <img src="produtos/Essência Gourmet.jpeg" alt="Essência Gourmet" loading="lazy" decoding="async" class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Doce Essência</h3>
@@ -378,8 +422,8 @@
                         </div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" class="w-full h-full object-cover">
+                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                            <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1">
                                 <i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance
                             </div>
@@ -417,8 +461,8 @@
                         </div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" class="w-full h-full object-cover">
+                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                            <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
                                 <i data-lucide="crown" class="w-3 h-3"></i> Ouro
                             </div>
@@ -451,10 +495,10 @@
                     <h2 class="text-2xl md:text-3xl font-bold text-white font-serif">A Magia do Detalhe</h2>
                     <p class="text-zinc-400 text-sm md:text-base">Transformamos ingredientes simples em obras de arte comestíveis.</p>
                 </div>
-                <div class="slider-container h-[250px] md:h-[400px] border border-white/10 shadow-xl" id="image-slider">
-                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/6d04dc1f-9e92-4aa9-aa63-d0d7e22baaba.webp" alt="Ingredientes" class="slider-image">
+                <div class="slider-container h-[250px] md:h-[400px] border border-white/10 shadow-xl bg-choco-950" id="image-slider">
+                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/6d04dc1f-9e92-4aa9-aa63-d0d7e22baaba.webp" alt="Ingredientes" loading="lazy" decoding="async" class="slider-image">
                     <div class="slider-overlay" id="slider-overlay">
-                        <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/942aeb84-3e9b-4082-8888-14291ba7b5fd.webp" alt="Produto Final" id="slider-img-after">
+                        <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/942aeb84-3e9b-4082-8888-14291ba7b5fd.webp" alt="Produto Final" loading="lazy" decoding="async" id="slider-img-after">
                     </div>
                     <div class="slider-handle" id="slider-handle"></div>
                 </div>
@@ -463,8 +507,8 @@
 
         <section id="diferenciais" class="py-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2">
-                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" class="w-full h-auto rounded-xl shadow-inner">
+                <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2 bg-choco-950">
+                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" loading="lazy" decoding="async" class="w-full h-auto rounded-xl shadow-inner">
                 </div>
                 <div class="order-1 lg:order-2 space-y-8">
                     <div>
@@ -631,6 +675,9 @@
             }, 800); 
         });
 
+        // ==========================================
+        // Otimização 4G + Splash Screen Interativa
+        // ==========================================
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const heroContainer = document.getElementById("hero-track"); 
@@ -649,34 +696,59 @@
         
         const images = [];
         let loadedCount = 0;
+        const splashScreen = document.getElementById('splash-screen');
+        const progressBar = document.getElementById('splash-progress');
         
+        // Define o limite para destravar a tela (15% em 4G, 100% ideal)
+        const thresholdToUnlock = isMobile ? Math.min(frameCount, 10) : frameCount;
+        let isUnlocked = false;
+
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.src = currentFrame(i);
             img.onload = () => {
                 loadedCount++;
+                
+                // Atualiza progresso visual na splash screen
+                if(progressBar) progressBar.style.width = `${(loadedCount / frameCount) * 100}%`;
+
                 if(loadedCount === 1) {
                     const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.5) : window.devicePixelRatio || 1;
-                    
                     canvas.width = images[0].width * dpr;
                     canvas.height = images[0].height * dpr;
-                    
                     context.scale(dpr, dpr);
-                    
                     canvas.style.width = '100%';
                     canvas.style.height = '100%';
-                    
                     context.drawImage(images[0], 0, 0, images[0].width, images[0].height);
                 }
+
+                // Destrava interface sem esperar a rede lenta terminar todos os 120 frames
+                if(loadedCount >= thresholdToUnlock && !isUnlocked) {
+                    isUnlocked = true;
+                    setTimeout(() => {
+                        splashScreen.style.opacity = '0';
+                        splashScreen.style.transform = 'scale(1.05)';
+                        setTimeout(() => splashScreen.remove(), 1000);
+                    }, 400); // Pequeno atraso para a barra de progresso ser vista
+                }
             };
+            // Fallback caso a rede falhe e a imagem dê erro: destrava mesmo assim
+            img.onerror = () => {
+                if(!isUnlocked) {
+                    isUnlocked = true;
+                    splashScreen.style.opacity = '0';
+                    setTimeout(() => splashScreen.remove(), 1000);
+                }
+            }
             images.push(img);
         }
 
+        // ==========================================
+        // Engine de Scroll (LERP) Apple-level
+        // ==========================================
         let targetScroll = 0;
         let smoothScrollCanvas = 0;
         let smoothScrollText = 0;
-        
-        // CORREÇÃO 1: Impede que o canvas seja repintado atoa
         let lastDrawnFrame = -1;
 
         window.addEventListener('scroll', () => {
@@ -715,10 +787,9 @@
 
             const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothScrollCanvas * frameCount)));
             
-            // Aqui está a Mágica de FPS: O if verifica se o frameIndex MUDOU
             if (frameIndex !== lastDrawnFrame && images[frameIndex] && images[frameIndex].complete && images[0]) {
                 context.drawImage(images[frameIndex], 0, 0, images[0].width, images[0].height);
-                lastDrawnFrame = frameIndex; // Trava a repintura
+                lastDrawnFrame = frameIndex; 
             }
 
             let op1 = mapRange(smoothScrollText, 0.0, 0.25, 1, 0);
@@ -749,6 +820,9 @@
         
         animateHero();
 
+        // ==========================================
+        // Touch Slider Apple-level (pan-y CSS ativado)
+        // ==========================================
         const sliderContainer = document.getElementById('image-slider');
         const sliderOverlay = document.getElementById('slider-overlay');
         const sliderHandle = document.getElementById('slider-handle');
@@ -777,9 +851,9 @@
             window.addEventListener('touchend', () => { isDragging = false; });
             window.addEventListener('touchmove', (e) => {
                 if (!isDragging) return;
-                if(e.cancelable) e.preventDefault(); 
+                // Deixa o evento passivo agir com o pan-y do CSS pra não brigar com scroll vertical
                 moveSlider(e.touches[0].clientX);
-            }, {passive: false});
+            }, {passive: true});
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
         }
 
