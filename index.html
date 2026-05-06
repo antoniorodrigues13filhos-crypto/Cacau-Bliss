@@ -174,9 +174,9 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <a href="#contato" class="bg-gold-600 text-white px-6 py-2.5 rounded-full text-sm font-medium cursor-pointer">
+                    <button onclick="openChat('')" class="bg-gold-600 text-white px-6 py-2.5 rounded-full text-sm font-medium cursor-pointer hover:bg-gold-500 transition-colors">
                         Encomendar
-                    </a>
+                    </button>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-zinc-300 focus:outline-none p-2">
@@ -190,7 +190,7 @@
                 <a href="#hero-track" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
                 <a href="#presentes" class="text-zinc-300 block py-3 w-full text-center text-lg">Composições</a>
                 <a href="#experiencia" class="text-zinc-300 block py-3 w-full text-center text-lg">Experiência</a>
-                <a href="#contato" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
+                <button onclick="openChat('')" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</button>
             </div>
         </div>
     </nav>
@@ -227,9 +227,9 @@
                         Porque quem sempre esteve ao seu lado merece <em class="text-gold-400 not-italic">mais do que um presente comum</em>.
                     </p>
                     <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
-                        <a href="#contato" class="hero-cta-primary justify-center cursor-pointer">
+                        <button onclick="openChat('')" class="hero-cta-primary justify-center cursor-pointer">
                             <i data-lucide="gift" class="w-4 h-4"></i> Encomendar Agora
-                        </a>
+                        </button>
                         <a href="#presentes" class="hero-cta-secondary justify-center cursor-pointer">
                             <i data-lucide="package" class="w-4 h-4"></i> Ver Composições
                         </a>
@@ -267,9 +267,9 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <button onclick="openChat('Aurora Materna')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -294,9 +294,9 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <button onclick="openChat('Doce Essência')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -322,9 +322,9 @@
                             <div class="mt-auto space-y-3 border-t border-white/10 pt-4">
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Simples</span><div class="text-lg font-bold text-white">R$ 120</div></div>
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Completa</span><div class="text-lg font-bold text-white">R$ 190</div></div>
-                                <a href="#contato" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <button onclick="openChat('Encanto Floral')" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     Selecionar Opção
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -349,9 +349,9 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <button onclick="openChat('Império Cacau')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -407,10 +407,10 @@
                     <i data-lucide="message-square" class="w-8 h-8 text-gold-400"></i>
                 </div>
                 <h2 class="text-3xl font-bold text-white font-serif mb-4">Pronto para encantar?</h2>
-                <p class="text-zinc-400 text-base mb-8 max-w-md mx-auto">Tire suas dúvidas ou inicie sua reserva agora mesmo. É só chamar a gente pelo botão do chat!</p>
-                <a href="#footer" class="bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 px-8 rounded-full inline-flex justify-center items-center gap-2 transition-all hover:scale-105 text-lg shadow-[0_0_20px_rgba(198,139,63,0.4)] cursor-pointer">
-                    Quero Encomendar <i data-lucide="arrow-down" class="w-5 h-5"></i>
-                </a>
+                <p class="text-zinc-400 text-base mb-8 max-w-md mx-auto">Nosso atendimento inteligente vai pegar os dados da sua reserva rapidinho e te direcionar para a confirmação no WhatsApp.</p>
+                <button onclick="openChat('')" class="bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 px-8 rounded-full inline-flex justify-center items-center gap-2 transition-all hover:scale-105 text-lg shadow-[0_0_20px_rgba(198,139,63,0.4)] cursor-pointer">
+                    Iniciar Reserva <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </section>
 
@@ -421,7 +421,6 @@
             <span class="text-xl font-bold font-serif text-white tracking-wide opacity-80 block mb-2">Cacau Bliss</span>
             <p class="text-zinc-600 text-xs mb-2">Criando momentos inesquecíveis através de sabores e aromas selecionados com amor.</p>
             <p class="text-zinc-600 text-xs">&copy; 2024 Cacau Bliss. Todos os direitos reservados.</p>
-            <div class="mt-4 text-gold-400 text-sm animate-pulse">👇 Clique no ícone abaixo para falar com a gente!</div>
         </div>
     </footer>
 
@@ -610,7 +609,7 @@
 
 
         // ==========================================
-        // SISTEMA DE CHAT DE RESERVA
+        // SISTEMA DE CHAT DE RESERVA & REDIRECIONAMENTO WHATSAPP
         // ==========================================
         let chatStep = 0;
         let userData = { name: '', product: '', address: '', date: '' };
@@ -675,20 +674,26 @@
             }, 600);
         }
 
-        function openChat() {
+        function openChat(preSelectedProduct = '') {
             chatModal.classList.remove('hidden');
             chatModal.classList.add('flex');
             document.body.style.overflow = 'hidden'; 
             
             chatMessages.innerHTML = '';
             chatStep = 0;
-            userData = { name: '', product: '', address: '', date: '' };
+            userData = { name: '', product: preSelectedProduct, address: '', date: '' };
             chatForm.style.display = 'flex';
             const greeting = getGreeting();
             
             setTimeout(() => {
-                addBotMessage(`${greeting}! Que alegria ter você aqui na Cacau Bliss. 🥰 Qual das nossas composições você vai levar hoje?`);
-                showProductCards();
+                if(preSelectedProduct) {
+                    addBotMessage(`${greeting}! Que excelente escolha a <strong>${preSelectedProduct}</strong>! 🥰 Para iniciarmos sua reserva, como posso te chamar?`);
+                    chatStep = 1;
+                    setTimeout(() => chatInput.focus(), 100);
+                } else {
+                    addBotMessage(`${greeting}! Que alegria ter você aqui na Cacau Bliss. 🥰 Qual das nossas composições você vai levar hoje?`);
+                    showProductCards();
+                }
             }, 300);
         }
 
@@ -761,8 +766,17 @@
                     addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o nosso WhatsApp para confirmarmos a reserva. Aguarde um instante...');
                     
                     setTimeout(() => {
-                        const wppText = `Olá! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:%0A%0A🎁 *Produto:* ${userData.product}%0A📍 *Endereço:* ${userData.address}%0A📅 *Data:* ${userData.date}`;
-                        window.open(`https://wa.me/559688091761?text=${wppText}`, '_blank');
+                        // Formatação garantida com encodeURIComponent
+                        const textToEncode = `Olá! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:\n\n🎁 *Produto:* ${userData.product}\n📍 *Endereço:* ${userData.address}\n📅 *Data:* ${userData.date}`;
+                        const wppUrl = `https://wa.me/559688091761?text=${encodeURIComponent(textToEncode)}`;
+                        
+                        // Resolução de Pop-up Block para Mobile (Redirecionamento nativo direto)
+                        if (isMobile) {
+                            window.location.href = wppUrl;
+                        } else {
+                            window.open(wppUrl, '_blank');
+                        }
+                        
                         closeChat();
                         chatStep = 0;
                         chatInput.disabled = false;
