@@ -117,12 +117,12 @@
         .scroll-block { will-change: transform, opacity; transform: translateZ(0); position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
         /* Botão Flutuante Limpo com Imagem 3D */
-        .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 64px; height: 64px; z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease-out; }
+        .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 64px; height: 64px; z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease-out; border: none; background: transparent; cursor: pointer; outline: none; padding: 0; }
         .whatsapp-float:active { transform: scale(0.92); }
 
         /* Estilo do Chat App */
         #chat-modal {
-            height: 100dvh;
+            height: 100dvh; /* Crava a interface no Mobile sem ser empurrada pelo teclado de forma nativa */
         }
         .chat-bubble-bot { background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.25rem 1.25rem 1.25rem 0.25rem; }
         .chat-bubble-user { background-color: rgba(198,139,63,0.2); border: 1px solid rgba(198,139,63,0.3); border-radius: 1.25rem 1.25rem 0.25rem 1.25rem; }
@@ -174,9 +174,9 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <button onclick="openChat('')" class="bg-gold-600 text-white px-6 py-2.5 rounded-full text-sm font-medium cursor-pointer">
+                    <a href="#contato" class="bg-gold-600 text-white px-6 py-2.5 rounded-full text-sm font-medium cursor-pointer">
                         Encomendar
-                    </button>
+                    </a>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-zinc-300 focus:outline-none p-2">
@@ -190,7 +190,7 @@
                 <a href="#hero-track" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
                 <a href="#presentes" class="text-zinc-300 block py-3 w-full text-center text-lg">Composições</a>
                 <a href="#experiencia" class="text-zinc-300 block py-3 w-full text-center text-lg">Experiência</a>
-                <button onclick="openChat('')" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</button>
+                <a href="#contato" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
             </div>
         </div>
     </nav>
@@ -227,9 +227,9 @@
                         Porque quem sempre esteve ao seu lado merece <em class="text-gold-400 not-italic">mais do que um presente comum</em>.
                     </p>
                     <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
-                        <button onclick="openChat('')" class="hero-cta-primary justify-center cursor-pointer">
+                        <a href="#contato" class="hero-cta-primary justify-center cursor-pointer">
                             <i data-lucide="gift" class="w-4 h-4"></i> Encomendar Agora
-                        </button>
+                        </a>
                         <a href="#presentes" class="hero-cta-secondary justify-center cursor-pointer">
                             <i data-lucide="package" class="w-4 h-4"></i> Ver Composições
                         </a>
@@ -267,9 +267,9 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button onclick="openChat('Aurora Materna')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -294,9 +294,9 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button onclick="openChat('Doce Essência')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -322,9 +322,9 @@
                             <div class="mt-auto space-y-3 border-t border-white/10 pt-4">
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Simples</span><div class="text-lg font-bold text-white">R$ 120</div></div>
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Completa</span><div class="text-lg font-bold text-white">R$ 190</div></div>
-                                <button onclick="openChat('Encanto Floral')" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <a href="#contato" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     Selecionar Opção
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -349,9 +349,9 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button onclick="openChat('Império Cacau')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -407,10 +407,10 @@
                     <i data-lucide="message-square" class="w-8 h-8 text-gold-400"></i>
                 </div>
                 <h2 class="text-3xl font-bold text-white font-serif mb-4">Pronto para encantar?</h2>
-                <p class="text-zinc-400 text-base mb-8 max-w-md mx-auto">Nosso atendimento inteligente vai pegar os dados da sua reserva rapidinho e te direcionar para a confirmação no WhatsApp.</p>
-                <button onclick="openChat('')" class="bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 px-8 rounded-full inline-flex justify-center items-center gap-2 transition-all hover:scale-105 text-lg shadow-[0_0_20px_rgba(198,139,63,0.4)] cursor-pointer">
-                    Iniciar Reserva <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
+                <p class="text-zinc-400 text-base mb-8 max-w-md mx-auto">Tire suas dúvidas ou inicie sua reserva agora mesmo. É só chamar a gente pelo botão do chat!</p>
+                <a href="#footer" class="bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 px-8 rounded-full inline-flex justify-center items-center gap-2 transition-all hover:scale-105 text-lg shadow-[0_0_20px_rgba(198,139,63,0.4)] cursor-pointer">
+                    Quero Encomendar <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                </a>
             </div>
         </section>
 
@@ -421,12 +421,13 @@
             <span class="text-xl font-bold font-serif text-white tracking-wide opacity-80 block mb-2">Cacau Bliss</span>
             <p class="text-zinc-600 text-xs mb-2">Criando momentos inesquecíveis através de sabores e aromas selecionados com amor.</p>
             <p class="text-zinc-600 text-xs">&copy; 2024 Cacau Bliss. Todos os direitos reservados.</p>
+            <div class="mt-4 text-gold-400 text-sm animate-pulse">👇 Clique no ícone abaixo para falar com a gente!</div>
         </div>
     </footer>
 
-    <a href="https://wa.me/559688091761" target="_blank" rel="noopener" class="whatsapp-float hover:scale-105" aria-label="Falar no WhatsApp">
-        <img src="3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-contain drop-shadow-2xl">
-    </a>
+    <button onclick="openChat()" class="whatsapp-float hover:scale-105" aria-label="Abrir Atendimento">
+        <img src="3d-icon-social-media-app.png" alt="Chat" class="w-full h-full object-contain drop-shadow-2xl">
+    </button>
 
     <div id="chat-modal" class="fixed inset-0 z-[100000] bg-black/95 backdrop-blur-md hidden flex-col w-full">
         <div class="glass-nav px-5 py-4 flex items-center justify-between shrink-0">
@@ -444,7 +445,8 @@
             </button>
         </div>
 
-        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10"></div>
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10">
+            </div>
 
         <div class="bg-[#0f0805] border-t border-white/10 p-3 shrink-0 safe-pb">
             <form id="chat-form" class="flex gap-2 max-w-3xl mx-auto w-full relative">
@@ -648,14 +650,12 @@
             scrollToBottom();
             setTimeout(() => msg.classList.remove('opacity-0', 'translate-y-4'), 50);
             
-            // Oculta a área de input para forçar a seleção no card e evitar atrito
             chatForm.style.display = 'none';
         }
 
         function selectProduct(productName) {
             if(chatStep !== 0) return;
             
-            // Desativa os botões para não dar duplo clique
             document.querySelectorAll('.chat-product-btn').forEach(b => {
                 b.disabled = true;
                 b.classList.add('opacity-40', 'cursor-not-allowed');
@@ -664,7 +664,6 @@
             addUserMessage(productName);
             userData.product = productName;
             
-            // Traz o input de volta
             chatForm.style.display = 'flex'; 
             chatInput.disabled = true;
             
@@ -676,26 +675,20 @@
             }, 600);
         }
 
-        function openChat(preSelectedProduct = '') {
+        function openChat() {
             chatModal.classList.remove('hidden');
             chatModal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Trava scroll da tela de fundo
+            document.body.style.overflow = 'hidden'; 
             
             chatMessages.innerHTML = '';
             chatStep = 0;
-            userData = { name: '', product: preSelectedProduct, address: '', date: '' };
+            userData = { name: '', product: '', address: '', date: '' };
             chatForm.style.display = 'flex';
             const greeting = getGreeting();
             
             setTimeout(() => {
-                if(preSelectedProduct) {
-                    addBotMessage(`${greeting}! Que excelente escolha a <strong>${preSelectedProduct}</strong>! 🥰 Para iniciarmos sua reserva, como posso te chamar?`);
-                    chatStep = 1;
-                    setTimeout(() => chatInput.focus(), 100);
-                } else {
-                    addBotMessage(`${greeting}! Que alegria ter você aqui na Cacau Bliss. 🥰 Qual das nossas composições você vai levar hoje?`);
-                    showProductCards();
-                }
+                addBotMessage(`${greeting}! Que alegria ter você aqui na Cacau Bliss. 🥰 Qual das nossas composições você vai levar hoje?`);
+                showProductCards();
             }, 300);
         }
 
@@ -738,7 +731,6 @@
         });
 
         function processStep(text) {
-            // Efeito visual de processamento
             chatInput.disabled = true;
             
             setTimeout(() => {
@@ -746,7 +738,6 @@
                 chatInput.focus();
 
                 if(chatStep === 0) {
-                    // Fallback caso ele digite ao invés de clicar (improvável, pois ocultamos o form)
                     userData.product = text;
                     addBotMessage(`Anotado! Excelente escolha. Para continuarmos, como posso te chamar?`);
                     chatStep = 1;
