@@ -122,10 +122,17 @@
 
         /* Estilo do Chat App */
         #chat-modal {
-            height: 100dvh; /* Crava a interface no Mobile sem ser empurrada pelo teclado de forma nativa */
+            height: 100dvh;
         }
         .chat-bubble-bot { background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.25rem 1.25rem 1.25rem 0.25rem; }
         .chat-bubble-user { background-color: rgba(198,139,63,0.2); border: 1px solid rgba(198,139,63,0.3); border-radius: 1.25rem 1.25rem 0.25rem 1.25rem; }
+        
+        /* Destaque Visual Fixo no Input */
+        .chat-input-active {
+            box-shadow: 0 0 0 2px rgba(198,139,63,0.5);
+            background: rgba(255,255,255,0.1) !important;
+        }
+
         .safe-pb { padding-bottom: env(safe-area-inset-bottom); }
 
         @media (max-width: 768px) {
@@ -243,10 +250,7 @@
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
+                        <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div><div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div></div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden bg-choco-950">
@@ -440,12 +444,11 @@
             </button>
         </div>
 
-        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10">
-            </div>
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10"></div>
 
         <div class="bg-[#0f0805] border-t border-white/10 p-3 shrink-0 safe-pb">
             <form id="chat-form" class="flex gap-2 max-w-3xl mx-auto w-full relative">
-                <input type="text" id="chat-input" class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-4 text-white text-base focus:outline-none focus:border-gold-500 transition-colors" placeholder="Digite aqui..." autocomplete="off">
+                <input type="text" id="chat-input" class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-4 text-white text-base focus:outline-none focus:border-gold-500 chat-input-active transition-all" placeholder="Digite aqui..." autocomplete="off">
                 <button type="submit" id="chat-submit" class="w-14 h-14 rounded-full bg-gold-600 text-white flex items-center justify-center shrink-0 hover:bg-gold-500 transition-colors shadow-[0_0_15px_rgba(198,139,63,0.4)] cursor-pointer">
                     <i data-lucide="send" class="w-6 h-6 ml-1"></i>
                 </button>
@@ -615,6 +618,64 @@
         const chatInput = document.getElementById('chat-input');
         const chatForm = document.getElementById('chat-form');
 
+        function getGreeting() {
+            const hour = new Date().getHours();
+            if (hour >= 5 && hour < 12) return 'Bom dia';
+            if (hour >= 12 && hour < 18) return 'Boa tarde';
+            return 'Boa noite';
+        }
+
+        function showProductCards() {
+            const msg = document.createElement('div');
+            msg.className = 'flex justify-start opacity-0 translate-y-4 transition-all duration-500 mb-2 w-full';
+            
+            const products = [
+                { name: 'Aurora Materna', price: 'R$ 250' },
+                { name: 'Doce Essência', price: 'R$ 140' },
+                { name: 'Encanto Floral', price: 'R$ 120+' },
+                { name: 'Império Cacau', price: 'R$ 180' }
+            ];
+            
+            let cardsHtml = products.map(p => 
+                `<button onclick="selectProduct('${p.name}')" class="chat-product-btn w-full text-left p-4 mb-3 rounded-xl border border-gold-500/30 bg-[#1a0f0a] hover:bg-gold-600/20 text-gold-200 transition-colors font-medium flex justify-between items-center cursor-pointer shadow-md">
+                    <span>${p.name}</span>
+                    <span class="text-xs text-gold-400/80 px-2 py-1 bg-white/5 rounded-md">${p.price}</span>
+                </button>`
+            ).join('');
+
+            msg.innerHTML = `<div class="w-full max-w-[85%] mt-2">${cardsHtml}</div>`;
+            chatMessages.appendChild(msg);
+            scrollToBottom();
+            setTimeout(() => msg.classList.remove('opacity-0', 'translate-y-4'), 50);
+            
+            // Oculta a área de input para forçar a seleção no card e evitar atrito
+            chatForm.style.display = 'none';
+        }
+
+        function selectProduct(productName) {
+            if(chatStep !== 0) return;
+            
+            // Desativa os botões para não dar duplo clique
+            document.querySelectorAll('.chat-product-btn').forEach(b => {
+                b.disabled = true;
+                b.classList.add('opacity-40', 'cursor-not-allowed');
+            });
+            
+            addUserMessage(productName);
+            userData.product = productName;
+            
+            // Traz o input de volta
+            chatForm.style.display = 'flex'; 
+            chatInput.disabled = true;
+            
+            setTimeout(() => {
+                chatInput.disabled = false;
+                addBotMessage(`Uau, excelente escolha! A <strong>${productName}</strong> é uma maravilha. ✨<br><br>Para continuarmos com a sua reserva, como posso te chamar?`);
+                chatStep = 1;
+                chatInput.focus();
+            }, 600);
+        }
+
         function openChat(preSelectedProduct = '') {
             chatModal.classList.remove('hidden');
             chatModal.classList.add('flex');
@@ -623,14 +684,18 @@
             chatMessages.innerHTML = '';
             chatStep = 0;
             userData = { name: '', product: preSelectedProduct, address: '', date: '' };
+            chatForm.style.display = 'flex';
+            const greeting = getGreeting();
             
             setTimeout(() => {
                 if(preSelectedProduct) {
-                    addBotMessage(`Olá! Que ótima escolha a <strong>${preSelectedProduct}</strong>. 🥰 Para iniciarmos sua reserva, como posso te chamar?`);
+                    addBotMessage(`${greeting}! Que excelente escolha a <strong>${preSelectedProduct}</strong>! 🥰 Para iniciarmos sua reserva, como posso te chamar?`);
+                    chatStep = 1;
+                    setTimeout(() => chatInput.focus(), 100);
                 } else {
-                    addBotMessage('Olá! Bem-vindo(a) à Cacau Bliss. 🥰 Para iniciarmos seu atendimento, como posso te chamar?');
+                    addBotMessage(`${greeting}! Que alegria ter você aqui na Cacau Bliss. 🥰 Qual das nossas composições você vai levar hoje?`);
+                    showProductCards();
                 }
-                setTimeout(() => chatInput.focus(), 100);
             }, 300);
         }
 
@@ -642,8 +707,8 @@
 
         function addBotMessage(text) {
             const msg = document.createElement('div');
-            msg.className = 'flex justify-start opacity-0 translate-y-4 transition-all duration-500 mb-2';
-            msg.innerHTML = `<div class="chat-bubble-bot px-5 py-3.5 text-white max-w-[85%] text-base leading-relaxed drop-shadow-lg">${text}</div>`;
+            msg.className = 'flex justify-start opacity-0 translate-y-4 transition-all duration-500 mb-3';
+            msg.innerHTML = `<div class="chat-bubble-bot px-5 py-4 text-white max-w-[85%] text-base leading-relaxed drop-shadow-lg">${text}</div>`;
             chatMessages.appendChild(msg);
             scrollToBottom();
             setTimeout(() => msg.classList.remove('opacity-0', 'translate-y-4'), 50);
@@ -651,8 +716,8 @@
 
         function addUserMessage(text) {
             const msg = document.createElement('div');
-            msg.className = 'flex justify-end opacity-0 translate-y-4 transition-all duration-500 mb-2';
-            msg.innerHTML = `<div class="chat-bubble-user px-5 py-3.5 text-white max-w-[85%] text-base font-medium leading-relaxed drop-shadow-lg">${text}</div>`;
+            msg.className = 'flex justify-end opacity-0 translate-y-4 transition-all duration-500 mb-3';
+            msg.innerHTML = `<div class="chat-bubble-user px-5 py-4 text-white max-w-[85%] text-base font-medium leading-relaxed drop-shadow-lg">${text}</div>`;
             chatMessages.appendChild(msg);
             scrollToBottom();
             setTimeout(() => msg.classList.remove('opacity-0', 'translate-y-4'), 50);
@@ -673,7 +738,7 @@
         });
 
         function processStep(text) {
-            // Typing effect simulate
+            // Efeito visual de processamento
             chatInput.disabled = true;
             
             setTimeout(() => {
@@ -681,18 +746,14 @@
                 chatInput.focus();
 
                 if(chatStep === 0) {
-                    userData.name = text;
-                    if(userData.product) {
-                        addBotMessage(`Prazer, ${userData.name}! Para onde devemos enviar a sua ${userData.product}? (Me passe o endereço completo com ponto de referência)`);
-                        chatStep = 2; // Pula a escolha de produto
-                    } else {
-                        addBotMessage(`Prazer, ${userData.name}! Qual das nossas composições você deseja reservar? (Ex: Aurora Materna, Doce Essência, etc)`);
-                        chatStep = 1;
-                    }
+                    // Fallback caso ele digite ao invés de clicar (improvável, pois ocultamos o form)
+                    userData.product = text;
+                    addBotMessage(`Anotado! Excelente escolha. Para continuarmos, como posso te chamar?`);
+                    chatStep = 1;
                 } 
                 else if(chatStep === 1) {
-                    userData.product = text;
-                    addBotMessage(`Anotado! Agora, por favor, me passe o endereço completo para entrega da sua ${userData.product} (com ponto de referência).`);
+                    userData.name = text;
+                    addBotMessage(`Prazer, ${userData.name}! Para onde devemos enviar a sua ${userData.product}? (Me passe o endereço completo com ponto de referência)`);
                     chatStep = 2;
                 }
                 else if(chatStep === 2) {
@@ -702,10 +763,11 @@
                 }
                 else if(chatStep === 3) {
                     userData.date = text;
-                    chatInput.disabled = true; // Finalizou
+                    chatInput.disabled = true; 
                     chatInput.placeholder = "Redirecionando...";
+                    chatForm.classList.add('opacity-50');
                     
-                    addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o WhatsApp para confirmarmos os detalhes e a forma de pagamento... aguarde um instante.');
+                    addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o nosso WhatsApp para confirmarmos a reserva. Aguarde um instante...');
                     
                     setTimeout(() => {
                         const wppText = `Olá! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:%0A%0A🎁 *Produto:* ${userData.product}%0A📍 *Endereço:* ${userData.address}%0A📅 *Data:* ${userData.date}`;
@@ -713,6 +775,7 @@
                         closeChat();
                         chatStep = 0;
                         chatInput.disabled = false;
+                        chatForm.classList.remove('opacity-50');
                         chatInput.placeholder = "Digite aqui...";
                     }, 2500);
                 }
