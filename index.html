@@ -93,18 +93,26 @@
             100% { background-position: 200% center; }
         }
         
+        /* Ajustes Tipográficos Responsivos */
+        .hero-content {
+            padding: 0 clamp(20px, 5vw, 10%);
+        }
+
         .hero-title {
             font-family: 'Lora', serif;
+            font-size: clamp(40px, 8vw, 100px);
             background: linear-gradient(105deg, #e8d5b0 0%, #f5eedc 18%, #c68b3f 30%, #ead9b9 42%, #ffffff 52%, #ead9b9 62%, #c68b3f 74%, #f5eedc 86%, #e8d5b0 100%);
             background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
             animation: gold-shimmer 6s 1s linear infinite; line-height: 1.15; letter-spacing: -0.02em;
         }
 
-        .hero-title-line {
-            display: block; width: 80px; height: 2px; background: linear-gradient(90deg, transparent, #c68b3f, transparent); margin: 1.25rem auto 0;
+        .hero-sub {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2vw, 20px);
+            color: #d4d4d8; /* zinc-300 */
         }
 
-        /* Otimização de Repintura: Text Shadow mais leve no mobile */
         .text-shadow-hero { text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
         @media (min-width: 768px) {
             .text-shadow-hero { text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
@@ -113,17 +121,13 @@
         .hero-cta-primary {
             background: linear-gradient(135deg, #c68b3f 0%, #b57233 50%, #97582d 100%); color: #fff; padding: 0.85rem 2rem; border-radius: 9999px;
             font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; box-shadow: 0 0 24px rgba(198,139,63,0.45), 0 4px 16px rgba(0,0,0,0.4);
-            transition: transform 0.2s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.15);
+            white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.15);
         }
-        .hero-cta-primary:hover { transform: scale(1.02); }
-        .hero-cta-primary:active { transform: scale(0.98); }
 
         .hero-cta-secondary {
             background: rgba(255,255,255,0.05); color: #e8d5b0; padding: 0.85rem 2rem; border-radius: 9999px; font-weight: 500; font-size: 0.95rem;
-            border: 1px solid rgba(198,139,63,0.35); backdrop-filter: blur(8px); transition: transform 0.2s, background 0.2s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+            border: 1px solid rgba(198,139,63,0.35); backdrop-filter: blur(8px); white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
         }
-        .hero-cta-secondary:hover { background: rgba(255,255,255,0.1); transform: scale(1.02); }
-        .hero-cta-secondary:active { transform: scale(0.98); }
 
         .hero-badge {
             display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(198,139,63,0.1); border: 1px solid rgba(198,139,63,0.3);
@@ -159,16 +163,25 @@
         .accordion-btn[aria-expanded="true"] { background-color: rgba(198, 139, 63, 0.1); }
 
         #hero-canvas { will-change: transform; }
-        /* Otimização: will-change e suporte pronto pro translate3d */
-        .scroll-block { will-change: transform, opacity; position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .scroll-block { 
+            will-change: transform, opacity; 
+            transform: translateZ(0); /* Força GPU nativa */
+            position: absolute; left: 0; right: 0; 
+            display: flex; flex-direction: column; align-items: center; text-align: center; 
+        }
 
         .whatsapp-float {
             position: fixed; bottom: 1.5rem; right: 1.5rem; background-color: #25D366; color: white; width: 56px; height: 56px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
-            z-index: 999; transition: transform 0.2s, background-color 0.2s;
+            z-index: 999;
         }
-        .whatsapp-float:hover { transform: scale(1.05); background-color: #20b858; }
-        .whatsapp-float:active { transform: scale(0.95); }
+
+        /* Formulário responsivo extra */
+        @media (max-width: 768px) {
+            .cro-capture-form {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-gold-500/30 selection:text-gold-100 relative">
@@ -196,19 +209,19 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#hero-track" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Início</a>
-                        <a href="#presentes" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Composições</a>
-                        <a href="#experiencia" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Experiência</a>
-                        <a href="#faq" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Dúvidas</a>
+                        <a href="#hero-track" class="text-zinc-300 px-3 py-2 text-sm font-medium">Início</a>
+                        <a href="#presentes" class="text-zinc-300 px-3 py-2 text-sm font-medium">Composições</a>
+                        <a href="#experiencia" class="text-zinc-300 px-3 py-2 text-sm font-medium">Experiência</a>
+                        <a href="#faq" class="text-zinc-300 px-3 py-2 text-sm font-medium">Dúvidas</a>
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <a href="#contato" class="bg-gold-600 hover:bg-gold-500 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all">
+                    <a href="#contato" class="bg-gold-600 text-white px-6 py-2.5 rounded-full text-sm font-medium">
                         Encomendar
                     </a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-zinc-300 focus:outline-none p-2 hover:text-white">
+                    <button id="mobile-menu-btn" class="text-zinc-300 focus:outline-none p-2">
                         <i data-lucide="menu" class="w-7 h-7"></i>
                     </button>
                 </div>
@@ -216,34 +229,34 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5">
             <div class="px-4 pt-2 pb-6 flex flex-col items-center space-y-2">
-                <a href="#hero-track" class="text-zinc-300 hover:text-gold-400 block py-3 w-full text-center text-lg">Início</a>
-                <a href="#presentes" class="text-zinc-300 hover:text-gold-400 block py-3 w-full text-center text-lg">Composições</a>
-                <a href="#experiencia" class="text-zinc-300 hover:text-gold-400 block py-3 w-full text-center text-lg">Experiência</a>
-                <a href="#contato" class="bg-gold-600 hover:bg-gold-500 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
+                <a href="#hero-track" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
+                <a href="#presentes" class="text-zinc-300 block py-3 w-full text-center text-lg">Composições</a>
+                <a href="#experiencia" class="text-zinc-300 block py-3 w-full text-center text-lg">Experiência</a>
+                <a href="#contato" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
             </div>
         </div>
     </nav>
 
-    <section id="hero-track" class="relative h-[250vh] md:h-[400vh] bg-black">
-        <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+    <section id="hero-track" class="relative h-[600vh] bg-black">
+        <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center hero-content">
             <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover z-0"></canvas>
             <div class="hero-vignette"></div>
             <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
 
-            <div class="relative z-20 max-w-5xl mx-auto w-full h-full flex items-center justify-center pointer-events-none px-6">
+            <div class="relative z-20 max-w-5xl mx-auto w-full h-full flex items-center justify-center pointer-events-none">
                 <div id="hero-block-1" class="scroll-block">
-                    <div class="hero-badge pointer-events-auto hover:bg-gold-600/20 transition-colors cursor-default">
+                    <div class="hero-badge pointer-events-auto">
                         <span class="hero-badge-dot"></span>
                         Cestas artesanais · Chocolates finos · Flores
                     </div>
-                    <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold mb-2">
+                    <h1 class="hero-title font-bold mb-2">
                         Ela cuidou de você<br>a vida inteira.
                     </h1>
-                    <p class="font-serif italic text-xl md:text-3xl text-zinc-300 text-shadow-hero">Hoje é a sua vez.</p>
+                    <p class="hero-sub text-shadow-hero">Hoje é a sua vez.</p>
                 </div>
 
                 <div id="hero-block-2" class="scroll-block opacity-0">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white font-serif mb-6 text-shadow-hero leading-tight">
+                    <h2 class="hero-title font-bold mb-6 text-shadow-hero leading-tight" style="font-size: clamp(32px, 6vw, 72px);">
                         A experiência completa.
                     </h2>
                     <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 text-base md:text-xl text-zinc-200">
@@ -254,7 +267,7 @@
                 </div>
 
                 <div id="hero-block-3" class="scroll-block opacity-0 pointer-events-auto">
-                    <p class="text-xl md:text-3xl text-white font-serif mb-8 text-shadow-hero max-w-2xl leading-snug">
+                    <p class="hero-sub text-shadow-hero mb-8 max-w-2xl leading-snug">
                         Porque quem sempre esteve ao seu lado merece <em class="text-gold-400 not-italic">mais do que um presente comum</em>.
                     </p>
                     <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
@@ -271,7 +284,6 @@
     </section>
 
     <main class="relative z-10 pb-24 bg-transparent">
-
         <section id="presentes" class="pt-20 pb-12 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-5xl font-bold text-white mb-3 font-serif">Nossas Composições</h2>
@@ -279,7 +291,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                <article class="clay-glass-card overflow-hidden flex flex-col relative hover:-translate-y-2 hover:border-gold-500/30">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4">
@@ -289,7 +301,7 @@
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/aurora materna.jpeg" alt="Aurora Materna" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            <img src="produtos/aurora materna.jpeg" alt="Aurora Materna" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gold-300">Premium</div>
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
@@ -304,7 +316,7 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 hover:bg-gold-600/40 hover:text-white transition-colors">
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </a>
                             </div>
@@ -312,7 +324,7 @@
                     </div>
                 </article>
 
-                <article class="clay-glass-card overflow-hidden flex flex-col relative hover:-translate-y-2 hover:border-gold-500/30">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4">
@@ -322,7 +334,7 @@
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Essência Gourmet.jpeg" alt="Essência Gourmet" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            <img src="produtos/Essência Gourmet.jpeg" alt="Essência Gourmet" class="w-full h-full object-cover">
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Doce Essência</h3>
@@ -335,7 +347,7 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 hover:bg-gold-600/40 hover:text-white transition-colors">
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </a>
                             </div>
@@ -343,7 +355,7 @@
                     </div>
                 </article>
 
-                <article class="clay-glass-card overflow-hidden flex flex-col relative hover:-translate-y-2 hover:border-gold-500/30">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4">
@@ -353,7 +365,7 @@
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1">
                                 <i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance
                             </div>
@@ -374,7 +386,7 @@
                                     <span class="text-sm text-zinc-400">Versão Completa</span>
                                     <div class="text-lg font-bold text-white">R$ 190</div>
                                 </div>
-                                <a href="#contato" class="w-full block text-center py-2 bg-gold-600/20 hover:bg-gold-600/40 border border-gold-500/30 rounded-lg text-gold-400 hover:text-white text-sm font-medium transition-colors">
+                                <a href="#contato" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium">
                                     Selecionar Opção
                                 </a>
                             </div>
@@ -382,7 +394,7 @@
                     </div>
                 </article>
 
-                <article class="clay-glass-card overflow-hidden flex flex-col relative hover:-translate-y-2 hover:border-gold-500/30">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4">
@@ -392,7 +404,7 @@
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                            <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
                                 <i data-lucide="crown" class="w-3 h-3"></i> Ouro
                             </div>
@@ -408,7 +420,7 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 hover:bg-gold-600/40 hover:text-white transition-colors">
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </a>
                             </div>
@@ -430,7 +442,7 @@
                     <div class="slider-overlay" id="slider-overlay">
                         <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/942aeb84-3e9b-4082-8888-14291ba7b5fd.webp" alt="Produto Final" id="slider-img-after">
                     </div>
-                    <div class="slider-handle hover:scale-110 transition-transform" id="slider-handle"></div>
+                    <div class="slider-handle" id="slider-handle"></div>
                 </div>
             </div>
         </section>
@@ -438,7 +450,7 @@
         <section id="diferenciais" class="py-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2">
-                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" class="w-full h-auto rounded-xl shadow-inner hover:scale-[1.02] transition-transform duration-500">
+                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" class="w-full h-auto rounded-xl shadow-inner">
                 </div>
                 <div class="order-1 lg:order-2 space-y-8">
                     <div>
@@ -446,27 +458,27 @@
                         <p class="text-zinc-400 text-base md:text-lg">Para a mulher que merece o melhor todos os dias. Não entregamos apenas cestas, entregamos sentimentos materializados em sabor e beleza.</p>
                     </div>
                     <div class="space-y-6">
-                        <div class="flex gap-4 items-start group">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30 group-hover:bg-gold-600/40 transition-colors">
-                                <i data-lucide="clock" class="w-6 h-6 text-gold-400 group-hover:text-white transition-colors"></i>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="clock" class="w-6 h-6 text-gold-400"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg">Entrega Agendada</h4>
                                 <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-start group">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30 group-hover:bg-gold-600/40 transition-colors">
-                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400 group-hover:text-white transition-colors"></i>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
                                 <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-start group">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30 group-hover:bg-gold-600/40 transition-colors">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400 group-hover:text-white transition-colors"></i>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg">Personalização</h4>
@@ -485,7 +497,7 @@
             </div>
             <div class="space-y-4">
                 <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none hover:bg-white/5 transition-colors" aria-expanded="false">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
                         <span class="text-white font-medium text-sm md:text-base">Com quanta antecedência devo fazer meu pedido?</span>
                         <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
                     </button>
@@ -496,7 +508,7 @@
                     </div>
                 </div>
                 <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none hover:bg-white/5 transition-colors" aria-expanded="false">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
                         <span class="text-white font-medium text-sm md:text-base">Vocês entregam em quais regiões?</span>
                         <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
                     </button>
@@ -507,7 +519,7 @@
                     </div>
                 </div>
                 <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none hover:bg-white/5 transition-colors" aria-expanded="false">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
                         <span class="text-white font-medium text-sm md:text-base">Posso alterar itens da cesta?</span>
                         <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
                     </button>
@@ -526,20 +538,20 @@
                     <h2 class="text-2xl md:text-3xl font-bold text-white font-serif">Reserve seu Momento</h2>
                     <p class="text-zinc-400 text-sm mt-2">Preencha os dados abaixo e nossa equipe entrará em contato rapidamente para confirmar os detalhes.</p>
                 </div>
-                <form action="#" method="POST" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" name="nome" placeholder="Seu Nome" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 hover:border-white/30 transition-colors text-base">
-                        <input type="tel" name="telefone" placeholder="Seu WhatsApp" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 hover:border-white/30 transition-colors text-base">
+                <form action="#" method="POST" class="space-y-4 cro-capture-form flex md:grid md:grid-cols-2 gap-4">
+                    <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" name="nome" placeholder="Seu Nome" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
+                        <input type="tel" name="telefone" placeholder="Seu WhatsApp" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
                     </div>
-                    <select name="opcao" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white appearance-none focus:outline-none focus:border-gold-500 hover:border-white/30 transition-colors text-base">
+                    <select name="opcao" class="col-span-1 md:col-span-2 w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white appearance-none focus:outline-none focus:border-gold-500 text-base">
                         <option value="" class="bg-choco-900 text-zinc-400">Qual opção deseja?</option>
                         <option value="aurora" class="bg-choco-900">Aurora Materna (R$ 250)</option>
                         <option value="doce" class="bg-choco-900">Doce Essência (R$ 140)</option>
                         <option value="floral_simples" class="bg-choco-900">Encanto Floral (R$ 120+)</option>
                         <option value="imperio" class="bg-choco-900">Império Cacau (R$ 180)</option>
                     </select>
-                    <textarea name="mensagem" id="mensagem" rows="3" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500 hover:border-white/30 transition-colors resize-none text-base" placeholder="Detalhes (Data, endereço, mensagem do cartão)..."></textarea>
-                    <button type="submit" class="w-full bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 rounded-lg flex justify-center items-center gap-2 transition-colors mt-2 text-lg">
+                    <textarea name="mensagem" id="mensagem" rows="3" class="col-span-1 md:col-span-2 w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500 resize-none text-base" placeholder="Detalhes (Data, endereço, mensagem do cartão)..."></textarea>
+                    <button type="submit" class="col-span-1 md:col-span-2 w-full bg-gold-600 text-white font-bold py-4 rounded-lg flex justify-center items-center gap-2 mt-2 text-lg">
                         Enviar Pedido <i data-lucide="send" class="w-5 h-5"></i>
                     </button>
                 </form>
@@ -556,12 +568,11 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="whatsapp-float hover:scale-105 transition-transform" aria-label="Falar no WhatsApp">
+    <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Falar no WhatsApp">
         <i data-lucide="message-circle" class="w-7 h-7"></i>
     </a>
 
     <script>
-        // Lógica de Detecção Mobile
         const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
 
         function mapRange(value, inMin, inMax, outMin, outMax) {
@@ -606,7 +617,6 @@
             }, 800); 
         });
 
-        // Otimização: Carregar apenas metade dos frames em Mobile para evitar peso na VRAM/RAM
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const heroContainer = document.getElementById("hero-track"); 
@@ -619,7 +629,6 @@
         const frameCount = isMobile ? Math.floor(maxFrames / 2) : maxFrames; 
         
         const currentFrame = index => {
-            // Em mobile, pula frames de 2 em 2 (ex: 2, 4, 6) para alcançar o fim na metade do tempo
             const mappedIndex = isMobile ? index * 2 : index;
             return `${String(mappedIndex).padStart(4, '0')}.webp`;
         };
@@ -633,16 +642,13 @@
             img.onload = () => {
                 loadedCount++;
                 if(loadedCount === 1) {
-                    // Otimização de DPR: Limita a 1.5 em mobile pra não fritar a GPU
                     const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.5) : window.devicePixelRatio || 1;
                     
                     canvas.width = images[0].width * dpr;
                     canvas.height = images[0].height * dpr;
                     
-                    // Escala o contexto da canvas
                     context.scale(dpr, dpr);
                     
-                    // Preenche via CSS
                     canvas.style.width = '100%';
                     canvas.style.height = '100%';
                     
@@ -668,7 +674,6 @@
             targetScroll = frac;
         }, { passive: true });
 
-        // Otimização: IntersectionObserver pausa a renderização se o Hero não estiver visível
         let isHeroVisible = true;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -677,9 +682,9 @@
         });
         if (heroContainer) observer.observe(heroContainer);
 
-        // Otimização: LERP Diferenciado (Movimento menos brusco em 60Hz Mobile)
-        const lerpCanvas = isMobile ? 0.10 : 0.15;
-        const lerpText = isMobile ? 0.06 : 0.04;
+        // LERP com os novos parâmetros atualizados
+        const lerpCanvas = 0.12;
+        const lerpText = 0.08;
 
         function animateHero() {
             if(!heroContainer) return;
@@ -697,26 +702,26 @@
                 context.drawImage(images[frameIndex], 0, 0, images[0].width, images[0].height);
             }
 
-            // Otimização: translate3d para ativar aceleração de hardware (GPU) sem puxar os pixels
-            let op1 = mapRange(smoothScrollText, 0.02, 0.20, 1, 0);
-            let y1 = mapRange(smoothScrollText, 0.02, 0.20, 0, -80);
+            // Sensibilidade do fade ajustada (0.25 para cada intervalo de transição) e Deslocamento Vertical em 120px
+            let op1 = mapRange(smoothScrollText, 0.0, 0.25, 1, 0);
+            let y1 = mapRange(smoothScrollText, 0.0, 0.25, 0, -120);
             block1.style.opacity = Math.max(0, op1);
             block1.style.transform = `translate3d(0px, ${y1}px, 0px)`;
             block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
 
             let op2, y2;
-            if (smoothScrollText < 0.45) {
-                op2 = mapRange(smoothScrollText, 0.25, 0.40, 0, 1);
-                y2 = mapRange(smoothScrollText, 0.25, 0.40, 80, 0);
+            if (smoothScrollText < 0.50) {
+                op2 = mapRange(smoothScrollText, 0.25, 0.50, 0, 1);
+                y2 = mapRange(smoothScrollText, 0.25, 0.50, 120, 0);
             } else {
-                op2 = mapRange(smoothScrollText, 0.55, 0.70, 1, 0);
-                y2 = mapRange(smoothScrollText, 0.55, 0.70, 0, -80);
+                op2 = mapRange(smoothScrollText, 0.55, 0.80, 1, 0);
+                y2 = mapRange(smoothScrollText, 0.55, 0.80, 0, -120);
             }
             block2.style.opacity = Math.max(0, op2);
             block2.style.transform = `translate3d(0px, ${y2}px, 0px)`;
 
-            let op3 = mapRange(smoothScrollText, 0.75, 0.90, 0, 1);
-            let y3 = mapRange(smoothScrollText, 0.75, 0.90, 80, 0);
+            let op3 = mapRange(smoothScrollText, 0.80, 1.0, 0, 1);
+            let y3 = mapRange(smoothScrollText, 0.80, 1.0, 120, 0);
             block3.style.opacity = Math.max(0, op3);
             block3.style.transform = `translate3d(0px, ${y3}px, 0px)`;
             block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
