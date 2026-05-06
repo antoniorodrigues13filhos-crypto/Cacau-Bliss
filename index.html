@@ -49,142 +49,22 @@
             font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
         }
 
-        .bg-fixed-layer {
+        /* Novidade: Noise Overlay (Granulado Leve) */
+        #noise-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/75d400a2-e4f7-4388-8f62-8f112aa521d7.webp');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-        }
-
-        .bg-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%);
-            z-index: -1;
-        }
-
-        /* Glass & Claymorphism Styles */
-        .glass-nav {
-            background: rgba(26, 15, 10, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .clay-glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 20px 40px -10px rgba(0,0,0,0.5),
-                inset 0 1px 1px rgba(255,255,255,0.15),
-                inset 0 -1px 1px rgba(0,0,0,0.2);
-            border-radius: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 15px rgba(198, 139, 63, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(198, 139, 63, 0.8); }
-        }
-        .animate-glow {
-            animation: pulse-glow 3s infinite ease-in-out;
-        }
-
-        /* Skeleton Shimmer */
-        .shimmer-bg {
-            background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite linear;
-        }
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* Before/After Slider */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            touch-action: none;
-        }
-        .slider-image {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .slider-overlay {
-            position: absolute;
             top: 0;
             left: 0;
-            height: 100%;
-            width: 50%;
-            overflow: hidden;
-        }
-        .slider-overlay img {
-            height: 100%;
             width: 100vw;
-            max-width: none;
-            object-fit: cover;
-        }
-        .slider-handle {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 4px;
-            background: #c68b3f;
-            transform: translateX(-50%);
-            cursor: ew-resize;
-            z-index: 10;
-        }
-        .slider-handle::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 36px;
-            height: 36px;
-            background: #c68b3f;
-            border: 3px solid #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 20px;
-        }
-
-        /* Accordion */
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .accordion-icon {
-            transition: transform 0.3s ease;
-        }
-        .accordion-btn[aria-expanded="true"] .accordion-icon {
-            transform: rotate(180deg);
-        }
-        .accordion-btn[aria-expanded="true"] {
-            background-color: rgba(198, 139, 63, 0.1);
+            height: 100vh;
+            /* Imagem de ruído sutil em Base64 para tiling */
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW1mzM2WlpaZmZm5ubm8vLzMzMzJycnj4+P6+vr8/Pz///////////////////////////////////////////////////+dnZ14AAAAAXRSTlMAQObYZgAAAnVJREFUeNqVlaOy4kAURRNcAsH//7XY7pY45vV9N6uq7sk55b6wP4Hn85lMpqKqS4U4pS4T4iK7N9ZAnX6vEAn6vYFIpDeLBFmDREK6f9bAnb5p5EvX5Y0S+Uatv86/XofY+69pZ4jX8mYI8Vr+bIEnXcsbB77fBvFyO+X4/j+N8RorS4rXVFlR/CbOmuI3f3Yq/uK6uvir6+48S9m5v+5cE/eOq+Xqf3OubK54pY/K4rV3bqvFX4OqqN/Kk+OovDkOrpE5vK6RjepT/ZRXN9vN5Y+Diz/8O5XFzXf/yZfXv3qX/8S967q8/k3cl9vF75fFbe/K54+DxR+Xp8vifvM+uN/y9Y8i5Z5H6m75+j8rUjXF6y8vU+Neq/X8X6/R33j9tXN7uYfGvV7reL3Xuvf8X547Y4vP+V4fV1G//5p7159v+z1//7+i/sM8X/9mDbe/5fPZ17XN7S93r2t73V8b3/Nffq8/v99e/6Gv47r5/j4b/xL3nK/R/r74i/vE72/p6v6X44v3wX+3t5e7vTzf86P/759v+S+/vz7Xzff/Ie6Z8ZqN9/v9/P44v//fOf3FvX/M/UfOfI17vXpE79d6Xq94zXvEbeY3i8V7veXp9UofF6m794bW8e/239tD9vV8f+f2X9T3X5rZ+f6P98S/r9H+fD9fH/n6N4rN6/v/bX+/P4v7XyOvxO/13jX+5PjSj/X8f4yYq4n5/P5q5mK6msv5/62Zp+npfL955Xit5vefN6pP9Xv9V+65p+P5vhb3P3NPr2X+b0f8uRrv99v5vU6/N/Zz6v+nZ//54/+S/+N9f8z9H//+/9T4f6L+//Y//+L+/6Px/v/Ffcz3Pf9ZfT7//j6vV/u9nv/H5P5/Uff6Mff6vff/p69n6/k6Lqfv9T97zve7v3bNPe+/vNfrff2P//8P//95n9fv//x//v+8z+f//v+W9v+f357v+4/7z/+R7P/ZzP+9ntfv9Z/5//+V9f+f//j8X+655/4H93jNvefvf5/6vzL+53+W+Rrv+S955Xit5uef9vFfr/f/Of2N+/+t4/f6P9+X77vOf+V+5P+85+X73/t/5//9vdf/X96v9fv9f//+r1f8/b//P//4/V8=);
+            /* z-index ajustado para cobrir o Motion Hero (z-0) e gradientes (z-10),
+               mas ficar abaixo do conteúdo de texto principal (z-20) e nav (z-50).
+               Se você quiser que o granulado cubra o site inteiro, incluindo cards, mude para z-60.
+               Minha recomendação é z-15 para ficar abaixo dos cards de vidro. */
+            z-index: 15; 
+            opacity: 0.04; /* Ajuste aqui a intensidade do granulado (0.01 a 0.1) */
+            pointer-events: none; /* Garante que o usuário consiga clicar nos elementos abaixo */
         }
 
         /* Motion Hero Styles */
@@ -193,7 +73,9 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-gold-500/30 selection:text-gold-100">
+<body class="antialiased selection:bg-gold-500/30 selection:text-gold-100 relative">
+
+    <div id="noise-overlay"></div>
 
     <div class="bg-fixed-layer"></div>
     <div class="bg-overlay"></div>
@@ -204,7 +86,6 @@
                 <div class="flex-shrink-0 flex items-center gap-2">
                     <span class="text-2xl font-bold font-serif text-white tracking-wide">Cacau Bliss</span>
                 </div>
-                
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#hero-container" class="text-zinc-300 hover:text-gold-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Início</a>
@@ -214,13 +95,11 @@
                         <a href="#faq" class="text-zinc-300 hover:text-gold-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">FAQ</a>
                     </div>
                 </div>
-
                 <div class="hidden md:block">
                     <a href="#contato" class="bg-gold-600 hover:bg-gold-500 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-[0_0_15px_rgba(198,139,63,0.3)] hover:shadow-[0_0_25px_rgba(198,139,63,0.5)]">
                         Encomendar
                     </a>
                 </div>
-
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-zinc-300 hover:text-white hover:bg-white/10 focus:outline-none">
                         <i data-lucide="menu" class="w-6 h-6"></i>
@@ -228,7 +107,6 @@
                 </div>
             </div>
         </div>
-
         <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5">
             <div class="px-2 pt-2 pb-6 space-y-1 sm:px-3 flex flex-col items-center">
                 <a href="#hero-container" class="text-zinc-300 hover:text-gold-400 block px-3 py-2 rounded-md text-base font-medium w-full text-center">Início</a>
@@ -251,20 +129,25 @@
             <div id="hero-content" class="relative z-20 max-w-4xl mx-auto text-center px-4 sm:px-6 transition-opacity duration-300 flex flex-col items-center">
                 
                 <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4 animate-fade-up text-transparent bg-clip-text bg-gradient-to-r from-white via-gold-100 to-gold-400" style="animation-delay: 0.1s;">
-                    [TÍTULO]
+                    Sabor que Emociona
                 </h1>
                 
                 <p class="text-xl md:text-2xl text-zinc-200 max-w-2xl mx-auto mb-4 animate-fade-up font-light" style="animation-delay: 0.2s;">
-                    [SUBTÍTULO]
+                    Chocolates artesanais e presentes inesquecíveis, feitos com paixão e os melhores ingredientes.
                 </p>
 
                 <p class="text-sm md:text-base text-zinc-400 max-w-xl mx-auto mb-10 animate-fade-up font-light" style="animation-delay: 0.3s;">
-                    [TEXTO EXTRA - menor, mais suave]
+                    Descubra nossa coleção exclusiva para a Páscoa e momentos especiais. Entrega agendada disponível.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up w-full" style="animation-delay: 0.4s;">
                     <div class="flex gap-4 justify-center w-full">
-                        [CTA BOTÕES]
+                        <a href="#presentes" class="bg-gold-600 hover:bg-gold-500 text-white px-8 py-4 rounded-full text-lg font-medium transition-all animate-glow flex items-center justify-center gap-2">
+                            Explorar Coleção <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#contato" class="bg-white/5 hover:bg-white/10 border border-white/10 text-white px-8 py-4 rounded-full text-lg font-medium backdrop-blur-sm transition-all flex items-center justify-center">
+                            Encomenda Especial
+                        </a>
                     </div>
                 </div>
             </div>
@@ -272,15 +155,12 @@
     </section>
 
     <main class="relative z-10 pb-24 bg-transparent">
-
         <section id="presentes" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Nossas Composições</h2>
                 <p class="text-zinc-400 max-w-2xl mx-auto">Feitas à mão com os melhores ingredientes e muito carinho.</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
-                
                 <article class="clay-glass-card overflow-hidden flex flex-col group relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-64 shimmer-bg"></div>
@@ -291,34 +171,22 @@
                             <div class="h-10 w-1/3 shimmer-bg rounded mt-8"></div>
                         </div>
                     </div>
-
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-64 overflow-hidden">
                             <img src="produtos/aurora materna.jpeg" alt="Aurora Materna Premium" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                            <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
-                                <i data-lucide="sun" class="w-3 h-3"></i> Premium
-                            </div>
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h3 class="text-2xl font-bold text-white mb-2 font-serif">Aurora Materna</h3>
                             <p class="text-gold-400 text-sm mb-6 italic">Um despertar inesquecível</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Pães artesanais & Mini sanduíche</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini bolo caseiro & Frutas frescas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Café, chá e Suco natural</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Geleia gourmet & Biscoitos</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Cuscuz & Caneca personalizada</li>
-                            </ul>
                             <div class="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
-                                <div class="text-2xl font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-3 bg-gold-600/20 border border-gold-500/30 rounded-full transition-colors text-gold-400">
+                                <div class="text-2xl font-bold text-white">R$ 250,00</div>
+                                <a href="#contato" class="p-3 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </article>
-
                 <article class="clay-glass-card overflow-hidden flex flex-col group relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-64 shimmer-bg"></div>
@@ -329,30 +197,21 @@
                             <div class="h-10 w-1/3 shimmer-bg rounded mt-8"></div>
                         </div>
                     </div>
-
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-64 overflow-hidden">
                             <img src="produtos/Essência Gourmet.jpeg" alt="Doce Essência Gourmet" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h3 class="text-2xl font-bold text-white mb-2 font-serif">Doce Essência Gourmet</h3>
-                            <p class="text-gold-400 text-sm mb-6 italic">Sofisticação em cada detalhe</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Trufas artesanais</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini ovos de chocolate</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500 mt-0.5"></i> <span>Coração recheado<br><span class="text-xs text-zinc-500">(cupuaçu ou maracujá)</span></span></li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Embalagem elegante</li>
-                            </ul>
                             <div class="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
-                                <div class="text-2xl font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-3 bg-gold-600/20 border border-gold-500/30 rounded-full transition-colors text-gold-400">
+                                <div class="text-2xl font-bold text-white">R$ 140,00</div>
+                                <a href="#contato" class="p-3 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </article>
-
                 <article class="clay-glass-card overflow-hidden flex flex-col group relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-64 shimmer-bg"></div>
@@ -363,38 +222,21 @@
                             <div class="flex gap-4 mt-8"><div class="h-10 w-1/2 shimmer-bg rounded"></div><div class="h-10 w-1/2 shimmer-bg rounded"></div></div>
                         </div>
                     </div>
-
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-64 overflow-hidden">
                             <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral Luxo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                            <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1">
-                                <i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance
-                            </div>
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h3 class="text-2xl font-bold text-white mb-2 font-serif">Encanto Floral Luxo</h3>
-                            <p class="text-gold-400 text-sm mb-6 italic">Delicadeza que emociona</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Arranjo de flores selecionadas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Chocolates gourmet Cacau Bliss</li>
-                            </ul>
-                            <div class="mt-auto pt-6 border-t border-white/10 space-y-3">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-zinc-400">Versão Simples</span>
-                                    <div class="text-xl font-bold text-white">R$ 120<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-zinc-400">Versão Completa</span>
-                                    <div class="text-xl font-bold text-white">R$ 190<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                </div>
-                                <a href="#contato" class="w-full mt-4 block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg transition-colors text-gold-400 text-sm font-medium">
-                                    Selecionar Opção
+                            <div class="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
+                                <div class="text-2xl font-bold text-white">R$ 190,00</div>
+                                <a href="#contato" class="p-3 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </article>
-
                 <article class="clay-glass-card overflow-hidden flex flex-col group relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-64 shimmer-bg"></div>
@@ -405,104 +247,71 @@
                             <div class="h-10 w-1/3 shimmer-bg rounded mt-8"></div>
                         </div>
                     </div>
-
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-64 overflow-hidden">
                             <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Cesta Império do Chocolate" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                            <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
-                                <i data-lucide="crown" class="w-3 h-3"></i> Ouro
-                            </div>
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h3 class="text-2xl font-bold text-white mb-2 font-serif">Império do Chocolate</h3>
-                            <p class="text-gold-400 text-sm mb-6 italic">A majestade do cacau em uma cesta</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mix de chocolates finos e importados</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Barras artesanais recheadas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Potes de creme de avelã premium</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Bebida achocolatada especial</li>
-                            </ul>
                             <div class="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
-                                <div class="text-2xl font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-3 bg-gold-600/20 border border-gold-500/30 rounded-full transition-colors text-gold-400">
+                                <div class="text-2xl font-bold text-white">R$ 180,00</div>
+                                <a href="#contato" class="p-3 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </article>
-
             </div>
         </section>
-
         <section id="experiencia" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
             <div class="clay-glass-card p-6 md:p-10">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-bold text-white mb-2 font-serif">A Magia do Detalhe</h2>
                     <p class="text-zinc-400">Transformamos ingredientes simples em obras de arte comestíveis.</p>
                 </div>
-
                 <div class="slider-container h-[300px] sm:h-[400px] md:h-[500px] border border-white/10 shadow-2xl" id="image-slider">
                     <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/6d04dc1f-9e92-4aa9-aa63-d0d7e22baaba.webp" alt="Ingredientes" class="slider-image">
                     <div class="slider-overlay" id="slider-overlay">
                         <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/942aeb84-3e9b-4082-8888-14291ba7b5fd.webp" alt="Produto Final" id="slider-img-after">
                     </div>
                     <div class="slider-handle" id="slider-handle"></div>
-                    <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded text-xs text-white z-0">Ingredientes</div>
-                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded text-xs text-white z-20">Arte Final</div>
                 </div>
             </div>
         </section>
-
         <section id="diferenciais" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2">
                     <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" class="w-full h-auto rounded-xl shadow-inner">
-                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gold-500/20 rounded-full blur-2xl"></div>
                 </div>
-                
                 <div class="order-1 lg:order-2 space-y-8">
-                    <div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">Por que escolher a Cacau Bliss?</h2>
-                        <p class="text-zinc-400 text-lg">Para a mulher que merece o melhor todos os dias. Não entregamos apenas cestas, entregamos sentimentos materializados em sabor e beleza.</p>
-                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white font-serif">Por que escolher a Cacau Bliss?</h2>
                     <div class="space-y-6">
                         <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center border border-gold-500/30">
                                 <i data-lucide="clock" class="w-6 h-6 text-gold-400"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg">Entrega Agendada</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
+                                <p class="text-zinc-400 text-sm">Garantimos que a surpresa chegue no momento perfeito.</p>
                             </div>
                         </div>
                         <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center border border-gold-500/30">
                                 <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Personalização</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Opções de cartões escritos à mão e embalagens que refletem a personalidade de quem recebe.</p>
+                                <p class="text-zinc-400 text-sm">Ingredientes selecionados e chocolates artesanais.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
         <section id="faq" class="py-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-white mb-4 font-serif">Dúvidas Frequentes</h2>
-                <p class="text-zinc-400">Tudo o que você precisa saber antes de encomendar.</p>
             </div>
             <div class="space-y-4">
                 <div class="clay-glass-card overflow-hidden">
@@ -511,79 +320,32 @@
                         <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
                     </button>
                     <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Recomendamos que os pedidos sejam feitos com pelo menos 48 horas de antecedência para garantirmos a disponibilidade de todos os itens frescos e a personalização adequada.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium">Vocês entregam em quais regiões?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Atualmente, realizamos entregas em toda a região metropolitana. Para áreas mais afastadas, consulte nossa equipe via WhatsApp para verificar taxas e viabilidade.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium">Posso alterar itens da cesta?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Sim! Oferecemos opções de substituição em caso de restrições alimentares (como itens sem glúten ou lactose). Consulte nossa equipe para personalizar sua cesta de acordo com a necessidade.
-                        </div>
+                        <div class="px-6 pb-5 text-zinc-400 text-sm">Recomendamos pelo menos 48 horas de antecedência.</div>
                     </div>
                 </div>
             </div>
         </section>
-
         <section id="contato" class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
             <div class="clay-glass-card p-8 md:p-12">
                 <div class="text-center mb-10">
-                    <h2 class="text-3xl font-bold text-white mb-2 font-serif">Faça sua Encomenda</h2>
-                    <p class="text-zinc-400">Preencha os dados abaixo e nossa equipe entrará em contato rapidamente para confirmar os detalhes.</p>
+                    <h2 class="text-3xl font-bold text-white font-serif">Faça sua Encomenda</h2>
                 </div>
-
                 <form action="#" method="POST" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="nome" class="block text-sm font-medium text-zinc-300 mb-2">Seu Nome</label>
-                            <input type="text" name="nome" id="nome" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-transparent transition-all" placeholder="Maria Silva">
-                        </div>
-                        <div>
-                            <label for="telefone" class="block text-sm font-medium text-zinc-300 mb-2">WhatsApp</label>
-                            <input type="tel" name="telefone" id="telefone" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-transparent transition-all" placeholder="(00) 00000-0000">
-                        </div>
+                        <input type="text" name="nome" placeholder="Seu Nome" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
+                        <input type="tel" name="telefone" placeholder="WhatsApp" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
                     </div>
-                    
-                    <div>
-                        <label for="opcao" class="block text-sm font-medium text-zinc-300 mb-2">Opção Desejada</label>
-                        <select name="opcao" id="opcao" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-transparent transition-all appearance-none">
-                            <option value="" class="bg-choco-900 text-zinc-400">Selecione uma opção...</option>
-                            <option value="aurora" class="bg-choco-900">Aurora Materna Premium (R$ 250)</option>
-                            <option value="doce" class="bg-choco-900">Doce Essência Gourmet (R$ 140)</option>
-                            <option value="floral_simples" class="bg-choco-900">Encanto Floral - Simples (R$ 120)</option>
-                            <option value="floral_completo" class="bg-choco-900">Encanto Floral - Completo (R$ 190)</option>
-                            <option value="imperio" class="bg-choco-900">Império do Chocolate (R$ 180)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="mensagem" class="block text-sm font-medium text-zinc-300 mb-2">Detalhes (Data, endereço, mensagem do cartão)</label>
-                        <textarea name="mensagem" id="mensagem" rows="4" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-transparent transition-all resize-none" placeholder="Gostaria de agendar para o dia..."></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 px-8 rounded-lg transition-all shadow-[0_0_15px_rgba(198,139,63,0.2)] hover:shadow-[0_0_25px_rgba(198,139,63,0.4)] flex justify-center items-center gap-2">
+                    <select name="opcao" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white appearance-none">
+                        <option value="" class="bg-choco-900 text-zinc-400">Selecione uma opção...</option>
+                        <option value="aurora" class="bg-choco-900">Aurora Materna (R$ 250)</option>
+                    </select>
+                    <textarea name="mensagem" rows="4" placeholder="Detalhes da encomenda..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white resize-none"></textarea>
+                    <button type="submit" class="w-full bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 px-8 rounded-lg flex justify-center items-center gap-2">
                         Enviar Pedido <i data-lucide="send" class="w-5 h-5"></i>
                     </button>
                 </form>
             </div>
         </section>
-
     </main>
 
     <footer id="footer" class="relative z-10 glass-nav border-t border-white/10 pt-12 pb-8">
@@ -591,220 +353,104 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex flex-col items-center md:items-start">
                     <span class="text-2xl font-bold font-serif text-white tracking-wide mb-4 opacity-80">Cacau Bliss</span>
-                    <p class="text-zinc-500 text-sm text-center md:text-left max-w-xs">
-                        Criando momentos inesquecíveis através de sabores e aromas selecionados com amor.
-                    </p>
+                    <p class="text-zinc-500 text-sm text-center md:text-left max-w-xs">Criando momentos inesquecíveis.</p>
                 </div>
-                
                 <div class="flex gap-4">
                     <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-gold-400 transition-all">
                         <i data-lucide="instagram" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-gold-400 transition-all">
-                        <i data-lucide="facebook" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-gold-400 transition-all">
-                        <i data-lucide="phone" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="mt-8 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-zinc-600 text-xs">
-                    &copy; 2024 Cacau Bliss. Todos os direitos reservados.
-                </p>
-                <div class="flex gap-4 text-xs text-zinc-600">
-                    <a href="#" class="hover:text-gold-500 transition-colors">Política de Privacidade</a>
-                    <a href="#" class="hover:text-gold-500 transition-colors">Termos de Serviço</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Lucide Icons
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
-
-        // Mobile Menu Toggle
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
-            const icon = this.querySelector('i');
             menu.classList.toggle('hidden');
-            
-            if(menu.classList.contains('hidden')) {
-                icon.setAttribute('data-lucide', 'menu');
-            } else {
-                icon.setAttribute('data-lucide', 'x');
-            }
-            lucide.createIcons();
         });
-
-        // Close mobile menu on link click
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
-                const btnIcon = document.querySelector('#mobile-menu-btn i');
-                btnIcon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
-        });
-
-        // Skeleton Loading Simulation
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const wrappers = document.querySelectorAll('.skeleton-wrapper');
                 const contents = document.querySelectorAll('.real-content');
-                
                 wrappers.forEach(w => w.style.opacity = '0');
-                
                 setTimeout(() => {
                     wrappers.forEach(w => w.style.display = 'none');
                     contents.forEach(c => c.style.opacity = '1');
                 }, 500); 
             }, 2000); 
         });
-
-        // Apple-style Cinematic Motion Hero Logic
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const heroContainer = document.getElementById("hero-container");
         const heroContent = document.getElementById("hero-content");
-        
         const frameCount = 120;
-        
-        // Caminho dos arquivos WebP fornecidos no git (assumindo que estão na mesma pasta)
         const currentFrame = index => `${String(index).padStart(4, '0')}.webp`;
-
         const images = [];
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.src = currentFrame(i);
             images.push(img);
         }
-
         images[0].onload = () => {
-            // Define o tamanho base do canvas com a resolução nativa do primeiro frame
             canvas.width = images[0].width;
             canvas.height = images[0].height;
             context.drawImage(images[0], 0, 0);
         };
-
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
-            
-            // Calcula a fração do scroll restrita à seção hero
             let scrollFraction = scrollTop / maxScrollTop;
             if (scrollFraction < 0) scrollFraction = 0;
             if (scrollFraction > 1) scrollFraction = 1;
-
-            const frameIndex = Math.min(
-                frameCount - 1,
-                Math.floor(scrollFraction * frameCount)
-            );
-
-            // Atualiza o frame no Canvas
+            const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
             if (images[frameIndex] && images[frameIndex].complete) {
-                requestAnimationFrame(() => {
-                    context.drawImage(images[frameIndex], 0, 0);
-                });
+                requestAnimationFrame(() => { context.drawImage(images[frameIndex], 0, 0); });
             }
-
-            // Fade-out do texto no início do scroll
             if (scrollFraction > 0.05) {
                 heroContent.style.opacity = Math.max(0, 1 - ((scrollFraction - 0.05) * 5));
             } else {
                 heroContent.style.opacity = 1;
             }
         });
-
-        // Before/After Slider Logic
         const sliderContainer = document.getElementById('image-slider');
         const sliderOverlay = document.getElementById('slider-overlay');
         const sliderHandle = document.getElementById('slider-handle');
         const sliderImgAfter = document.getElementById('slider-img-after');
         let isDragging = false;
-
         function updateSliderWidth() {
             if(sliderContainer) {
                 const containerWidth = sliderContainer.offsetWidth;
                 sliderImgAfter.style.width = containerWidth + 'px';
             }
         }
-
         updateSliderWidth();
         window.addEventListener('resize', updateSliderWidth);
-
         function moveSlider(clientX) {
             const rect = sliderContainer.getBoundingClientRect();
             let xPos = clientX - rect.left;
-            
             if (xPos < 0) xPos = 0;
             if (xPos > rect.width) xPos = rect.width;
-
             const percentage = (xPos / rect.width) * 100;
-            
             sliderOverlay.style.width = `${percentage}%`;
             sliderHandle.style.left = `${percentage}%`;
         }
-
         if(sliderContainer) {
-            sliderHandle.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                sliderHandle.style.cursor = 'grabbing';
-            });
-            window.addEventListener('mouseup', () => {
-                isDragging = false;
-                sliderHandle.style.cursor = 'ew-resize';
-            });
-            window.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                moveSlider(e.clientX);
-            });
-
-            sliderHandle.addEventListener('touchstart', (e) => {
-                isDragging = true;
-            }, {passive: true});
-            window.addEventListener('touchend', () => {
-                isDragging = false;
-            });
-            window.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                if(e.cancelable) e.preventDefault(); 
-                moveSlider(e.touches[0].clientX);
-            }, {passive: false});
-
-            sliderContainer.addEventListener('click', (e) => {
-                moveSlider(e.clientX);
-            });
+            sliderHandle.addEventListener('mousedown', () => isDragging = true);
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', (e) => { if (isDragging) moveSlider(e.clientX); });
+            sliderContainer.addEventListener('click', (e) => moveSlider(e.clientX));
         }
-
-        // Accordion Logic
         const accordions = document.querySelectorAll('.accordion-btn');
-        
         accordions.forEach(acc => {
             acc.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                
-                accordions.forEach(otherAcc => {
-                    if(otherAcc !== this) {
-                        otherAcc.setAttribute('aria-expanded', 'false');
-                        otherAcc.nextElementSibling.style.maxHeight = null;
-                    }
-                });
-
-                this.setAttribute('aria-expanded', !isExpanded);
                 const content = this.nextElementSibling;
-                
-                if (!isExpanded) {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } else {
-                    content.style.maxHeight = null;
-                }
+                if (content.style.maxHeight) { content.style.maxHeight = null; } 
+                else { content.style.maxHeight = content.scrollHeight + "px"; }
             });
         });
-
     </script>
 </body>
 </html>
