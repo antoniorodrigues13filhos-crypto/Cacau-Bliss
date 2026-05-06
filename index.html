@@ -1,751 +1,751 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <title>Cacau Bliss - Experiências Únicas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta name="description" content="Cestas artesanais, chocolates finos e arranjos florais preparados com dedicação.">
-    <meta name="robots" content="index,follow">
-    
-    <meta property="og:type" content="business.business">
-    <meta property="og:title" content="Cacau Bliss">
+    <meta charset="utf-8">
+    <title>Cacau Bliss - Experiências Únicas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cestas artesanais, chocolates finos e arranjos florais preparados com dedicação.">
+    <meta name="robots" content="index,follow">
+    
+    <meta property="og:type" content="business.business">
+    <meta property="og:title" content="Cacau Bliss">
 
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <style type="text/tailwindcss">
-        @theme {
-            --color-gold-50: #fbf8f1;
-            --color-gold-100: #f5eedc;
-            --color-gold-200: #ead9b9;
-            --color-gold-300: #dec18e;
-            --color-gold-400: #d1a35f;
-            --color-gold-500: #c68b3f;
-            --color-gold-600: #b57233;
-            --color-gold-700: #97582d;
-            --color-gold-800: #7b472a;
-            --color-gold-900: #643b24;
-            --color-choco-900: #1a0f0a;
-            --color-choco-950: #0f0805;
-        }
-    </style>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-gold-50: #fbf8f1;
+            --color-gold-100: #f5eedc;
+            --color-gold-200: #ead9b9;
+            --color-gold-300: #dec18e;
+            --color-gold-400: #d1a35f;
+            --color-gold-500: #c68b3f;
+            --color-gold-600: #b57233;
+            --color-gold-700: #97582d;
+            --color-gold-800: #7b472a;
+            --color-gold-900: #643b24;
+            --color-choco-900: #1a0f0a;
+            --color-choco-950: #0f0805;
+        }
+    </style>
 
-    <style>
-        ::-webkit-scrollbar { display: none; }
-        @media (min-width: 768px) { 
-            ::-webkit-scrollbar { display: block; width: 6px; } 
-            ::-webkit-scrollbar-track { background: #0f0805; }
-            ::-webkit-scrollbar-thumb { background: #c68b3f; border-radius: 9999px; }
-        }
-        * { scrollbar-width: none; }
-        @media (min-width: 768px) { * { scrollbar-width: thin; scrollbar-color: #c68b3f #0f0805; } }
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        @media (min-width: 768px) { 
+            ::-webkit-scrollbar { display: block; width: 6px; } 
+            ::-webkit-scrollbar-track { background: #0f0805; }
+            ::-webkit-scrollbar-thumb { background: #c68b3f; border-radius: 9999px; }
+        }
+        * { scrollbar-width: none; }
+        @media (min-width: 768px) { * { scrollbar-width: thin; scrollbar-color: #c68b3f #0f0805; } }
 
-        body {
-            background-color: #0f0805;
-            color: #fafafa;
-            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+        body {
+            background-color: #0f0805;
+            color: #fafafa;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-        .bg-fixed-layer {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/75d400a2-e4f7-4388-8f62-8f112aa521d7.webp');
-            background-size: cover; background-position: center; z-index: -2;
-        }
+        .bg-fixed-layer {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url('https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/75d400a2-e4f7-4388-8f62-8f112aa521d7.webp');
+            background-size: cover; background-position: center; z-index: -2;
+        }
 
-        .bg-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%); z-index: -1;
-        }
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%); z-index: -1;
+        }
 
-        .noise-overlay {
-            position: fixed; inset: 0; width: 100vw; height: 100vh;
-            z-index: 9999; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay;
-        }
+        .noise-overlay {
+            position: fixed; inset: 0; width: 100vw; height: 100vh;
+            z-index: 9999; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay;
+        }
 
-        .grain-static {
-            position: fixed; inset: 0; width: 100%; height: 100%;
-            z-index: 9998; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            background-size: 180px 180px; opacity: 0.04; mix-blend-mode: soft-light;
-        }
+        .grain-static {
+            position: fixed; inset: 0; width: 100%; height: 100%;
+            z-index: 9998; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-size: 180px 180px; opacity: 0.04; mix-blend-mode: soft-light;
+        }
 
-        .hero-vignette {
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse 60% 80% at 50% 50%, transparent 40%, rgba(10,5,3,0.7) 100%), linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 25%, transparent 70%, rgba(0,0,0,0.85) 100%);
-            z-index: 11; pointer-events: none;
-        }
+        .hero-vignette {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 50%, transparent 40%, rgba(10,5,3,0.7) 100%), linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 25%, transparent 70%, rgba(0,0,0,0.85) 100%);
+            z-index: 11; pointer-events: none;
+        }
 
-        .glass-nav {
-            background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        .glass-nav {
+            background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-        .clay-glass-card {
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2);
-            border-radius: 1.5rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+        .clay-glass-card {
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2);
+            border-radius: 1.5rem; transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-        @keyframes gold-shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        
-        .hero-title {
-            font-family: 'Lora', serif;
-            background: linear-gradient(105deg, #e8d5b0 0%, #f5eedc 18%, #c68b3f 30%, #ead9b9 42%, #ffffff 52%, #ead9b9 62%, #c68b3f 74%, #f5eedc 86%, #e8d5b0 100%);
-            background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            animation: gold-shimmer 6s 1s linear infinite; line-height: 1.15; letter-spacing: -0.02em;
-        }
+        @keyframes gold-shimmer {
+            0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        
+        .hero-title {
+            font-family: 'Lora', serif;
+            background: linear-gradient(105deg, #e8d5b0 0%, #f5eedc 18%, #c68b3f 30%, #ead9b9 42%, #ffffff 52%, #ead9b9 62%, #c68b3f 74%, #f5eedc 86%, #e8d5b0 100%);
+            background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            animation: gold-shimmer 6s 1s linear infinite; line-height: 1.15; letter-spacing: -0.02em;
+        }
 
-        .hero-title-line {
-            display: block; width: 80px; height: 2px; background: linear-gradient(90deg, transparent, #c68b3f, transparent); margin: 1.25rem auto 0;
-        }
+        .hero-title-line {
+            display: block; width: 80px; height: 2px; background: linear-gradient(90deg, transparent, #c68b3f, transparent); margin: 1.25rem auto 0;
+        }
 
-        .text-shadow-hero { text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
+        .text-shadow-hero { text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
 
-        .hero-cta-primary {
-            background: linear-gradient(135deg, #c68b3f 0%, #b57233 50%, #97582d 100%); color: #fff; padding: 0.85rem 2rem; border-radius: 9999px;
-            font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; box-shadow: 0 0 24px rgba(198,139,63,0.45), 0 4px 16px rgba(0,0,0,0.4);
-            transition: transform 0.2s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.15);
-        }
-        .hero-cta-primary:active { transform: scale(0.98); }
+        .hero-cta-primary {
+            background: linear-gradient(135deg, #c68b3f 0%, #b57233 50%, #97582d 100%); color: #fff; padding: 0.85rem 2rem; border-radius: 9999px;
+            font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; box-shadow: 0 0 24px rgba(198,139,63,0.45), 0 4px 16px rgba(0,0,0,0.4);
+            transition: transform 0.2s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-cta-primary:active { transform: scale(0.98); }
 
-        .hero-cta-secondary {
-            background: rgba(255,255,255,0.05); color: #e8d5b0; padding: 0.85rem 2rem; border-radius: 9999px; font-weight: 500; font-size: 0.95rem;
-            border: 1px solid rgba(198,139,63,0.35); backdrop-filter: blur(8px); transition: transform 0.2s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
-        }
-        .hero-cta-secondary:active { transform: scale(0.98); }
+        .hero-cta-secondary {
+            background: rgba(255,255,255,0.05); color: #e8d5b0; padding: 0.85rem 2rem; border-radius: 9999px; font-weight: 500; font-size: 0.95rem;
+            border: 1px solid rgba(198,139,63,0.35); backdrop-filter: blur(8px); transition: transform 0.2s; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        .hero-cta-secondary:active { transform: scale(0.98); }
 
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(198,139,63,0.1); border: 1px solid rgba(198,139,63,0.3);
-            backdrop-filter: blur(12px); padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.75rem; color: #d1a35f; letter-spacing: 0.08em;
-            text-transform: uppercase; margin-bottom: 1.5rem;
-        }
-        .hero-badge-dot {
-            width: 6px; height: 6px; border-radius: 50%; background: #c68b3f; box-shadow: 0 0 6px #c68b3f; animation: pulse-dot 2s infinite;
-        }
-        @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 4px #c68b3f; } 50% { box-shadow: 0 0 12px #c68b3f; } }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(198,139,63,0.1); border: 1px solid rgba(198,139,63,0.3);
+            backdrop-filter: blur(12px); padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.75rem; color: #d1a35f; letter-spacing: 0.08em;
+            text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+        .hero-badge-dot {
+            width: 6px; height: 6px; border-radius: 50%; background: #c68b3f; box-shadow: 0 0 6px #c68b3f; animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 4px #c68b3f; } 50% { box-shadow: 0 0 12px #c68b3f; } }
 
-        .shimmer-bg {
-            background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
-            background-size: 200% 100%; animation: shimmer 1.5s infinite linear;
-        }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .shimmer-bg {
+            background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+            background-size: 200% 100%; animation: shimmer 1.5s infinite linear;
+        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        .slider-container { position: relative; width: 100%; border-radius: 1.5rem; overflow: hidden; touch-action: none; }
-        .slider-image { display: block; width: 100%; height: 100%; object-fit: cover; }
-        .slider-overlay { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; pointer-events: none; }
-        .slider-overlay img { height: 100%; width: 100vw; max-width: none; object-fit: cover; }
-        .slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: #c68b3f; transform: translateX(-50%); z-index: 10; cursor: ew-resize; }
-        .slider-handle::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 36px; height: 36px; background: #c68b3f; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>');
-            background-position: center; background-repeat: no-repeat; background-size: 20px;
-        }
+        .slider-container { position: relative; width: 100%; border-radius: 1.5rem; overflow: hidden; touch-action: none; }
+        .slider-image { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .slider-overlay { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; pointer-events: none; }
+        .slider-overlay img { height: 100%; width: 100vw; max-width: none; object-fit: cover; }
+        .slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: #c68b3f; transform: translateX(-50%); z-index: 10; cursor: ew-resize; }
+        .slider-handle::after {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 36px; height: 36px; background: #c68b3f; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>');
+            background-position: center; background-repeat: no-repeat; background-size: 20px;
+        }
 
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .accordion-icon { transition: transform 0.3s ease; }
-        .accordion-btn[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); }
-        .accordion-btn[aria-expanded="true"] { background-color: rgba(198, 139, 63, 0.1); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion-btn[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); }
+        .accordion-btn[aria-expanded="true"] { background-color: rgba(198, 139, 63, 0.1); }
 
-        #hero-canvas { will-change: transform; }
-        .scroll-block { will-change: transform, opacity; position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        #hero-canvas { will-change: transform; }
+        .scroll-block { will-change: transform, opacity; position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-        .whatsapp-float {
-            position: fixed; bottom: 1.5rem; right: 1.5rem; background-color: #25D366; color: white; width: 56px; height: 56px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
-            z-index: 999; transition: transform 0.2s, background-color 0.2s;
-        }
-        .whatsapp-float:active { transform: scale(0.95); background-color: #1ebe57; }
-    </style>
+        .whatsapp-float {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; background-color: #25D366; color: white; width: 56px; height: 56px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+            z-index: 999; transition: transform 0.2s, background-color 0.2s;
+        }
+        .whatsapp-float:active { transform: scale(0.95); background-color: #1ebe57; }
+    </style>
 </head>
 <body class="antialiased selection:bg-gold-500/30 selection:text-gold-100 relative">
 
-    <div class="grain-static"></div>
+    <div class="grain-static"></div>
 
-    <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
-        <filter id="noise-filter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch">
-                <animate attributeName="baseFrequency" dur="7s" values="0.72;0.74;0.70;0.73;0.72" repeatCount="indefinite"/>
-            </feTurbulence>
-            <feColorMatrix type="saturate" values="0"/>
-        </filter>
-        <rect width="100%" height="100%" filter="url(#noise-filter)" opacity="1"/>
-    </svg>
+    <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
+        <filter id="noise-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch">
+                <animate attributeName="baseFrequency" dur="7s" values="0.72;0.74;0.70;0.73;0.72" repeatCount="indefinite"/>
+            </feTurbulence>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noise-filter)" opacity="1"/>
+    </svg>
 
-    <div class="bg-fixed-layer"></div>
-    <div class="bg-overlay"></div>
+    <div class="bg-fixed-layer"></div>
+    <div class="bg-overlay"></div>
 
-    <nav class="fixed w-full z-50 glass-nav">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 md:h-20">
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <span class="text-xl md:text-2xl font-bold font-serif text-white tracking-wide">Cacau Bliss</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#hero-track" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Início</a>
-                        <a href="#presentes" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Composições</a>
-                        <a href="#experiencia" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Experiência</a>
-                        <a href="#faq" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Dúvidas</a>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <a href="#contato" class="bg-gold-600 hover:bg-gold-500 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all">
-                        Encomendar
-                    </a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-zinc-300 focus:outline-none p-2">
-                        <i data-lucide="menu" class="w-7 h-7"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5">
-            <div class="px-4 pt-2 pb-6 flex flex-col items-center space-y-2">
-                <a href="#hero-track" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
-                <a href="#presentes" class="text-zinc-300 block py-3 w-full text-center text-lg">Composições</a>
-                <a href="#experiencia" class="text-zinc-300 block py-3 w-full text-center text-lg">Experiência</a>
-                <a href="#contato" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
-            </div>
-        </div>
-    </nav>
+    <nav class="fixed w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span class="text-xl md:text-2xl font-bold font-serif text-white tracking-wide">Cacau Bliss</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#hero-track" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Início</a>
+                        <a href="#presentes" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Composições</a>
+                        <a href="#experiencia" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Experiência</a>
+                        <a href="#faq" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Dúvidas</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#contato" class="bg-gold-600 hover:bg-gold-500 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all">
+                        Encomendar
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-zinc-300 focus:outline-none p-2">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5">
+            <div class="px-4 pt-2 pb-6 flex flex-col items-center space-y-2">
+                <a href="#hero-track" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
+                <a href="#presentes" class="text-zinc-300 block py-3 w-full text-center text-lg">Composições</a>
+                <a href="#experiencia" class="text-zinc-300 block py-3 w-full text-center text-lg">Experiência</a>
+                <a href="#contato" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
+            </div>
+        </div>
+    </nav>
 
-    <section id="hero-track" class="relative h-[400vh] bg-black">
-        <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover z-0"></canvas>
-            <div class="hero-vignette"></div>
-            <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
+    <section id="hero-track" class="relative h-[400vh] bg-black">
+        <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover z-0"></canvas>
+            <div class="hero-vignette"></div>
+            <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
 
-            <div class="relative z-20 max-w-5xl mx-auto w-full h-full flex items-center justify-center pointer-events-none px-6">
-                <div id="hero-block-1" class="scroll-block">
-                    <div class="hero-badge pointer-events-auto">
-                        <span class="hero-badge-dot"></span>
-                        Cestas artesanais · Chocolates finos · Flores
-                    </div>
-                    <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold mb-2">
-                        Ela cuidou de você<br>a vida inteira.
-                    </h1>
-                    <p class="font-serif italic text-xl md:text-3xl text-zinc-300 text-shadow-hero">Hoje é a sua vez.</p>
-                </div>
+            <div class="relative z-20 max-w-5xl mx-auto w-full h-full flex items-center justify-center pointer-events-none px-6">
+                <div id="hero-block-1" class="scroll-block">
+                    <div class="hero-badge pointer-events-auto">
+                        <span class="hero-badge-dot"></span>
+                        Cestas artesanais · Chocolates finos · Flores
+                    </div>
+                    <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold mb-2">
+                        Ela cuidou de você<br>a vida inteira.
+                    </h1>
+                    <p class="font-serif italic text-xl md:text-3xl text-zinc-300 text-shadow-hero">Hoje é a sua vez.</p>
+                </div>
 
-                <div id="hero-block-2" class="scroll-block opacity-0">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white font-serif mb-6 text-shadow-hero leading-tight">
-                        A experiência completa.
-                    </h2>
-                    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 text-base md:text-xl text-zinc-200">
-                        <span class="bg-black/60 backdrop-blur-md px-5 py-2 rounded-full border border-white/10">Café da manhã</span>
-                        <span class="bg-black/60 backdrop-blur-md px-5 py-2 rounded-full border border-white/10">Chocolates finos</span>
-                        <span class="bg-black/60 backdrop-blur-md px-5 py-2 rounded-full border border-white/10">Flores selecionadas</span>
-                    </div>
-                </div>
+                <div id="hero-block-2" class="scroll-block opacity-0">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white font-serif mb-6 text-shadow-hero leading-tight">
+                        A experiência completa.
+                    </h2>
+                    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 text-base md:text-xl text-zinc-200">
+                        <span class="bg-black/60 backdrop-blur-md px-5 py-2 rounded-full border border-white/10">Café da manhã</span>
+                        <span class="bg-black/60 backdrop-blur-md px-5 py-2 rounded-full border border-white/10">Chocolates finos</span>
+                        <span class="bg-black/60 backdrop-blur-md px-5 py-2 rounded-full border border-white/10">Flores selecionadas</span>
+                    </div>
+                </div>
 
-                <div id="hero-block-3" class="scroll-block opacity-0 pointer-events-auto">
-                    <p class="text-xl md:text-3xl text-white font-serif mb-8 text-shadow-hero max-w-2xl leading-snug">
-                        Porque quem sempre esteve ao seu lado merece <em class="text-gold-400 not-italic">mais do que um presente comum</em>.
-                    </p>
-                    <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
-                        <a href="#contato" class="hero-cta-primary justify-center">
-                            <i data-lucide="gift" class="w-4 h-4"></i> Encomendar Agora
-                        </a>
-                        <a href="#presentes" class="hero-cta-secondary justify-center">
-                            <i data-lucide="package" class="w-4 h-4"></i> Ver Composições
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div id="hero-block-3" class="scroll-block opacity-0 pointer-events-auto">
+                    <p class="text-xl md:text-3xl text-white font-serif mb-8 text-shadow-hero max-w-2xl leading-snug">
+                        Porque quem sempre esteve ao seu lado merece <em class="text-gold-400 not-italic">mais do que um presente comum</em>.
+                    </p>
+                    <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
+                        <a href="#contato" class="hero-cta-primary justify-center">
+                            <i data-lucide="gift" class="w-4 h-4"></i> Encomendar Agora
+                        </a>
+                        <a href="#presentes" class="hero-cta-secondary justify-center">
+                            <i data-lucide="package" class="w-4 h-4"></i> Ver Composições
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <main class="relative z-10 pb-24 bg-transparent">
+    <main class="relative z-10 pb-24 bg-transparent">
 
-        <section id="presentes" class="pt-20 pb-12 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-5xl font-bold text-white mb-3 font-serif">Nossas Composições</h2>
-                <p class="text-zinc-400 max-w-2xl mx-auto">Feitas à mão com os melhores ingredientes e muito carinho.</p>
-            </div>
+        <section id="presentes" class="pt-20 pb-12 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-3 font-serif">Nossas Composições</h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto">Feitas à mão com os melhores ingredientes e muito carinho.</p>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
-                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
-                        <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
-                    </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/aurora materna.jpeg" alt="Aurora Materna" class="w-full h-full object-cover">
-                            <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gold-300">Premium</div>
-                        </div>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold text-white font-serif mb-1">Aurora Materna</h3>
-                            <p class="text-gold-400 text-sm mb-4 italic">Um despertar inesquecível</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Pães artesanais & Mini sanduíche</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini bolo caseiro & Frutas frescas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Café, chá e Suco natural</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Geleia gourmet & Biscoitos</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Cuscuz & Caneca personalizada</li>
-                            </ul>
-                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
-                                <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
-                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
+                        <div class="w-full h-56 shimmer-bg"></div>
+                        <div class="p-6 space-y-4">
+                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
+                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
+                        </div>
+                    </div>
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="produtos/aurora materna.jpeg" alt="Aurora Materna" class="w-full h-full object-cover">
+                            <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gold-300">Premium</div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white font-serif mb-1">Aurora Materna</h3>
+                            <p class="text-gold-400 text-sm mb-4 italic">Um despertar inesquecível</p>
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Pães artesanais & Mini sanduíche</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini bolo caseiro & Frutas frescas</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Café, chá e Suco natural</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Geleia gourmet & Biscoitos</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Cuscuz & Caneca personalizada</li>
+                            </ul>
+                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
+                                <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
-                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
-                        <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
-                    </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Essência Gourmet.jpeg" alt="Essência Gourmet" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold text-white font-serif mb-1">Doce Essência</h3>
-                            <p class="text-gold-400 text-sm mb-4 italic">Sofisticação em cada detalhe</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Trufas artesanais</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini ovos de chocolate</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500 mt-0.5"></i> <span>Coração recheado<br><span class="text-xs text-zinc-500">(cupuaçu ou maracujá)</span></span></li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Embalagem elegante</li>
-                            </ul>
-                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
-                                <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
-                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
+                        <div class="w-full h-56 shimmer-bg"></div>
+                        <div class="p-6 space-y-4">
+                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
+                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
+                        </div>
+                    </div>
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="produtos/Essência Gourmet.jpeg" alt="Essência Gourmet" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white font-serif mb-1">Doce Essência</h3>
+                            <p class="text-gold-400 text-sm mb-4 italic">Sofisticação em cada detalhe</p>
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Trufas artesanais</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini ovos de chocolate</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500 mt-0.5"></i> <span>Coração recheado<br><span class="text-xs text-zinc-500">(cupuaçu ou maracujá)</span></span></li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Embalagem elegante</li>
+                            </ul>
+                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
+                                <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
-                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
-                        <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
-                    </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" class="w-full h-full object-cover">
-                            <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1">
-                                <i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance
-                            </div>
-                        </div>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold text-white font-serif mb-1">Encanto Floral</h3>
-                            <p class="text-gold-400 text-sm mb-4 italic">Delicadeza que emociona</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Arranjo de flores selecionadas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Chocolates gourmet Cacau Bliss</li>
-                            </ul>
-                            <div class="mt-auto space-y-3 border-t border-white/10 pt-4">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-zinc-400">Versão Simples</span>
-                                    <div class="text-lg font-bold text-white">R$ 120</div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-zinc-400">Versão Completa</span>
-                                    <div class="text-lg font-bold text-white">R$ 190</div>
-                                </div>
-                                <a href="#contato" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium">
-                                    Selecionar Opção
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
+                        <div class="w-full h-56 shimmer-bg"></div>
+                        <div class="p-6 space-y-4">
+                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
+                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
+                        </div>
+                    </div>
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" class="w-full h-full object-cover">
+                            <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1">
+                                <i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white font-serif mb-1">Encanto Floral</h3>
+                            <p class="text-gold-400 text-sm mb-4 italic">Delicadeza que emociona</p>
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Arranjo de flores selecionadas</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Chocolates gourmet Cacau Bliss</li>
+                            </ul>
+                            <div class="mt-auto space-y-3 border-t border-white/10 pt-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-zinc-400">Versão Simples</span>
+                                    <div class="text-lg font-bold text-white">R$ 120</div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-zinc-400">Versão Completa</span>
+                                    <div class="text-lg font-bold text-white">R$ 190</div>
+                                </div>
+                                <a href="#contato" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium">
+                                    Selecionar Opção
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
-                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
-                        <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
-                    </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" class="w-full h-full object-cover">
-                            <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
-                                <i data-lucide="crown" class="w-3 h-3"></i> Ouro
-                            </div>
-                        </div>
-                        <div class="p-5 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold text-white font-serif mb-1">Império Cacau</h3>
-                            <p class="text-gold-400 text-sm mb-4 italic">A majestade do cacau em uma cesta</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mix de chocolates finos e importados</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Barras artesanais recheadas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Potes de creme de avelã premium</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Bebida achocolatada especial</li>
-                            </ul>
-                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
-                                <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
-                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
+                        <div class="w-full h-56 shimmer-bg"></div>
+                        <div class="p-6 space-y-4">
+                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
+                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
+                        </div>
+                    </div>
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" class="w-full h-full object-cover">
+                            <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
+                                <i data-lucide="crown" class="w-3 h-3"></i> Ouro
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-white font-serif mb-1">Império Cacau</h3>
+                            <p class="text-gold-400 text-sm mb-4 italic">A majestade do cacau em uma cesta</p>
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mix de chocolates finos e importados</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Barras artesanais recheadas</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Potes de creme de avelã premium</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Bebida achocolatada especial</li>
+                            </ul>
+                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
+                                <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
+                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 
-            </div>
-        </section>
+            </div>
+        </section>
 
-        <section id="experiencia" class="py-12 px-5 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-            <div class="clay-glass-card p-5 md:p-10">
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white font-serif">A Magia do Detalhe</h2>
-                    <p class="text-zinc-400 text-sm md:text-base">Transformamos ingredientes simples em obras de arte comestíveis.</p>
-                </div>
-                <div class="slider-container h-[250px] md:h-[400px] border border-white/10 shadow-xl" id="image-slider">
-                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/6d04dc1f-9e92-4aa9-aa63-d0d7e22baaba.webp" alt="Ingredientes" class="slider-image">
-                    <div class="slider-overlay" id="slider-overlay">
-                        <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/942aeb84-3e9b-4082-8888-14291ba7b5fd.webp" alt="Produto Final" id="slider-img-after">
-                    </div>
-                    <div class="slider-handle" id="slider-handle"></div>
-                </div>
-            </div>
-        </section>
+        <section id="experiencia" class="py-12 px-5 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div class="clay-glass-card p-5 md:p-10">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white font-serif">A Magia do Detalhe</h2>
+                    <p class="text-zinc-400 text-sm md:text-base">Transformamos ingredientes simples em obras de arte comestíveis.</p>
+                </div>
+                <div class="slider-container h-[250px] md:h-[400px] border border-white/10 shadow-xl" id="image-slider">
+                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/6d04dc1f-9e92-4aa9-aa63-d0d7e22baaba.webp" alt="Ingredientes" class="slider-image">
+                    <div class="slider-overlay" id="slider-overlay">
+                        <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/942aeb84-3e9b-4082-8888-14291ba7b5fd.webp" alt="Produto Final" id="slider-img-after">
+                    </div>
+                    <div class="slider-handle" id="slider-handle"></div>
+                </div>
+            </div>
+        </section>
 
-        <section id="diferenciais" class="py-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2">
-                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" class="w-full h-auto rounded-xl shadow-inner">
-                </div>
-                <div class="order-1 lg:order-2 space-y-8">
-                    <div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">Por que escolher a Cacau Bliss?</h2>
-                        <p class="text-zinc-400 text-base md:text-lg">Para a mulher que merece o melhor todos os dias. Não entregamos apenas cestas, entregamos sentimentos materializados em sabor e beleza.</p>
-                    </div>
-                    <div class="space-y-6">
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="clock" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Entrega Agendada</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Personalização</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Opções de cartões escritos à mão e embalagens que refletem a personalidade de quem recebe.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="diferenciais" class="py-16 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2">
+                    <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/3777c7fe-d282-405a-ade0-f8c468390c0b.webp" alt="Detalhes Cacau Bliss" class="w-full h-auto rounded-xl shadow-inner">
+                </div>
+                <div class="order-1 lg:order-2 space-y-8">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">Por que escolher a Cacau Bliss?</h2>
+                        <p class="text-zinc-400 text-base md:text-lg">Para a mulher que merece o melhor todos os dias. Não entregamos apenas cestas, entregamos sentimentos materializados em sabor e beleza.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="clock" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Entrega Agendada</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Personalização</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Opções de cartões escritos à mão e embalagens que refletem a personalidade de quem recebe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <section id="faq" class="py-16 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-white mb-3 font-serif">Dúvidas Frequentes</h2>
-                <p class="text-zinc-400 text-sm md:text-base">Tudo o que você precisa saber antes de encomendar.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Com quanta antecedência devo fazer meu pedido?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Recomendamos que os pedidos sejam feitos com pelo menos 48 horas de antecedência para garantirmos a disponibilidade de todos os itens frescos e a personalização adequada.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Vocês entregam em quais regiões?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Atualmente, realizamos entregas em toda a região metropolitana. Para áreas mais afastadas, consulte nossa equipe via WhatsApp para verificar taxas e viabilidade.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Posso alterar itens da cesta?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Sim! Oferecemos opções de substituição em caso de restrições alimentares (como itens sem glúten ou lactose). Consulte nossa equipe para personalizar sua cesta de acordo com a necessidade.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section id="faq" class="py-16 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white mb-3 font-serif">Dúvidas Frequentes</h2>
+                <p class="text-zinc-400 text-sm md:text-base">Tudo o que você precisa saber antes de encomendar.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="clay-glass-card overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
+                        <span class="text-white font-medium text-sm md:text-base">Com quanta antecedência devo fazer meu pedido?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
+                            Recomendamos que os pedidos sejam feitos com pelo menos 48 horas de antecedência para garantirmos a disponibilidade de todos os itens frescos e a personalização adequada.
+                        </div>
+                    </div>
+                </div>
+                <div class="clay-glass-card overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
+                        <span class="text-white font-medium text-sm md:text-base">Vocês entregam em quais regiões?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
+                            Atualmente, realizamos entregas em toda a região metropolitana. Para áreas mais afastadas, consulte nossa equipe via WhatsApp para verificar taxas e viabilidade.
+                        </div>
+                    </div>
+                </div>
+                <div class="clay-glass-card overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
+                        <span class="text-white font-medium text-sm md:text-base">Posso alterar itens da cesta?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
+                            Sim! Oferecemos opções de substituição em caso de restrições alimentares (como itens sem glúten ou lactose). Consulte nossa equipe para personalizar sua cesta de acordo com a necessidade.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <section id="contato" class="py-12 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-            <div class="clay-glass-card p-6 md:p-10">
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white font-serif">Reserve seu Momento</h2>
-                    <p class="text-zinc-400 text-sm mt-2">Preencha os dados abaixo e nossa equipe entrará em contato rapidamente para confirmar os detalhes.</p>
-                </div>
-                <form action="#" method="POST" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" name="nome" placeholder="Seu Nome" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
-                        <input type="tel" name="telefone" placeholder="Seu WhatsApp" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
-                    </div>
-                    <select name="opcao" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white appearance-none focus:outline-none focus:border-gold-500 text-base">
-                        <option value="" class="bg-choco-900 text-zinc-400">Qual opção deseja?</option>
-                        <option value="aurora" class="bg-choco-900">Aurora Materna (R$ 250)</option>
-                        <option value="doce" class="bg-choco-900">Doce Essência (R$ 140)</option>
-                        <option value="floral_simples" class="bg-choco-900">Encanto Floral (R$ 120+)</option>
-                        <option value="imperio" class="bg-choco-900">Império Cacau (R$ 180)</option>
-                    </select>
-                    <textarea name="mensagem" id="mensagem" rows="3" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500 transition-all resize-none text-base" placeholder="Detalhes (Data, endereço, mensagem do cartão)..."></textarea>
-                    <button type="submit" class="w-full bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 rounded-lg flex justify-center items-center gap-2 transition-colors mt-2 text-lg">
-                        Enviar Pedido <i data-lucide="send" class="w-5 h-5"></i>
-                    </button>
-                </form>
-            </div>
-        </section>
+        <section id="contato" class="py-12 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+            <div class="clay-glass-card p-6 md:p-10">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white font-serif">Reserve seu Momento</h2>
+                    <p class="text-zinc-400 text-sm mt-2">Preencha os dados abaixo e nossa equipe entrará em contato rapidamente para confirmar os detalhes.</p>
+                </div>
+                <form action="#" method="POST" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" name="nome" placeholder="Seu Nome" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
+                        <input type="tel" name="telefone" placeholder="Seu WhatsApp" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
+                    </div>
+                    <select name="opcao" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white appearance-none focus:outline-none focus:border-gold-500 text-base">
+                        <option value="" class="bg-choco-900 text-zinc-400">Qual opção deseja?</option>
+                        <option value="aurora" class="bg-choco-900">Aurora Materna (R$ 250)</option>
+                        <option value="doce" class="bg-choco-900">Doce Essência (R$ 140)</option>
+                        <option value="floral_simples" class="bg-choco-900">Encanto Floral (R$ 120+)</option>
+                        <option value="imperio" class="bg-choco-900">Império Cacau (R$ 180)</option>
+                    </select>
+                    <textarea name="mensagem" id="mensagem" rows="3" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500 transition-all resize-none text-base" placeholder="Detalhes (Data, endereço, mensagem do cartão)..."></textarea>
+                    <button type="submit" class="w-full bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 rounded-lg flex justify-center items-center gap-2 transition-colors mt-2 text-lg">
+                        Enviar Pedido <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
 
-    </main>
+    </main>
 
-    <footer id="footer" class="relative z-10 border-t border-white/10 pt-10 pb-20 md:pb-8 bg-black/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <span class="text-xl font-bold font-serif text-white tracking-wide opacity-80 block mb-2">Cacau Bliss</span>
-            <p class="text-zinc-600 text-xs mb-2">Criando momentos inesquecíveis através de sabores e aromas selecionados com amor.</p>
-            <p class="text-zinc-600 text-xs">&copy; 2024 Cacau Bliss. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    <footer id="footer" class="relative z-10 border-t border-white/10 pt-10 pb-20 md:pb-8 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <span class="text-xl font-bold font-serif text-white tracking-wide opacity-80 block mb-2">Cacau Bliss</span>
+            <p class="text-zinc-600 text-xs mb-2">Criando momentos inesquecíveis através de sabores e aromas selecionados com amor.</p>
+            <p class="text-zinc-600 text-xs">&copy; 2024 Cacau Bliss. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-    <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Falar no WhatsApp">
-        <i data-lucide="message-circle" class="w-7 h-7"></i>
-    </a>
+    <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Falar no WhatsApp">
+        <i data-lucide="message-circle" class="w-7 h-7"></i>
+    </a>
 
-    <script>
-        // Função LERP matemática para fluidez do Scroll (Interpolação)
-        function mapRange(value, inMin, inMax, outMin, outMax) {
-            if (value <= inMin) return outMin;
-            if (value >= inMax) return outMax;
-            return outMin + (outMax - outMin) * ((value - inMin) / (inMax - inMin));
-        }
+    <script>
+        // Função LERP matemática para fluidez do Scroll (Interpolação)
+        function mapRange(value, inMin, inMax, outMin, outMax) {
+            if (value <= inMin) return outMin;
+            if (value >= inMax) return outMax;
+            return outMin + (outMax - outMin) * ((value - inMin) / (inMax - inMin));
+        }
 
-        // Ícones
-        function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
-        initLucide();
+        // Ícones
+        function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
+        initLucide();
 
-        // Menu Mobile Otimizado
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = this.querySelector('i');
-            menu.classList.toggle('hidden');
-            if(menu.classList.contains('hidden')) {
-                icon.setAttribute('data-lucide', 'menu');
-            } else {
-                icon.setAttribute('data-lucide', 'x');
-            }
-            lucide.createIcons();
-        });
+        // Menu Mobile Otimizado
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = this.querySelector('i');
+            menu.classList.toggle('hidden');
+            if(menu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        });
 
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
-                const btnIcon = document.querySelector('#mobile-menu-btn i');
-                btnIcon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
-        });
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+                const btnIcon = document.querySelector('#mobile-menu-btn i');
+                btnIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
 
-        // Skeleton Loading
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const wrappers = document.querySelectorAll('.skeleton-wrapper');
-                const contents = document.querySelectorAll('.real-content');
-                wrappers.forEach(w => w.style.opacity = '0');
-                setTimeout(() => {
-                    wrappers.forEach(w => w.style.display = 'none');
-                    contents.forEach(c => c.style.opacity = '1');
-                }, 400); 
-            }, 800); 
-        });
+        // Skeleton Loading
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const wrappers = document.querySelectorAll('.skeleton-wrapper');
+                const contents = document.querySelectorAll('.real-content');
+                wrappers.forEach(w => w.style.opacity = '0');
+                setTimeout(() => {
+                    wrappers.forEach(w => w.style.display = 'none');
+                    contents.forEach(c => c.style.opacity = '1');
+                }, 400); 
+            }, 800); 
+        });
 
-        // Lógica do Hero Cinematográfico Otimizada para LERP (Fluidez Touch)
-        const canvas = document.getElementById("hero-canvas");
-        const context = canvas.getContext("2d");
-        const heroContainer = document.getElementById("hero-track"); 
-        
-        const block1 = document.getElementById("hero-block-1");
-        const block2 = document.getElementById("hero-block-2");
-        const block3 = document.getElementById("hero-block-3");
+        // Lógica do Hero Cinematográfico Otimizada para LERP (Fluidez Touch)
+        const canvas = document.getElementById("hero-canvas");
+        const context = canvas.getContext("2d");
+        const heroContainer = document.getElementById("hero-track"); 
+        
+        const block1 = document.getElementById("hero-block-1");
+        const block2 = document.getElementById("hero-block-2");
+        const block3 = document.getElementById("hero-block-3");
 
-        const frameCount = 120;
-        const currentFrame = index => `${String(index).padStart(4, '0')}.webp`;
-        
-        const images = [];
-        let loadedCount = 0;
-        
-        for (let i = 1; i <= frameCount; i++) {
-            const img = new Image();
-            img.src = currentFrame(i);
-            img.onload = () => {
-                loadedCount++;
-                if(loadedCount === 1) {
-                    canvas.width = images[0].width;
-                    canvas.height = images[0].height;
-                    context.drawImage(images[0], 0, 0);
-                }
-            };
-            images.push(img);
-        }
+        const frameCount = 120;
+        const currentFrame = index => `${String(index).padStart(4, '0')}.webp`;
+        
+        const images = [];
+        let loadedCount = 0;
+        
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            img.onload = () => {
+                loadedCount++;
+                if(loadedCount === 1) {
+                    canvas.width = images[0].width;
+                    canvas.height = images[0].height;
+                    context.drawImage(images[0], 0, 0);
+                }
+            };
+            images.push(img);
+        }
 
-        // Variáveis para a Interpolação Linear (LERP) do Scroll
-        let targetScroll = 0;
-        let smoothScrollCanvas = 0;
-        let smoothScrollText = 0;
+        // Variáveis para a Interpolação Linear (LERP) do Scroll
+        let targetScroll = 0;
+        let smoothScrollCanvas = 0;
+        let smoothScrollText = 0;
 
-        // O evento de scroll APENAS atualiza o target (leveza extrema)
-        window.addEventListener('scroll', () => {
-            if(!heroContainer) return;
-            const scrollTop = window.scrollY;
-            const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
-            
-            let frac = scrollTop / maxScrollTop;
-            if (frac < 0) frac = 0;
-            if (frac > 1) frac = 1;
-            
-            targetScroll = frac;
-        }, { passive: true });
+        // O evento de scroll APENAS atualiza o target (leveza extrema)
+        window.addEventListener('scroll', () => {
+            if(!heroContainer) return;
+            const scrollTop = window.scrollY;
+            const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
+            
+            let frac = scrollTop / maxScrollTop;
+            if (frac < 0) frac = 0;
+            if (frac > 1) frac = 1;
+            
+            targetScroll = frac;
+        }, { passive: true });
 
-        // O loop de animação persegue o target gradativamente
-        function animateHero() {
-            if(!heroContainer) return;
+        // O loop de animação persegue o target gradativamente
+        function animateHero() {
+            if(!heroContainer) return;
 
-            // Fator LERP "Desconectado":
-            // Canvas atualiza rápido (0.15)
-            // Texto atualiza mais lento (0.04) para criar um efeito de flutuação e atraso suave (Smooth Lag)
-            smoothScrollCanvas += (targetScroll - smoothScrollCanvas) * 0.15;
-            smoothScrollText += (targetScroll - smoothScrollText) * 0.04;
+            // Fator LERP "Desconectado":
+            // Canvas atualiza rápido (0.15)
+            // Texto atualiza mais lento (0.04) para criar um efeito de flutuação e atraso suave (Smooth Lag)
+            smoothScrollCanvas += (targetScroll - smoothScrollCanvas) * 0.15;
+            smoothScrollText += (targetScroll - smoothScrollText) * 0.04;
 
-            // 1. Atualiza as imagens do Canvas
-            const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothScrollCanvas * frameCount)));
-            if (images[frameIndex] && images[frameIndex].complete) {
-                context.drawImage(images[frameIndex], 0, 0);
-            }
+            // 1. Atualiza as imagens do Canvas
+            const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothScrollCanvas * frameCount)));
+            if (images[frameIndex] && images[frameIndex].complete) {
+                context.drawImage(images[frameIndex], 0, 0);
+            }
 
-            // 2. Atualiza os Blocos de Texto com distância maior de voo (eixo Y ampliado para 80px)
-            // BLOCO 1
-            let op1 = mapRange(smoothScrollText, 0.02, 0.20, 1, 0);
-            let y1 = mapRange(smoothScrollText, 0.02, 0.20, 0, -80);
-            block1.style.opacity = Math.max(0, op1);
-            block1.style.transform = `translateY(${y1}px)`;
-            block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
+            // 2. Atualiza os Blocos de Texto com distância maior de voo (eixo Y ampliado para 80px)
+            // BLOCO 1
+            let op1 = mapRange(smoothScrollText, 0.02, 0.20, 1, 0);
+            let y1 = mapRange(smoothScrollText, 0.02, 0.20, 0, -80);
+            block1.style.opacity = Math.max(0, op1);
+            block1.style.transform = `translateY(${y1}px)`;
+            block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
 
-            // BLOCO 2
-            let op2, y2;
-            if (smoothScrollText < 0.45) {
-                op2 = mapRange(smoothScrollText, 0.25, 0.40, 0, 1);
-                y2 = mapRange(smoothScrollText, 0.25, 0.40, 80, 0);
-            } else {
-                op2 = mapRange(smoothScrollText, 0.55, 0.70, 1, 0);
-                y2 = mapRange(smoothScrollText, 0.55, 0.70, 0, -80);
-            }
-            block2.style.opacity = Math.max(0, op2);
-            block2.style.transform = `translateY(${y2}px)`;
+            // BLOCO 2
+            let op2, y2;
+            if (smoothScrollText < 0.45) {
+                op2 = mapRange(smoothScrollText, 0.25, 0.40, 0, 1);
+                y2 = mapRange(smoothScrollText, 0.25, 0.40, 80, 0);
+            } else {
+                op2 = mapRange(smoothScrollText, 0.55, 0.70, 1, 0);
+                y2 = mapRange(smoothScrollText, 0.55, 0.70, 0, -80);
+            }
+            block2.style.opacity = Math.max(0, op2);
+            block2.style.transform = `translateY(${y2}px)`;
 
-            // BLOCO 3
-            let op3 = mapRange(smoothScrollText, 0.75, 0.90, 0, 1);
-            let y3 = mapRange(smoothScrollText, 0.75, 0.90, 80, 0);
-            block3.style.opacity = Math.max(0, op3);
-            block3.style.transform = `translateY(${y3}px)`;
-            block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
+            // BLOCO 3
+            let op3 = mapRange(smoothScrollText, 0.75, 0.90, 0, 1);
+            let y3 = mapRange(smoothScrollText, 0.75, 0.90, 80, 0);
+            block3.style.opacity = Math.max(0, op3);
+            block3.style.transform = `translateY(${y3}px)`;
+            block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
 
-            // Loop eterno
-            requestAnimationFrame(animateHero);
-        }
-        
-        // Inicia o Loop de Fluidez
-        animateHero();
+            // Loop eterno
+            requestAnimationFrame(animateHero);
+        }
+        
+        // Inicia o Loop de Fluidez
+        animateHero();
 
-        // Slider Touch Otimizado
-        const sliderContainer = document.getElementById('image-slider');
-        const sliderOverlay = document.getElementById('slider-overlay');
-        const sliderHandle = document.getElementById('slider-handle');
-        const sliderImgAfter = document.getElementById('slider-img-after');
-        let isDragging = false;
+        // Slider Touch Otimizado
+        const sliderContainer = document.getElementById('image-slider');
+        const sliderOverlay = document.getElementById('slider-overlay');
+        const sliderHandle = document.getElementById('slider-handle');
+        const sliderImgAfter = document.getElementById('slider-img-after');
+        let isDragging = false;
 
-        function updateSliderWidth() {
-            if(sliderContainer) sliderImgAfter.style.width = sliderContainer.offsetWidth + 'px';
-        }
-        updateSliderWidth();
-        window.addEventListener('resize', updateSliderWidth);
+        function updateSliderWidth() {
+            if(sliderContainer) sliderImgAfter.style.width = sliderContainer.offsetWidth + 'px';
+        }
+        updateSliderWidth();
+        window.addEventListener('resize', updateSliderWidth);
 
-        function moveSlider(clientX) {
-            const rect = sliderContainer.getBoundingClientRect();
-            let xPos = Math.max(0, Math.min(clientX - rect.left, rect.width));
-            const percentage = (xPos / rect.width) * 100;
-            sliderOverlay.style.width = `${percentage}%`;
-            sliderHandle.style.left = `${percentage}%`;
-        }
+        function moveSlider(clientX) {
+            const rect = sliderContainer.getBoundingClientRect();
+            let xPos = Math.max(0, Math.min(clientX - rect.left, rect.width));
+            const percentage = (xPos / rect.width) * 100;
+            sliderOverlay.style.width = `${percentage}%`;
+            sliderHandle.style.left = `${percentage}%`;
+        }
 
-        if(sliderContainer) {
-            sliderHandle.addEventListener('mousedown', () => { isDragging = true; });
-            window.addEventListener('mouseup', () => { isDragging = false; });
-            window.addEventListener('mousemove', (e) => { if (isDragging) moveSlider(e.clientX); });
-            sliderHandle.addEventListener('touchstart', () => { isDragging = true; }, {passive: true});
-            window.addEventListener('touchend', () => { isDragging = false; });
-            window.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                if(e.cancelable) e.preventDefault(); 
-                moveSlider(e.touches[0].clientX);
-            }, {passive: false});
-            sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
-        }
+        if(sliderContainer) {
+            sliderHandle.addEventListener('mousedown', () => { isDragging = true; });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            window.addEventListener('mousemove', (e) => { if (isDragging) moveSlider(e.clientX); });
+            sliderHandle.addEventListener('touchstart', () => { isDragging = true; }, {passive: true});
+            window.addEventListener('touchend', () => { isDragging = false; });
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                if(e.cancelable) e.preventDefault(); 
+                moveSlider(e.touches[0].clientX);
+            }, {passive: false});
+            sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
+        }
 
-        // Accordion FAQ
-        document.querySelectorAll('.accordion-btn').forEach(acc => {
-            acc.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                document.querySelectorAll('.accordion-btn').forEach(other => {
-                    if(other !== this) {
-                        other.setAttribute('aria-expanded', 'false');
-                        other.nextElementSibling.style.maxHeight = null;
-                    }
-                });
-                this.setAttribute('aria-expanded', !isExpanded);
-                const content = this.nextElementSibling;
-                content.style.maxHeight = !isExpanded ? content.scrollHeight + "px" : null;
-            });
-        });
-    </script>
+        // Accordion FAQ
+        document.querySelectorAll('.accordion-btn').forEach(acc => {
+            acc.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                document.querySelectorAll('.accordion-btn').forEach(other => {
+                    if(other !== this) {
+                        other.setAttribute('aria-expanded', 'false');
+                        other.nextElementSibling.style.maxHeight = null;
+                    }
+                });
+                this.setAttribute('aria-expanded', !isExpanded);
+                const content = this.nextElementSibling;
+                content.style.maxHeight = !isExpanded ? content.scrollHeight + "px" : null;
+            });
+        });
+    </script>
 </body>
 </html>
