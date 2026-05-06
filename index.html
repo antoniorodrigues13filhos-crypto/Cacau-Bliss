@@ -586,7 +586,7 @@
             });
         });
 
-        // Skeleton Loading Rápido
+        // Skeleton Loading
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const wrappers = document.querySelectorAll('.skeleton-wrapper');
@@ -650,20 +650,22 @@
         function animateHero() {
             if(!heroContainer) return;
 
-            // Fator LERP: 0.12 para o canvas, 0.08 para os textos (velocidades orgânicas distintas)
-            smoothScrollCanvas += (targetScroll - smoothScrollCanvas) * 0.12;
-            smoothScrollText += (targetScroll - smoothScrollText) * 0.08;
+            // Fator LERP "Desconectado":
+            // Canvas atualiza rápido (0.15)
+            // Texto atualiza mais lento (0.04) para criar um efeito de flutuação e atraso suave (Smooth Lag)
+            smoothScrollCanvas += (targetScroll - smoothScrollCanvas) * 0.15;
+            smoothScrollText += (targetScroll - smoothScrollText) * 0.04;
 
-            // 1. Atualiza as imagens do Canvas de forma suave
+            // 1. Atualiza as imagens do Canvas
             const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothScrollCanvas * frameCount)));
             if (images[frameIndex] && images[frameIndex].complete) {
                 context.drawImage(images[frameIndex], 0, 0);
             }
 
-            // 2. Atualiza a Opacidade e Y dos Blocos de Texto de forma suave
+            // 2. Atualiza os Blocos de Texto com distância maior de voo (eixo Y ampliado para 80px)
             // BLOCO 1
             let op1 = mapRange(smoothScrollText, 0.02, 0.20, 1, 0);
-            let y1 = mapRange(smoothScrollText, 0.02, 0.20, 0, -30);
+            let y1 = mapRange(smoothScrollText, 0.02, 0.20, 0, -80);
             block1.style.opacity = Math.max(0, op1);
             block1.style.transform = `translateY(${y1}px)`;
             block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
@@ -672,22 +674,22 @@
             let op2, y2;
             if (smoothScrollText < 0.45) {
                 op2 = mapRange(smoothScrollText, 0.25, 0.40, 0, 1);
-                y2 = mapRange(smoothScrollText, 0.25, 0.40, 30, 0);
+                y2 = mapRange(smoothScrollText, 0.25, 0.40, 80, 0);
             } else {
                 op2 = mapRange(smoothScrollText, 0.55, 0.70, 1, 0);
-                y2 = mapRange(smoothScrollText, 0.55, 0.70, 0, -30);
+                y2 = mapRange(smoothScrollText, 0.55, 0.70, 0, -80);
             }
             block2.style.opacity = Math.max(0, op2);
             block2.style.transform = `translateY(${y2}px)`;
 
             // BLOCO 3
             let op3 = mapRange(smoothScrollText, 0.75, 0.90, 0, 1);
-            let y3 = mapRange(smoothScrollText, 0.75, 0.90, 30, 0);
+            let y3 = mapRange(smoothScrollText, 0.75, 0.90, 80, 0);
             block3.style.opacity = Math.max(0, op3);
             block3.style.transform = `translateY(${y3}px)`;
             block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
 
-            // Loop eterno e eficiente
+            // Loop eterno
             requestAnimationFrame(animateHero);
         }
         
