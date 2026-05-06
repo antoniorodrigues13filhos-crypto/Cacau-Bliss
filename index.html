@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Cacau Bliss - Experiências Únicas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="Cestas artesanais, chocolates finos e arranjos florais preparados com dedicação.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,10 +36,7 @@
 
     <style>
         /* Otimizações Touch "Apple-level" */
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-        
+        * { -webkit-tap-highlight-color: transparent; }
         ::-webkit-scrollbar { display: none; }
         @media (min-width: 768px) { 
             ::-webkit-scrollbar { display: block; width: 6px; } 
@@ -50,146 +47,58 @@
         @media (min-width: 768px) { * { scrollbar-width: thin; scrollbar-color: #c68b3f #0f0805; } }
 
         body {
-            background-color: #0f0805;
-            color: #fafafa;
+            background-color: #0f0805; color: #fafafa;
             font-family: ui-sans-serif, system-ui, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            overscroll-behavior-y: none;
+            -webkit-font-smoothing: antialiased; overflow-x: hidden; overscroll-behavior-y: none;
         }
 
         /* Splash Screen */
         #splash-screen {
-            position: fixed; inset: 0; z-index: 99999;
-            background-color: #0f0805;
+            position: fixed; inset: 0; z-index: 99999; background-color: #0f0805;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .splash-logo {
-            font-family: 'Lora', serif; font-size: 2rem; font-weight: 700;
-            letter-spacing: 0.1em; color: #fff;
+            font-family: 'Lora', serif; font-size: 2rem; font-weight: 700; letter-spacing: 0.1em; color: #fff;
             background: linear-gradient(105deg, #e8d5b0 0%, #c68b3f 50%, #ffffff 100%);
             -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
             animation: pulse-glow 2s infinite;
         }
-        .splash-bar-container {
-            width: 140px; height: 2px; background: rgba(255,255,255,0.1);
-            margin-top: 1.5rem; border-radius: 4px; overflow: hidden; position: relative;
-        }
-        #splash-progress {
-            position: absolute; top: 0; left: 0; height: 100%; width: 0%;
-            background: #c68b3f; transition: width 0.3s ease-out;
-        }
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 8px rgba(198,139,63,0.3)); }
-            50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(198,139,63,0.6)); }
-        }
+        .splash-bar-container { width: 140px; height: 2px; background: rgba(255,255,255,0.1); margin-top: 1.5rem; border-radius: 4px; overflow: hidden; position: relative; }
+        #splash-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #c68b3f; transition: width 0.3s ease-out; }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 8px rgba(198,139,63,0.3)); } 50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(198,139,63,0.6)); } }
 
-        .bg-fixed-layer {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/75d400a2-e4f7-4388-8f62-8f112aa521d7.webp');
-            background-size: cover; background-position: center; z-index: -2;
-        }
+        .bg-fixed-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/75d400a2-e4f7-4388-8f62-8f112aa521d7.webp'); background-size: cover; background-position: center; z-index: -2; }
+        .bg-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%); z-index: -1; }
+        .noise-overlay { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay; will-change: transform; transform: translateZ(0); }
+        @media (max-width: 768px) { .noise-overlay { display: none; } }
 
-        .bg-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%); z-index: -1;
-        }
+        .grain-static { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 9998; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 180px 180px; opacity: 0.04; mix-blend-mode: soft-light; }
 
-        .noise-overlay {
-            position: fixed; inset: 0; width: 100vw; height: 100vh;
-            z-index: 9999; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay;
-            will-change: transform; transform: translateZ(0);
-        }
-        @media (max-width: 768px) {
-            .noise-overlay { display: none; } 
-        }
+        .glass-nav { background: rgba(26, 15, 10, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: background 0.3s ease; }
+        @media (min-width: 768px) { .glass-nav { background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); } }
 
-        .grain-static {
-            position: fixed; inset: 0; width: 100%; height: 100%;
-            z-index: 9998; pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            background-size: 180px 180px; opacity: 0.04; mix-blend-mode: soft-light;
-        }
+        .clay-glass-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; transition: transform 0.3s ease; }
+        @media (min-width: 768px) { .clay-glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2); } }
 
-        .glass-nav {
-            background: rgba(26, 15, 10, 0.85); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.3s ease;
-        }
-        @media (min-width: 768px) {
-            .glass-nav { background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        }
-
-        .clay-glass-card {
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem; transition: transform 0.3s ease;
-        }
-        @media (min-width: 768px) {
-            .clay-glass-card {
-                background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-                box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2);
-            }
-        }
-
-        @keyframes gold-shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
+        @keyframes gold-shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         
-        .hero-content {
-            padding: 0 clamp(20px, 5vw, 10%);
-        }
-
-        .hero-title {
-            font-family: 'Lora', serif;
-            font-size: clamp(40px, 8vw, 100px);
-            background: linear-gradient(105deg, #e8d5b0 0%, #f5eedc 18%, #c68b3f 30%, #ead9b9 42%, #ffffff 52%, #ead9b9 62%, #c68b3f 74%, #f5eedc 86%, #e8d5b0 100%);
-            background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-            animation: gold-shimmer 6s 1s linear infinite; line-height: 1.15; letter-spacing: -0.02em;
-        }
-
-        .hero-sub {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            font-size: clamp(16px, 2vw, 20px);
-            color: #d4d4d8;
-        }
-
+        .hero-content { padding: 0 clamp(20px, 5vw, 10%); }
+        .hero-title { font-family: 'Lora', serif; font-size: clamp(40px, 8vw, 100px); background: linear-gradient(105deg, #e8d5b0 0%, #f5eedc 18%, #c68b3f 30%, #ead9b9 42%, #ffffff 52%, #ead9b9 62%, #c68b3f 74%, #f5eedc 86%, #e8d5b0 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gold-shimmer 6s 1s linear infinite; line-height: 1.15; letter-spacing: -0.02em; }
+        .hero-sub { font-family: 'Lora', serif; font-style: italic; font-size: clamp(16px, 2vw, 20px); color: #d4d4d8; }
         .text-shadow-hero { text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        @media (min-width: 768px) {
-            .text-shadow-hero { text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
-        }
+        @media (min-width: 768px) { .text-shadow-hero { text-shadow: 0 4px 20px rgba(0,0,0,0.9); } }
 
-        .hero-cta-primary {
-            background: linear-gradient(135deg, #c68b3f 0%, #b57233 50%, #97582d 100%); color: #fff; padding: 0.85rem 2rem; border-radius: 9999px;
-            font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; box-shadow: 0 0 24px rgba(198,139,63,0.45), 0 4px 16px rgba(0,0,0,0.4);
-            white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .hero-cta-secondary {
-            background: rgba(255,255,255,0.05); color: #e8d5b0; padding: 0.85rem 2rem; border-radius: 9999px; font-weight: 500; font-size: 0.95rem;
-            border: 1px solid rgba(198,139,63,0.35); white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
-        }
+        .hero-cta-primary { background: linear-gradient(135deg, #c68b3f 0%, #b57233 50%, #97582d 100%); color: #fff; padding: 0.85rem 2rem; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.04em; box-shadow: 0 0 24px rgba(198,139,63,0.45), 0 4px 16px rgba(0,0,0,0.4); white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.15); cursor: pointer; }
+        .hero-cta-secondary { background: rgba(255,255,255,0.05); color: #e8d5b0; padding: 0.85rem 2rem; border-radius: 9999px; font-weight: 500; font-size: 0.95rem; border: 1px solid rgba(198,139,63,0.35); white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
         @media (min-width: 768px) { .hero-cta-secondary { backdrop-filter: blur(8px); } }
 
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(198,139,63,0.1); border: 1px solid rgba(198,139,63,0.3);
-            padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.75rem; color: #d1a35f; letter-spacing: 0.08em;
-            text-transform: uppercase; margin-bottom: 1.5rem;
-        }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(198,139,63,0.1); border: 1px solid rgba(198,139,63,0.3); padding: 0.35rem 1rem; border-radius: 9999px; font-size: 0.75rem; color: #d1a35f; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.5rem; }
         @media (min-width: 768px) { .hero-badge { backdrop-filter: blur(12px); } }
-
-        .hero-badge-dot {
-            width: 6px; height: 6px; border-radius: 50%; background: #c68b3f; box-shadow: 0 0 6px #c68b3f; animation: pulse-dot 2s infinite;
-        }
+        .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #c68b3f; box-shadow: 0 0 6px #c68b3f; animation: pulse-dot 2s infinite; }
         @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 4px #c68b3f; } 50% { box-shadow: 0 0 12px #c68b3f; } }
 
-        .shimmer-bg {
-            background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
-            background-size: 200% 100%; animation: shimmer 1.5s infinite linear;
-        }
+        .shimmer-bg { background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
         .slider-container { position: relative; width: 100%; border-radius: 1.5rem; overflow: hidden; touch-action: pan-y; }
@@ -197,12 +106,7 @@
         .slider-overlay { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; pointer-events: none; }
         .slider-overlay img { height: 100%; width: 100vw; max-width: none; object-fit: cover; }
         .slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: #c68b3f; transform: translateX(-50%); z-index: 10; cursor: ew-resize; }
-        .slider-handle::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 36px; height: 36px; background: #c68b3f; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>');
-            background-position: center; background-repeat: no-repeat; background-size: 20px;
-        }
+        .slider-handle::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: #c68b3f; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>'); background-position: center; background-repeat: no-repeat; background-size: 20px; }
 
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .accordion-icon { transition: transform 0.3s ease; }
@@ -210,29 +114,22 @@
         .accordion-btn[aria-expanded="true"] { background-color: rgba(198, 139, 63, 0.1); }
 
         #hero-canvas { will-change: transform; }
-        .scroll-block { 
-            will-change: transform, opacity; 
-            transform: translateZ(0);
-            position: absolute; left: 0; right: 0; 
-            display: flex; flex-direction: column; align-items: center; text-align: center; 
-        }
+        .scroll-block { will-change: transform, opacity; transform: translateZ(0); position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-        /* Botão flutuante limpo (sem fundo verde/bordas extras) */
-        .whatsapp-float {
-            position: fixed; bottom: 1.5rem; right: 1.5rem; width: 64px; height: 64px;
-            z-index: 999; display: flex; align-items: center; justify-content: center;
-            transition: transform 0.2s ease-out;
-        }
+        /* Botão Flutuante Limpo com Imagem 3D */
+        .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 64px; height: 64px; z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease-out; }
         .whatsapp-float:active { transform: scale(0.92); }
 
+        /* Estilo do Chat App */
+        #chat-modal {
+            height: 100dvh; /* Crava a interface no Mobile sem ser empurrada pelo teclado de forma nativa */
+        }
+        .chat-bubble-bot { background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.25rem 1.25rem 1.25rem 0.25rem; }
+        .chat-bubble-user { background-color: rgba(198,139,63,0.2); border: 1px solid rgba(198,139,63,0.3); border-radius: 1.25rem 1.25rem 0.25rem 1.25rem; }
+        .safe-pb { padding-bottom: env(safe-area-inset-bottom); }
+
         @media (max-width: 768px) {
-            .cro-capture-form {
-                flex-direction: column;
-            }
-            .backdrop-blur-md {
-                backdrop-filter: none !important;
-                background: rgba(0, 0, 0, 0.85) !important;
-            }
+            .backdrop-blur-md { backdrop-filter: none !important; background: rgba(0, 0, 0, 0.85) !important; }
         }
     </style>
 </head>
@@ -248,12 +145,7 @@
     <div class="grain-static"></div>
 
     <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
-        <filter id="noise-filter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch">
-                <animate attributeName="baseFrequency" dur="7s" values="0.72;0.74;0.70;0.73;0.72" repeatCount="indefinite"/>
-            </feTurbulence>
-            <feColorMatrix type="saturate" values="0"/>
-        </filter>
+        <filter id="noise-filter"><feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch"><animate attributeName="baseFrequency" dur="7s" values="0.72;0.74;0.70;0.73;0.72" repeatCount="indefinite"/></feTurbulence><feColorMatrix type="saturate" values="0"/></filter>
         <rect width="100%" height="100%" filter="url(#noise-filter)" opacity="1"/>
     </svg>
 
@@ -275,9 +167,9 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <a href="#contato" class="bg-gold-600 text-white px-6 py-2.5 rounded-full text-sm font-medium">
+                    <button onclick="openChat('')" class="bg-gold-600 text-white px-6 py-2.5 rounded-full text-sm font-medium cursor-pointer">
                         Encomendar
-                    </a>
+                    </button>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-zinc-300 focus:outline-none p-2">
@@ -291,7 +183,7 @@
                 <a href="#hero-track" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
                 <a href="#presentes" class="text-zinc-300 block py-3 w-full text-center text-lg">Composições</a>
                 <a href="#experiencia" class="text-zinc-300 block py-3 w-full text-center text-lg">Experiência</a>
-                <a href="#contato" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
+                <button onclick="openChat('')" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</button>
             </div>
         </div>
     </nav>
@@ -308,9 +200,7 @@
                         <span class="hero-badge-dot"></span>
                         Cestas artesanais · Chocolates finos · Flores
                     </div>
-                    <h1 class="hero-title font-bold mb-2">
-                        Ela cuidou de você<br>a vida inteira.
-                    </h1>
+                    <h1 class="hero-title font-bold mb-2">Ela cuidou de você<br>a vida inteira.</h1>
                     <p class="hero-sub text-shadow-hero">Hoje é a sua vez.</p>
                 </div>
 
@@ -330,10 +220,10 @@
                         Porque quem sempre esteve ao seu lado merece <em class="text-gold-400 not-italic">mais do que um presente comum</em>.
                     </p>
                     <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
-                        <a href="#contato" class="hero-cta-primary justify-center">
+                        <button onclick="openChat('')" class="hero-cta-primary justify-center cursor-pointer">
                             <i data-lucide="gift" class="w-4 h-4"></i> Encomendar Agora
-                        </a>
-                        <a href="#presentes" class="hero-cta-secondary justify-center">
+                        </button>
+                        <a href="#presentes" class="hero-cta-secondary justify-center cursor-pointer">
                             <i data-lucide="package" class="w-4 h-4"></i> Ver Composições
                         </a>
                     </div>
@@ -369,15 +259,13 @@
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Pães artesanais & Mini sanduíche</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini bolo caseiro & Frutas frescas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Café, chá e Suco natural</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Geleia gourmet & Biscoitos</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Cuscuz & Caneca personalizada</li>
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
+                                <button onclick="openChat('Aurora Materna')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -386,10 +274,7 @@
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
+                        <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div></div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden bg-choco-950">
@@ -401,14 +286,13 @@
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Trufas artesanais</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini ovos de chocolate</li>
-                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500 mt-0.5"></i> <span>Coração recheado<br><span class="text-xs text-zinc-500">(cupuaçu ou maracujá)</span></span></li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Embalagem elegante</li>
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
+                                <button onclick="openChat('Doce Essência')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -417,37 +301,26 @@
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
+                        <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div></div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden bg-choco-950">
                             <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" loading="lazy" decoding="async" class="w-full h-full object-cover">
-                            <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1">
-                                <i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance
-                            </div>
+                            <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1"><i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance</div>
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Encanto Floral</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">Delicadeza que emociona</p>
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Arranjo de flores selecionadas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Chocolates gourmet Cacau Bliss</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Arranjo de flores</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Chocolates Cacau Bliss</li>
                             </ul>
                             <div class="mt-auto space-y-3 border-t border-white/10 pt-4">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-zinc-400">Versão Simples</span>
-                                    <div class="text-lg font-bold text-white">R$ 120</div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-zinc-400">Versão Completa</span>
-                                    <div class="text-lg font-bold text-white">R$ 190</div>
-                                </div>
-                                <a href="#contato" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium">
+                                <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Simples</span><div class="text-lg font-bold text-white">R$ 120</div></div>
+                                <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Completa</span><div class="text-lg font-bold text-white">R$ 190</div></div>
+                                <button onclick="openChat('Encanto Floral')" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     Selecionar Opção
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -456,32 +329,25 @@
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
-                        <div class="p-6 space-y-4">
-                            <div class="h-6 w-3/4 shimmer-bg rounded"></div>
-                            <div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div>
-                        </div>
+                        <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div></div>
                     </div>
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-56 overflow-hidden bg-choco-950">
                             <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" loading="lazy" decoding="async" class="w-full h-full object-cover">
-                            <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
-                                <i data-lucide="crown" class="w-3 h-3"></i> Ouro
-                            </div>
+                            <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1"><i data-lucide="crown" class="w-3 h-3"></i> Ouro</div>
                         </div>
                         <div class="p-5 flex flex-col flex-grow">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Império Cacau</h3>
-                            <p class="text-gold-400 text-sm mb-4 italic">A majestade do cacau em uma cesta</p>
+                            <p class="text-gold-400 text-sm mb-4 italic">A majestade em uma cesta</p>
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mix de chocolates finos e importados</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Barras artesanais recheadas</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Potes de creme de avelã premium</li>
-                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Bebida achocolatada especial</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mix chocolates importados</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Creme de avelã premium</li>
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <a href="#contato" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400">
+                                <button onclick="openChat('Império Cacau')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -526,94 +392,21 @@
                                 <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Personalização</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Opções de cartões escritos à mão e embalagens que refletem a personalidade de quem recebe.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="py-16 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-white mb-3 font-serif">Dúvidas Frequentes</h2>
-                <p class="text-zinc-400 text-sm md:text-base">Tudo o que você precisa saber antes de encomendar.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Com quanta antecedência devo fazer meu pedido?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Recomendamos que os pedidos sejam feitos com pelo menos 48 horas de antecedência para garantirmos a disponibilidade de todos os itens frescos e a personalização adequada.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Vocês entregam em quais regiões?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Atualmente, realizamos entregas em toda a região metropolitana. Para áreas mais afastadas, consulte nossa equipe via WhatsApp para verificar taxas e viabilidade.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Posso alterar itens da cesta?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Sim! Oferecemos opções de substituição em caso de restrições alimentares (como itens sem glúten ou lactose). Consulte nossa equipe para personalizar sua cesta de acordo com a necessidade.
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contato" class="py-12 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-            <div class="clay-glass-card p-6 md:p-10">
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white font-serif">Reserve seu Momento</h2>
-                    <p class="text-zinc-400 text-sm mt-2">Preencha os dados abaixo e nossa equipe entrará em contato rapidamente para confirmar os detalhes.</p>
+            <div class="clay-glass-card p-8 md:p-12 text-center">
+                <div class="w-16 h-16 mx-auto bg-gold-600/20 rounded-full flex items-center justify-center border border-gold-500/30 mb-6">
+                    <i data-lucide="message-square" class="w-8 h-8 text-gold-400"></i>
                 </div>
-                <form action="#" method="POST" class="space-y-4 cro-capture-form flex md:grid md:grid-cols-2 gap-4">
-                    <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" name="nome" placeholder="Seu Nome" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
-                        <input type="tel" name="telefone" placeholder="Seu WhatsApp" required class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 text-base">
-                    </div>
-                    <select name="opcao" class="col-span-1 md:col-span-2 w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white appearance-none focus:outline-none focus:border-gold-500 text-base">
-                        <option value="" class="bg-choco-900 text-zinc-400">Qual opção deseja?</option>
-                        <option value="aurora" class="bg-choco-900">Aurora Materna (R$ 250)</option>
-                        <option value="doce" class="bg-choco-900">Doce Essência (R$ 140)</option>
-                        <option value="floral_simples" class="bg-choco-900">Encanto Floral (R$ 120+)</option>
-                        <option value="imperio" class="bg-choco-900">Império Cacau (R$ 180)</option>
-                    </select>
-                    <textarea name="mensagem" id="mensagem" rows="3" class="col-span-1 md:col-span-2 w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-gold-500 resize-none text-base" placeholder="Detalhes (Data, endereço, mensagem do cartão)..."></textarea>
-                    <button type="submit" class="col-span-1 md:col-span-2 w-full bg-gold-600 text-white font-bold py-4 rounded-lg flex justify-center items-center gap-2 mt-2 text-lg">
-                        Enviar Pedido <i data-lucide="send" class="w-5 h-5"></i>
-                    </button>
-                </form>
+                <h2 class="text-3xl font-bold text-white font-serif mb-4">Pronto para encantar?</h2>
+                <p class="text-zinc-400 text-base mb-8 max-w-md mx-auto">Nosso atendimento inteligente vai pegar os dados da sua reserva rapidinho e te direcionar para a confirmação no WhatsApp.</p>
+                <button onclick="openChat('')" class="bg-gold-600 hover:bg-gold-500 text-white font-bold py-4 px-8 rounded-full inline-flex justify-center items-center gap-2 transition-all hover:scale-105 text-lg shadow-[0_0_20px_rgba(198,139,63,0.4)] cursor-pointer">
+                    Iniciar Reserva <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
             </div>
         </section>
 
@@ -627,9 +420,38 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="whatsapp-float hover:scale-105" aria-label="Falar no WhatsApp">
+    <a href="https://wa.me/559688091761" target="_blank" rel="noopener" class="whatsapp-float hover:scale-105" aria-label="Falar no WhatsApp">
         <img src="3d-icon-social-media-app.png" alt="WhatsApp" class="w-full h-full object-contain drop-shadow-2xl">
     </a>
+
+    <div id="chat-modal" class="fixed inset-0 z-[100000] bg-black/95 backdrop-blur-md hidden flex-col w-full">
+        <div class="glass-nav px-5 py-4 flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gold-600 flex items-center justify-center shadow-lg">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold text-base">Atendimento Cacau Bliss</h3>
+                    <p class="text-gold-400 text-xs flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Online</p>
+                </div>
+            </div>
+            <button onclick="closeChat()" class="p-2 text-zinc-400 hover:text-white cursor-pointer bg-white/5 rounded-full">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10">
+            </div>
+
+        <div class="bg-[#0f0805] border-t border-white/10 p-3 shrink-0 safe-pb">
+            <form id="chat-form" class="flex gap-2 max-w-3xl mx-auto w-full relative">
+                <input type="text" id="chat-input" class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-4 text-white text-base focus:outline-none focus:border-gold-500 transition-colors" placeholder="Digite aqui..." autocomplete="off">
+                <button type="submit" id="chat-submit" class="w-14 h-14 rounded-full bg-gold-600 text-white flex items-center justify-center shrink-0 hover:bg-gold-500 transition-colors shadow-[0_0_15px_rgba(198,139,63,0.4)] cursor-pointer">
+                    <i data-lucide="send" class="w-6 h-6 ml-1"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script>
         const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
@@ -643,43 +465,19 @@
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = this.querySelector('i');
-            menu.classList.toggle('hidden');
-            if(menu.classList.contains('hidden')) {
-                icon.setAttribute('data-lucide', 'menu');
-            } else {
-                icon.setAttribute('data-lucide', 'x');
-            }
-            lucide.createIcons();
-        });
-
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
-                const btnIcon = document.querySelector('#mobile-menu-btn i');
-                btnIcon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
-        });
-
+        // Splash e Canvas
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const wrappers = document.querySelectorAll('.skeleton-wrapper');
                 const contents = document.querySelectorAll('.real-content');
                 wrappers.forEach(w => w.style.opacity = '0');
-                setTimeout(() => {
-                    wrappers.forEach(w => w.style.display = 'none');
-                    contents.forEach(c => c.style.opacity = '1');
-                }, 400); 
+                setTimeout(() => { wrappers.forEach(w => w.style.display = 'none'); contents.forEach(c => c.style.opacity = '1'); }, 400); 
             }, 800); 
         });
 
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const heroContainer = document.getElementById("hero-track"); 
-        
         const block1 = document.getElementById("hero-block-1");
         const block2 = document.getElementById("hero-block-2");
         const block3 = document.getElementById("hero-block-3");
@@ -696,7 +494,6 @@
         let loadedCount = 0;
         const splashScreen = document.getElementById('splash-screen');
         const progressBar = document.getElementById('splash-progress');
-        
         const thresholdToUnlock = isMobile ? Math.min(frameCount, 10) : frameCount;
         let isUnlocked = false;
 
@@ -705,7 +502,6 @@
             img.src = currentFrame(i);
             img.onload = () => {
                 loadedCount++;
-                
                 if(progressBar) progressBar.style.width = `${(loadedCount / frameCount) * 100}%`;
 
                 if(i === 1) {
@@ -737,41 +533,25 @@
             images.push(img);
         }
 
-        let targetScroll = 0;
-        let smoothScrollCanvas = 0;
-        let smoothScrollText = 0;
-        let lastDrawnFrame = -1;
+        let targetScroll = 0; let smoothScrollCanvas = 0; let smoothScrollText = 0; let lastDrawnFrame = -1;
 
         window.addEventListener('scroll', () => {
             if(!heroContainer) return;
             const scrollTop = window.scrollY;
             const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
-            
             let frac = scrollTop / maxScrollTop;
-            if (frac < 0) frac = 0;
-            if (frac > 1) frac = 1;
-            
-            targetScroll = frac;
+            targetScroll = Math.max(0, Math.min(frac, 1));
         }, { passive: true });
 
         let isHeroVisible = true;
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                isHeroVisible = entry.isIntersecting;
-            });
-        });
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { isHeroVisible = entry.isIntersecting; }); });
         if (heroContainer) observer.observe(heroContainer);
 
-        const lerpCanvas = 0.12;
-        const lerpText = 0.08;
+        const lerpCanvas = 0.12; const lerpText = 0.08;
 
         function animateHero() {
             if(!heroContainer) return;
-            
-            if (!isHeroVisible) {
-                requestAnimationFrame(animateHero);
-                return;
-            }
+            if (!isHeroVisible) { requestAnimationFrame(animateHero); return; }
 
             smoothScrollCanvas += (targetScroll - smoothScrollCanvas) * lerpCanvas;
             smoothScrollText += (targetScroll - smoothScrollText) * lerpText;
@@ -783,81 +563,161 @@
                 lastDrawnFrame = frameIndex; 
             }
 
-            let op1 = mapRange(smoothScrollText, 0.0, 0.25, 1, 0);
-            let y1 = mapRange(smoothScrollText, 0.0, 0.25, 0, -120);
-            block1.style.opacity = Math.max(0, op1);
-            block1.style.transform = `translate3d(0px, ${y1}px, 0px)`;
-            block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
+            let op1 = mapRange(smoothScrollText, 0.0, 0.25, 1, 0); let y1 = mapRange(smoothScrollText, 0.0, 0.25, 0, -120);
+            block1.style.opacity = Math.max(0, op1); block1.style.transform = `translate3d(0px, ${y1}px, 0px)`; block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
 
             let op2, y2;
-            if (smoothScrollText < 0.50) {
-                op2 = mapRange(smoothScrollText, 0.25, 0.50, 0, 1);
-                y2 = mapRange(smoothScrollText, 0.25, 0.50, 120, 0);
-            } else {
-                op2 = mapRange(smoothScrollText, 0.55, 0.80, 1, 0);
-                y2 = mapRange(smoothScrollText, 0.55, 0.80, 0, -120);
-            }
-            block2.style.opacity = Math.max(0, op2);
-            block2.style.transform = `translate3d(0px, ${y2}px, 0px)`;
+            if (smoothScrollText < 0.50) { op2 = mapRange(smoothScrollText, 0.25, 0.50, 0, 1); y2 = mapRange(smoothScrollText, 0.25, 0.50, 120, 0); } 
+            else { op2 = mapRange(smoothScrollText, 0.55, 0.80, 1, 0); y2 = mapRange(smoothScrollText, 0.55, 0.80, 0, -120); }
+            block2.style.opacity = Math.max(0, op2); block2.style.transform = `translate3d(0px, ${y2}px, 0px)`;
 
-            let op3 = mapRange(smoothScrollText, 0.80, 1.0, 0, 1);
-            let y3 = mapRange(smoothScrollText, 0.80, 1.0, 120, 0);
-            block3.style.opacity = Math.max(0, op3);
-            block3.style.transform = `translate3d(0px, ${y3}px, 0px)`;
-            block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
+            let op3 = mapRange(smoothScrollText, 0.80, 1.0, 0, 1); let y3 = mapRange(smoothScrollText, 0.80, 1.0, 120, 0);
+            block3.style.opacity = Math.max(0, op3); block3.style.transform = `translate3d(0px, ${y3}px, 0px)`; block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
 
             requestAnimationFrame(animateHero);
         }
-        
         animateHero();
 
+        // Slider
         const sliderContainer = document.getElementById('image-slider');
         const sliderOverlay = document.getElementById('slider-overlay');
         const sliderHandle = document.getElementById('slider-handle');
         const sliderImgAfter = document.getElementById('slider-img-after');
         let isDragging = false;
 
-        function updateSliderWidth() {
-            if(sliderContainer) sliderImgAfter.style.width = sliderContainer.offsetWidth + 'px';
-        }
-        updateSliderWidth();
-        window.addEventListener('resize', updateSliderWidth);
+        function updateSliderWidth() { if(sliderContainer) sliderImgAfter.style.width = sliderContainer.offsetWidth + 'px'; }
+        updateSliderWidth(); window.addEventListener('resize', updateSliderWidth);
 
         function moveSlider(clientX) {
             const rect = sliderContainer.getBoundingClientRect();
             let xPos = Math.max(0, Math.min(clientX - rect.left, rect.width));
             const percentage = (xPos / rect.width) * 100;
-            sliderOverlay.style.width = `${percentage}%`;
-            sliderHandle.style.left = `${percentage}%`;
+            sliderOverlay.style.width = `${percentage}%`; sliderHandle.style.left = `${percentage}%`;
         }
 
         if(sliderContainer) {
-            sliderHandle.addEventListener('mousedown', () => { isDragging = true; });
-            window.addEventListener('mouseup', () => { isDragging = false; });
+            sliderHandle.addEventListener('mousedown', () => { isDragging = true; }); window.addEventListener('mouseup', () => { isDragging = false; });
             window.addEventListener('mousemove', (e) => { if (isDragging) moveSlider(e.clientX); });
-            sliderHandle.addEventListener('touchstart', () => { isDragging = true; }, {passive: true});
-            window.addEventListener('touchend', () => { isDragging = false; });
-            window.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                moveSlider(e.touches[0].clientX);
-            }, {passive: true});
+            sliderHandle.addEventListener('touchstart', () => { isDragging = true; }, {passive: true}); window.addEventListener('touchend', () => { isDragging = false; });
+            window.addEventListener('touchmove', (e) => { if (!isDragging) return; moveSlider(e.touches[0].clientX); }, {passive: true});
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
         }
 
-        document.querySelectorAll('.accordion-btn').forEach(acc => {
-            acc.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                document.querySelectorAll('.accordion-btn').forEach(other => {
-                    if(other !== this) {
-                        other.setAttribute('aria-expanded', 'false');
-                        other.nextElementSibling.style.maxHeight = null;
-                    }
-                });
-                this.setAttribute('aria-expanded', !isExpanded);
-                const content = this.nextElementSibling;
-                content.style.maxHeight = !isExpanded ? content.scrollHeight + "px" : null;
-            });
+
+        // ==========================================
+        // SISTEMA DE CHAT DE RESERVA
+        // ==========================================
+        let chatStep = 0;
+        let userData = { name: '', product: '', address: '', date: '' };
+        
+        const chatModal = document.getElementById('chat-modal');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatForm = document.getElementById('chat-form');
+
+        function openChat(preSelectedProduct = '') {
+            chatModal.classList.remove('hidden');
+            chatModal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Trava scroll da tela de fundo
+            
+            chatMessages.innerHTML = '';
+            chatStep = 0;
+            userData = { name: '', product: preSelectedProduct, address: '', date: '' };
+            
+            setTimeout(() => {
+                if(preSelectedProduct) {
+                    addBotMessage(`Olá! Que ótima escolha a <strong>${preSelectedProduct}</strong>. 🥰 Para iniciarmos sua reserva, como posso te chamar?`);
+                } else {
+                    addBotMessage('Olá! Bem-vindo(a) à Cacau Bliss. 🥰 Para iniciarmos seu atendimento, como posso te chamar?');
+                }
+                setTimeout(() => chatInput.focus(), 100);
+            }, 300);
+        }
+
+        function closeChat() {
+            chatModal.classList.add('hidden');
+            chatModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function addBotMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'flex justify-start opacity-0 translate-y-4 transition-all duration-500 mb-2';
+            msg.innerHTML = `<div class="chat-bubble-bot px-5 py-3.5 text-white max-w-[85%] text-base leading-relaxed drop-shadow-lg">${text}</div>`;
+            chatMessages.appendChild(msg);
+            scrollToBottom();
+            setTimeout(() => msg.classList.remove('opacity-0', 'translate-y-4'), 50);
+        }
+
+        function addUserMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'flex justify-end opacity-0 translate-y-4 transition-all duration-500 mb-2';
+            msg.innerHTML = `<div class="chat-bubble-user px-5 py-3.5 text-white max-w-[85%] text-base font-medium leading-relaxed drop-shadow-lg">${text}</div>`;
+            chatMessages.appendChild(msg);
+            scrollToBottom();
+            setTimeout(() => msg.classList.remove('opacity-0', 'translate-y-4'), 50);
+        }
+
+        function scrollToBottom() {
+            chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: 'smooth' });
+        }
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = chatInput.value.trim();
+            if(!text) return;
+            
+            addUserMessage(text);
+            chatInput.value = '';
+            processStep(text);
         });
+
+        function processStep(text) {
+            // Typing effect simulate
+            chatInput.disabled = true;
+            
+            setTimeout(() => {
+                chatInput.disabled = false;
+                chatInput.focus();
+
+                if(chatStep === 0) {
+                    userData.name = text;
+                    if(userData.product) {
+                        addBotMessage(`Prazer, ${userData.name}! Para onde devemos enviar a sua ${userData.product}? (Me passe o endereço completo com ponto de referência)`);
+                        chatStep = 2; // Pula a escolha de produto
+                    } else {
+                        addBotMessage(`Prazer, ${userData.name}! Qual das nossas composições você deseja reservar? (Ex: Aurora Materna, Doce Essência, etc)`);
+                        chatStep = 1;
+                    }
+                } 
+                else if(chatStep === 1) {
+                    userData.product = text;
+                    addBotMessage(`Anotado! Agora, por favor, me passe o endereço completo para entrega da sua ${userData.product} (com ponto de referência).`);
+                    chatStep = 2;
+                }
+                else if(chatStep === 2) {
+                    userData.address = text;
+                    addBotMessage('Perfeito. E para qual data e horário você deseja agendar a entrega?');
+                    chatStep = 3;
+                }
+                else if(chatStep === 3) {
+                    userData.date = text;
+                    chatInput.disabled = true; // Finalizou
+                    chatInput.placeholder = "Redirecionando...";
+                    
+                    addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o WhatsApp para confirmarmos os detalhes e a forma de pagamento... aguarde um instante.');
+                    
+                    setTimeout(() => {
+                        const wppText = `Olá! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:%0A%0A🎁 *Produto:* ${userData.product}%0A📍 *Endereço:* ${userData.address}%0A📅 *Data:* ${userData.date}`;
+                        window.open(`https://wa.me/559688091761?text=${wppText}`, '_blank');
+                        closeChat();
+                        chatStep = 0;
+                        chatInput.disabled = false;
+                        chatInput.placeholder = "Digite aqui...";
+                    }, 2500);
+                }
+            }, 600);
+        }
     </script>
 </body>
 </html>
