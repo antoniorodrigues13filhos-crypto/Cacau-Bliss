@@ -46,6 +46,7 @@
             color: #fafafa;
             font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         .bg-fixed-layer {
@@ -150,7 +151,7 @@
         .accordion-btn[aria-expanded="true"] { background-color: rgba(198, 139, 63, 0.1); }
 
         #hero-canvas { will-change: transform; }
-        .scroll-block { will-change: transform, opacity; }
+        .scroll-block { will-change: transform, opacity; position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
         .whatsapp-float {
             position: fixed; bottom: 1.5rem; right: 1.5rem; background-color: #25D366; color: white; width: 56px; height: 56px;
@@ -185,7 +186,7 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#hero-container" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Início</a>
+                        <a href="#hero-track" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Início</a>
                         <a href="#presentes" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Composições</a>
                         <a href="#experiencia" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Experiência</a>
                         <a href="#faq" class="text-zinc-300 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors">Dúvidas</a>
@@ -205,7 +206,7 @@
         </div>
         <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5">
             <div class="px-4 pt-2 pb-6 flex flex-col items-center space-y-2">
-                <a href="#hero-container" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
+                <a href="#hero-track" class="text-zinc-300 block py-3 w-full text-center text-lg">Início</a>
                 <a href="#presentes" class="text-zinc-300 block py-3 w-full text-center text-lg">Composições</a>
                 <a href="#experiencia" class="text-zinc-300 block py-3 w-full text-center text-lg">Experiência</a>
                 <a href="#contato" class="bg-gold-600 text-white block py-3 rounded-lg mt-4 w-full text-center font-bold">Encomendar Agora</a>
@@ -213,14 +214,14 @@
         </div>
     </nav>
 
-    <section id="hero-container" class="relative h-[300vh] md:h-[400vh] bg-black">
+    <section id="hero-track" class="relative h-[400vh] bg-black">
         <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
             <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover z-0"></canvas>
             <div class="hero-vignette"></div>
             <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
 
             <div class="relative z-20 max-w-5xl mx-auto w-full h-full flex items-center justify-center pointer-events-none px-6">
-                <div id="hero-block-1" class="scroll-block absolute flex flex-col items-center text-center w-full">
+                <div id="hero-block-1" class="scroll-block">
                     <div class="hero-badge pointer-events-auto">
                         <span class="hero-badge-dot"></span>
                         Cestas artesanais · Chocolates finos · Flores
@@ -232,14 +233,14 @@
                     <span class="hero-title-line"></span>
                 </div>
 
-                <div id="hero-block-2" class="scroll-block absolute flex flex-col items-center text-center w-full opacity-0">
-                    <p class="font-serif italic text-xl md:text-3xl lg:text-4xl text-zinc-200 max-w-3xl leading-relaxed">
+                <div id="hero-block-2" class="scroll-block opacity-0">
+                    <p class="font-serif italic text-xl md:text-3xl lg:text-4xl text-zinc-200 max-w-3xl leading-relaxed text-shadow-hero">
                         Surpreenda com uma experiência completa — café da manhã, chocolates finos e flores selecionadas, preparados com carinho para transformar um gesto simples em um momento inesquecível.
                     </p>
                 </div>
 
-                <div id="hero-block-3" class="scroll-block absolute flex flex-col items-center text-center w-full opacity-0 pointer-events-auto">
-                    <p class="text-xl md:text-2xl text-zinc-300 font-serif mb-8 max-w-2xl leading-snug">
+                <div id="hero-block-3" class="scroll-block opacity-0 pointer-events-auto">
+                    <p class="text-xl md:text-2xl text-zinc-300 font-serif mb-8 max-w-2xl leading-snug text-shadow-hero">
                         Porque quem sempre esteve ao seu lado merece <em class="text-gold-400 not-italic">mais do que um presente comum</em>.
                     </p>
                     <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-4 justify-center">
@@ -546,6 +547,7 @@
     </a>
 
     <script>
+        // Função LERP matemática para fluidez do Scroll (Interpolação)
         function mapRange(value, inMin, inMax, outMin, outMax) {
             if (value <= inMin) return outMin;
             if (value >= inMax) return outMax;
@@ -591,10 +593,10 @@
             }, 800); 
         });
 
-        // Lógica do Hero Cinematográfico Otimizada para Mobile
+        // Lógica do Hero Cinematográfico Otimizada para LERP (Fluidez Touch)
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
-        const heroContainer = document.getElementById("hero-container");
+        const heroContainer = document.getElementById("hero-track"); // Referência à faixa inteira
         
         const block1 = document.getElementById("hero-block-1");
         const block2 = document.getElementById("hero-block-2");
@@ -604,59 +606,87 @@
         const currentFrame = index => `${String(index).padStart(4, '0')}.webp`;
         
         const images = [];
+        let loadedCount = 0;
+        
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             img.src = currentFrame(i);
+            img.onload = () => {
+                loadedCount++;
+                if(loadedCount === 1) {
+                    canvas.width = images[0].width;
+                    canvas.height = images[0].height;
+                    context.drawImage(images[0], 0, 0);
+                }
+            };
             images.push(img);
         }
 
-        images[0].onload = () => {
-            canvas.width = images[0].width;
-            canvas.height = images[0].height;
-            context.drawImage(images[0], 0, 0);
-        };
+        // Variáveis para a Interpolação Linear (LERP) do Scroll
+        let targetScroll = 0;
+        let smoothScrollCanvas = 0;
+        let smoothScrollText = 0;
 
+        // O evento de scroll APENAS atualiza o target (leveza extrema)
         window.addEventListener('scroll', () => {
             if(!heroContainer) return;
             const scrollTop = window.scrollY;
             const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
             
-            let scrollFraction = scrollTop / maxScrollTop;
-            if (scrollFraction < 0) scrollFraction = 0;
-            if (scrollFraction > 1) scrollFraction = 1;
+            let frac = scrollTop / maxScrollTop;
+            if (frac < 0) frac = 0;
+            if (frac > 1) frac = 1;
             
-            const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
-            if (images[frameIndex] && images[frameIndex].complete) {
-                requestAnimationFrame(() => { context.drawImage(images[frameIndex], 0, 0); });
-            }
-            
-            requestAnimationFrame(() => {
-                // BLOCO 1
-                let op1 = mapRange(scrollFraction, 0.02, 0.20, 1, 0);
-                let y1 = mapRange(scrollFraction, 0.02, 0.20, 0, -30);
-                block1.style.opacity = op1;
-                block1.style.transform = `translateY(${y1}px)`;
-
-                // BLOCO 2
-                let op2, y2;
-                if (scrollFraction < 0.45) {
-                    op2 = mapRange(scrollFraction, 0.25, 0.40, 0, 1);
-                    y2 = mapRange(scrollFraction, 0.25, 0.40, 30, 0);
-                } else {
-                    op2 = mapRange(scrollFraction, 0.55, 0.70, 1, 0);
-                    y2 = mapRange(scrollFraction, 0.55, 0.70, 0, -30);
-                }
-                block2.style.opacity = op2;
-                block2.style.transform = `translateY(${y2}px)`;
-
-                // BLOCO 3
-                let op3 = mapRange(scrollFraction, 0.75, 0.90, 0, 1);
-                let y3 = mapRange(scrollFraction, 0.75, 0.90, 30, 0);
-                block3.style.opacity = op3;
-                block3.style.transform = `translateY(${y3}px)`;
-                block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
-            });
+            targetScroll = frac;
         }, { passive: true });
+
+        // O loop de animação persegue o target gradativamente
+        function animateHero() {
+            if(!heroContainer) return;
+
+            // Fator LERP: 0.12 para o canvas, 0.08 para os textos (velocidades orgânicas distintas)
+            smoothScrollCanvas += (targetScroll - smoothScrollCanvas) * 0.12;
+            smoothScrollText += (targetScroll - smoothScrollText) * 0.08;
+
+            // 1. Atualiza as imagens do Canvas de forma suave
+            const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothScrollCanvas * frameCount)));
+            if (images[frameIndex] && images[frameIndex].complete) {
+                context.drawImage(images[frameIndex], 0, 0);
+            }
+
+            // 2. Atualiza a Opacidade e Y dos Blocos de Texto de forma suave
+            // BLOCO 1
+            let op1 = mapRange(smoothScrollText, 0.02, 0.20, 1, 0);
+            let y1 = mapRange(smoothScrollText, 0.02, 0.20, 0, -30);
+            block1.style.opacity = Math.max(0, op1);
+            block1.style.transform = `translateY(${y1}px)`;
+            block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
+
+            // BLOCO 2
+            let op2, y2;
+            if (smoothScrollText < 0.45) {
+                op2 = mapRange(smoothScrollText, 0.25, 0.40, 0, 1);
+                y2 = mapRange(smoothScrollText, 0.25, 0.40, 30, 0);
+            } else {
+                op2 = mapRange(smoothScrollText, 0.55, 0.70, 1, 0);
+                y2 = mapRange(smoothScrollText, 0.55, 0.70, 0, -30);
+            }
+            block2.style.opacity = Math.max(0, op2);
+            block2.style.transform = `translateY(${y2}px)`;
+
+            // BLOCO 3
+            let op3 = mapRange(smoothScrollText, 0.75, 0.90, 0, 1);
+            let y3 = mapRange(smoothScrollText, 0.75, 0.90, 30, 0);
+            block3.style.opacity = Math.max(0, op3);
+            block3.style.transform = `translateY(${y3}px)`;
+            block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
+
+            // Loop eterno e eficiente
+            requestAnimationFrame(animateHero);
+        }
+        
+        // Inicia o Loop de Fluidez
+        animateHero();
 
         // Slider Touch Otimizado
         const sliderContainer = document.getElementById('image-slider');
