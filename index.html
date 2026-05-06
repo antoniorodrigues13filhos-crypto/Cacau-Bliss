@@ -7,23 +7,18 @@
     <meta name="description" content="Pinchman's is a café and artisan bakery located in Sudbury's South End...">
     <meta name="robots" content="index,follow">
     
-    <!-- Open Graph / Redes Sociais -->
     <meta property="og:type" content="business.business">
     <meta property="og:title" content="Pinchman's Café & Artisan Bakery">
     <meta property="og:url" content="http://www.pinchmans.ca/">
     <meta property="og:image" content="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/55a197e9-ce00-4201-94f1-8df92559ad66.webp">
 
-    <!-- CSS e Fontes -->
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
 
-    <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Scripts (Analytics/Recaptcha) -->
     <script src="https://www.google-analytics.com/analytics.js" async></script>
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
@@ -245,20 +240,16 @@
 </head>
 <body class="antialiased selection:bg-gold-500/30 selection:text-gold-100">
 
-    <!-- Fixed Backgrounds -->
     <div class="bg-fixed-layer"></div>
     <div class="bg-overlay"></div>
 
-    <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-2">
                     <span class="text-2xl font-bold font-serif text-white tracking-wide">Cacau Bliss</span>
                 </div>
                 
-                <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#hero" class="text-zinc-300 hover:text-gold-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Início</a>
@@ -269,14 +260,12 @@
                     </div>
                 </div>
 
-                <!-- CTA Button Desktop -->
                 <div class="hidden md:block">
                     <a href="#contato" class="bg-gold-600 hover:bg-gold-500 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-[0_0_15px_rgba(198,139,63,0.3)] hover:shadow-[0_0_25px_rgba(198,139,63,0.5)]">
                         Encomendar
                     </a>
                 </div>
 
-                <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-zinc-300 hover:text-white hover:bg-white/10 focus:outline-none">
                         <i data-lucide="menu" class="w-6 h-6"></i>
@@ -285,7 +274,6 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5">
             <div class="px-2 pt-2 pb-6 space-y-1 sm:px-3 flex flex-col items-center">
                 <a href="#hero" class="text-zinc-300 hover:text-gold-400 block px-3 py-2 rounded-md text-base font-medium w-full text-center">Início</a>
@@ -298,7 +286,6 @@
         </div>
     </nav>
 
-    <!-- Scroll Indicator -->
     <a href="#presentes" id="scroll-indicator" class="scroll-indicator flex flex-col items-center gap-2">
         <span class="text-xs tracking-widest text-white/50 uppercase font-medium">Rolar</span>
         <div class="mouse-icon">
@@ -306,7 +293,6 @@
         </div>
     </a>
 
-    <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div class="max-w-4xl mx-auto text-center z-10">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-500/30 bg-gold-500/10 backdrop-blur-sm text-gold-300 text-sm font-medium mb-8 animate-fade-up" style="animation-delay: 0.1s;">
@@ -333,21 +319,17 @@
         </div>
     </section>
 
-    <!-- Main Content -->
     <main class="relative z-10 pb-24">
 
-        <!-- Products Section -->
         <section id="presentes" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Nossas Composições</h2>
                 <p class="text-zinc-400 max-w-2xl mx-auto">Feitas à mão com os melhores ingredientes e muito carinho.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
                 
-                <!-- Card 1: Aurora Materna -->
                 <article class="clay-glass-card overflow-hidden flex flex-col group relative">
-                    <!-- Skeleton -->
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-64 shimmer-bg"></div>
                         <div class="p-8 space-y-4">
@@ -362,10 +344,9 @@
                         </div>
                     </div>
 
-                    <!-- Real Content -->
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/2360da5e-8699-4ab3-aa77-b303a71d35cb.webp" alt="Aurora Materna Premium" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <img src="produtos/aurora materna.jpeg" alt="Aurora Materna Premium" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                             <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
                                 <i data-lucide="sun" class="w-3 h-3"></i> Premium
                             </div>
@@ -392,9 +373,7 @@
                     </div>
                 </article>
 
-                <!-- Card 2: Doce Essência -->
                 <article class="clay-glass-card overflow-hidden flex flex-col group relative">
-                    <!-- Skeleton -->
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-64 shimmer-bg"></div>
                         <div class="p-8 space-y-4">
@@ -408,10 +387,9 @@
                         </div>
                     </div>
 
-                    <!-- Real Content -->
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/e28f36fb-a6b4-4186-afcd-3fb5a1b32005.webp" alt="Doce Essência Gourmet" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <img src="produtos/Essência Gourmet.jpeg" alt="Doce Essência Gourmet" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         </div>
                         <div class="p-8 flex flex-col flex-grow">
                             <h3 class="text-2xl font-bold text-white mb-2 font-serif">Doce Essência Gourmet</h3>
@@ -434,9 +412,7 @@
                     </div>
                 </article>
 
-                <!-- Card 3: Encanto Floral -->
-                <article class="clay-glass-card overflow-hidden flex flex-col group relative md:col-span-2 lg:col-span-1">
-                    <!-- Skeleton -->
+                <article class="clay-glass-card overflow-hidden flex flex-col group relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-64 shimmer-bg"></div>
                         <div class="p-8 space-y-4">
@@ -453,10 +429,9 @@
                         </div>
                     </div>
 
-                    <!-- Real Content -->
                     <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
                         <div class="relative h-64 overflow-hidden">
-                            <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/8e7ac300-0c1e-4d7a-baeb-f69cd9f113bc.webp" alt="Encanto Floral Luxo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral Luxo" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                             <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1">
                                 <i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance
                             </div>
@@ -486,10 +461,52 @@
                         </div>
                     </div>
                 </article>
+
+                <article class="clay-glass-card overflow-hidden flex flex-col group relative">
+                    <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
+                        <div class="w-full h-64 shimmer-bg"></div>
+                        <div class="p-8 space-y-4">
+                            <div class="h-8 w-3/4 shimmer-bg rounded"></div>
+                            <div class="h-4 w-full shimmer-bg rounded"></div>
+                            <div class="space-y-2 mt-6">
+                                <div class="h-3 w-5/6 shimmer-bg rounded"></div>
+                                <div class="h-3 w-4/6 shimmer-bg rounded"></div>
+                            </div>
+                            <div class="h-10 w-1/3 shimmer-bg rounded mt-8"></div>
+                        </div>
+                    </div>
+
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Cesta Império do Chocolate" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1">
+                                <i data-lucide="crown" class="w-3 h-3"></i> Ouro
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-bold text-white mb-2 font-serif">Império do Chocolate</h3>
+                            <p class="text-gold-400 text-sm mb-6 italic">A majestade do cacau em uma cesta</p>
+                            
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mix de chocolates finos e importados</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Barras artesanais recheadas</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Potes de creme de avelã premium</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Bebida achocolatada especial</li>
+                            </ul>
+
+                            <div class="mt-auto pt-6 border-t border-white/10 flex items-center justify-between">
+                                <div class="text-2xl font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
+                                <a href="#contato" class="p-3 bg-gold-600/20 hover:bg-gold-600/40 border border-gold-500/30 rounded-full transition-colors text-gold-400">
+                                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
             </div>
         </section>
 
-        <!-- Before / After Slider Section -->
         <section id="experiencia" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
             <div class="clay-glass-card p-6 md:p-10">
                 <div class="text-center mb-10">
@@ -498,25 +515,20 @@
                 </div>
 
                 <div class="slider-container h-[300px] sm:h-[400px] md:h-[500px] border border-white/10 shadow-2xl" id="image-slider">
-                    <!-- Before Image (Base) -->
                     <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/6d04dc1f-9e92-4aa9-aa63-d0d7e22baaba.webp" alt="Ingredientes" class="slider-image">
                     
-                    <!-- After Image (Overlay) -->
                     <div class="slider-overlay" id="slider-overlay">
                         <img src="https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/942aeb84-3e9b-4082-8888-14291ba7b5fd.webp" alt="Produto Final" id="slider-img-after">
                     </div>
 
-                    <!-- Draggable Handle -->
                     <div class="slider-handle" id="slider-handle"></div>
                     
-                    <!-- Labels -->
                     <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded text-xs text-white z-0">Ingredientes</div>
                     <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded text-xs text-white z-20">Arte Final</div>
                 </div>
             </div>
         </section>
 
-        <!-- Diferenciais Section -->
         <section id="diferenciais" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden clay-glass-card p-2">
@@ -565,7 +577,6 @@
             </div>
         </section>
 
-        <!-- FAQ Section -->
         <section id="faq" class="py-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-white mb-4 font-serif">Dúvidas Frequentes</h2>
@@ -573,7 +584,6 @@
             </div>
 
             <div class="space-y-4">
-                <!-- FAQ Item 1 -->
                 <div class="clay-glass-card overflow-hidden">
                     <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
                         <span class="text-white font-medium">Com quanta antecedência devo fazer meu pedido?</span>
@@ -586,7 +596,6 @@
                     </div>
                 </div>
 
-                <!-- FAQ Item 2 -->
                 <div class="clay-glass-card overflow-hidden">
                     <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
                         <span class="text-white font-medium">Vocês entregam em quais regiões?</span>
@@ -599,7 +608,6 @@
                     </div>
                 </div>
 
-                <!-- FAQ Item 3 -->
                 <div class="clay-glass-card overflow-hidden">
                     <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
                         <span class="text-white font-medium">Posso alterar itens da cesta?</span>
@@ -614,7 +622,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contato" class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
             <div class="clay-glass-card p-8 md:p-12">
                 <div class="text-center mb-10">
@@ -642,6 +649,7 @@
                             <option value="doce" class="bg-choco-900">Doce Essência Gourmet (R$ 140)</option>
                             <option value="floral_simples" class="bg-choco-900">Encanto Floral - Simples (R$ 120)</option>
                             <option value="floral_completo" class="bg-choco-900">Encanto Floral - Completo (R$ 190)</option>
+                            <option value="imperio" class="bg-choco-900">Império do Chocolate (R$ 180)</option>
                         </select>
                     </div>
 
@@ -659,7 +667,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer id="footer" class="relative z-10 glass-nav border-t border-white/10 pt-12 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -695,7 +702,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
         // Initialize Lucide Icons
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
@@ -855,7 +861,6 @@
 
     </script>
 
-<!-- Buildix Badge -->
 <a href="https://buildix.app" target="_blank" rel="noopener noreferrer"
    style="position:fixed;bottom:16px;right:16px;z-index:9999;display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(24,24,27,0.9);backdrop-filter:blur(4px);border-radius:9999px;font-size:12px;color:#a1a1aa;text-decoration:none;border:1px solid rgba(63,63,70,0.5);font-family:system-ui,-apple-system,sans-serif;transition:color 0.2s;"
    onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a1a1aa'">
@@ -895,7 +900,7 @@
 </svg>
   Made in Buildix
 </a>
-<!-- End Buildix Badge -->
-
+</body>
+</html>
 </body>
 </html>
