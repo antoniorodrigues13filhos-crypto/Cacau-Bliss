@@ -67,7 +67,6 @@
 
         /* ─────────────────────────────────────────────
            NOISE / GRAIN PREMIUM OVERLAY
-           Camada de ruído cinematográfico animado
         ───────────────────────────────────────────── */
         .noise-overlay {
             position: fixed;
@@ -80,7 +79,6 @@
             mix-blend-mode: overlay;
         }
 
-        /* Grain estático fino */
         .grain-static {
             position: fixed;
             inset: 0;
@@ -94,7 +92,6 @@
             mix-blend-mode: soft-light;
         }
 
-        /* Vinheta lateral suave no hero */
         .hero-vignette {
             position: absolute;
             inset: 0;
@@ -105,7 +102,7 @@
             pointer-events: none;
         }
 
-        /* Glass & Claymorphism Styles */
+        /* Glass & Claymorphism */
         .glass-nav {
             background: rgba(26, 15, 10, 0.4);
             backdrop-filter: blur(12px);
@@ -135,14 +132,11 @@
         }
 
         /* ─────────────────────────────────────────────
-           HERO TYPOGRAPHY & BUTTONS
+           HERO TYPOGRAPHY
         ───────────────────────────────────────────── */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to   { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-up {
-            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         @keyframes gold-shimmer {
@@ -162,9 +156,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation:
-                fadeInUp 0.9s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both,
-                gold-shimmer 6s 1s linear infinite;
+            animation: gold-shimmer 6s 1s linear infinite;
             line-height: 1.15;
             letter-spacing: -0.02em;
         }
@@ -175,17 +167,14 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, #c68b3f, transparent);
             margin: 1.25rem auto 0;
-            animation: fadeInUp 0.9s 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         .hero-subtitle {
             font-family: 'Lora', serif;
             font-style: italic;
-            animation: fadeInUp 0.9s 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         .hero-extra {
-            animation: fadeInUp 0.9s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
             font-size: 0.85rem;
             letter-spacing: 0.06em;
             text-transform: uppercase;
@@ -210,7 +199,6 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            animation: fadeInUp 0.9s 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
             border: 1px solid rgba(255,255,255,0.15);
         }
         .hero-cta-primary:hover {
@@ -233,7 +221,6 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            animation: fadeInUp 0.9s 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
         .hero-cta-secondary:hover {
             background: rgba(198,139,63,0.12);
@@ -258,7 +245,7 @@
             color: #d1a35f;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            animation: fadeInUp 0.9s 0s cubic-bezier(0.16, 1, 0.3, 1) both, float 4s 1s ease-in-out infinite;
+            animation: float 4s 1s ease-in-out infinite;
             margin-bottom: 1.5rem;
         }
         .hero-badge-dot {
@@ -302,7 +289,6 @@
             color: rgba(198,139,63,0.6);
         }
 
-        /* Other styles */
         .shimmer-bg {
             background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
             background-size: 200% 100%;
@@ -341,6 +327,11 @@
         .accordion-btn[aria-expanded="true"] { background-color: rgba(198, 139, 63, 0.1); }
 
         #hero-canvas { will-change: transform; }
+        
+        /* Otimização de transição controlada via JS */
+        .scroll-block {
+            will-change: transform, opacity;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-gold-500/30 selection:text-gold-100 relative">
@@ -349,16 +340,8 @@
 
     <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
         <filter id="noise-filter">
-            <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.72"
-                numOctaves="4"
-                stitchTiles="stitch">
-                <animate
-                    attributeName="baseFrequency"
-                    dur="7s"
-                    values="0.72;0.74;0.70;0.73;0.72"
-                    repeatCount="indefinite"/>
+            <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch">
+                <animate attributeName="baseFrequency" dur="7s" values="0.72;0.74;0.70;0.73;0.72" repeatCount="indefinite"/>
             </feTurbulence>
             <feColorMatrix type="saturate" values="0"/>
         </filter>
@@ -374,7 +357,6 @@
                 <div class="flex-shrink-0 flex items-center gap-2">
                     <span class="text-2xl font-bold font-serif text-white tracking-wide">Cacau Bliss</span>
                 </div>
-                
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#hero-container" class="text-zinc-300 hover:text-gold-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">Início</a>
@@ -384,13 +366,11 @@
                         <a href="#faq" class="text-zinc-300 hover:text-gold-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">FAQ</a>
                     </div>
                 </div>
-
                 <div class="hidden md:block">
                     <a href="#contato" class="bg-gold-600 hover:bg-gold-500 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-[0_0_15px_rgba(198,139,63,0.3)] hover:shadow-[0_0_25px_rgba(198,139,63,0.5)]">
                         Encomendar
                     </a>
                 </div>
-
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-zinc-300 hover:text-white hover:bg-white/10 focus:outline-none">
                         <i data-lucide="menu" class="w-6 h-6"></i>
@@ -398,7 +378,6 @@
                 </div>
             </div>
         </div>
-
         <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-white/5">
             <div class="px-2 pt-2 pb-6 space-y-1 sm:px-3 flex flex-col items-center">
                 <a href="#hero-container" class="text-zinc-300 hover:text-gold-400 block px-3 py-2 rounded-md text-base font-medium w-full text-center">Início</a>
@@ -419,38 +398,42 @@
             <div class="hero-vignette"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-10 pointer-events-none"></div>
 
-            <div id="hero-content" class="relative z-20 max-w-4xl mx-auto text-center px-4 sm:px-6 transition-opacity duration-300 flex flex-col items-center">
+            <div class="relative z-20 max-w-4xl mx-auto w-full h-full flex items-center justify-center pointer-events-none px-4 sm:px-6">
                 
-                <div class="hero-badge">
-                    <span class="hero-badge-dot"></span>
-                    Cestas artesanais · Chocolates finos · Flores
+                <div id="hero-block-1" class="scroll-block absolute flex flex-col items-center text-center w-full">
+                    <div class="hero-badge pointer-events-auto">
+                        <span class="hero-badge-dot"></span>
+                        Cestas artesanais · Chocolates finos · Flores
+                    </div>
+                    <h1 class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-4 px-2">
+                        Ela cuidou de você<br>a vida inteira.<br>
+                        <span style="font-style: italic; font-size: 0.9em;">Hoje é a sua vez.</span>
+                    </h1>
+                    <span class="hero-title-line"></span>
                 </div>
 
-                <h1 class="hero-title text-4xl md:text-6xl lg:text-7xl font-bold mb-4 px-2">
-                    Ela cuidou de você<br>a vida inteira.<br>
-                    <span style="font-style: italic; font-size: 0.9em;">Hoje é a sua vez.</span>
-                </h1>
-
-                <span class="hero-title-line"></span>
-
-                <p class="hero-subtitle text-base md:text-xl text-zinc-200 max-w-2xl mx-auto mt-8 mb-5 font-light leading-relaxed">
-                    Surpreenda com uma experiência completa — café da manhã, chocolates finos e flores selecionadas, preparados com carinho para transformar um gesto simples em um momento inesquecível.
-                </p>
-
-                <p class="hero-extra text-zinc-400 max-w-xl mx-auto mb-10">
-                    Porque quem sempre esteve ao seu lado merece <em>mais do que um presente comum</em>.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
-                    <a href="#contato" class="hero-cta-primary">
-                        <i data-lucide="gift" class="w-4 h-4"></i>
-                        Encomendar Agora
-                    </a>
-                    <a href="#presentes" class="hero-cta-secondary">
-                        <i data-lucide="package" class="w-4 h-4"></i>
-                        Ver Composições
-                    </a>
+                <div id="hero-block-2" class="scroll-block absolute flex flex-col items-center text-center w-full opacity-0">
+                    <p class="hero-subtitle text-xl md:text-3xl lg:text-4xl text-zinc-200 max-w-3xl leading-relaxed">
+                        Surpreenda com uma experiência completa — café da manhã, chocolates finos e flores selecionadas, preparados com carinho para transformar um gesto simples em um momento inesquecível.
+                    </p>
                 </div>
+
+                <div id="hero-block-3" class="scroll-block absolute flex flex-col items-center text-center w-full opacity-0 pointer-events-auto">
+                    <p class="hero-extra text-zinc-300 max-w-xl mx-auto mb-10 text-lg md:text-xl">
+                        Porque quem sempre esteve ao seu lado merece <em class="text-gold-400">mais do que um presente comum</em>.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
+                        <a href="#contato" class="hero-cta-primary shadow-lg shadow-gold-500/20">
+                            <i data-lucide="gift" class="w-4 h-4"></i>
+                            Encomendar Agora
+                        </a>
+                        <a href="#presentes" class="hero-cta-secondary">
+                            <i data-lucide="package" class="w-4 h-4"></i>
+                            Ver Composições
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
             <div class="scroll-indicator" id="scroll-indicator">
@@ -797,6 +780,13 @@
     </footer>
 
     <script>
+        // Função auxiliar matemática para animação de Scroll
+        function mapRange(value, inMin, inMax, outMin, outMax) {
+            if (value <= inMin) return outMin;
+            if (value >= inMax) return outMax;
+            return outMin + (outMax - outMin) * ((value - inMin) / (inMax - inMin));
+        }
+
         // Ícones
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
@@ -852,11 +842,18 @@
             observer.observe(heroSection);
         }
 
-        // Motion Hero (Scroll Sequência de Imagens)
+        // ─────────────────────────────────────────────────────────
+        // LÓGICA DO MOTION HERO CINEMATOGRÁFICO
+        // ─────────────────────────────────────────────────────────
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const heroContainer = document.getElementById("hero-container");
-        const heroContent = document.getElementById("hero-content");
+        
+        // Blocos de texto que vão animar
+        const block1 = document.getElementById("hero-block-1");
+        const block2 = document.getElementById("hero-block-2");
+        const block3 = document.getElementById("hero-block-3");
+
         const frameCount = 120;
         const currentFrame = index => `${String(index).padStart(4, '0')}.webp`;
         
@@ -877,23 +874,62 @@
             if(!heroContainer) return;
             const scrollTop = window.scrollY;
             const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
+            
+            // Fração do scroll [0 a 1]
             let scrollFraction = scrollTop / maxScrollTop;
             if (scrollFraction < 0) scrollFraction = 0;
             if (scrollFraction > 1) scrollFraction = 1;
             
+            // 1. ANIMAÇÃO DOS FRAMES (CANVAS)
             const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
             if (images[frameIndex] && images[frameIndex].complete) {
                 requestAnimationFrame(() => { context.drawImage(images[frameIndex], 0, 0); });
             }
             
-            if (scrollFraction > 0.05) {
-                heroContent.style.opacity = Math.max(0, 1 - ((scrollFraction - 0.05) * 5));
-            } else {
-                heroContent.style.opacity = 1;
-            }
+            // 2. ANIMAÇÃO DOS BLOCOS DE TEXTO (SCROLL LINKED)
+            requestAnimationFrame(() => {
+                // BLOCO 1: Visível no início, desaparece rápido (0.05 a 0.20)
+                let op1 = mapRange(scrollFraction, 0.05, 0.20, 1, 0);
+                let y1 = mapRange(scrollFraction, 0.05, 0.20, 0, -50);
+                block1.style.opacity = op1;
+                block1.style.transform = `translateY(${y1}px)`;
+                block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
+
+                // BLOCO 2: Surge (0.25 a 0.40), segura, some (0.55 a 0.70)
+                let op2, y2;
+                if (scrollFraction < 0.45) {
+                    op2 = mapRange(scrollFraction, 0.25, 0.40, 0, 1);
+                    y2 = mapRange(scrollFraction, 0.25, 0.40, 50, 0);
+                } else {
+                    op2 = mapRange(scrollFraction, 0.55, 0.70, 1, 0);
+                    y2 = mapRange(scrollFraction, 0.55, 0.70, 0, -50);
+                }
+                block2.style.opacity = op2;
+                block2.style.transform = `translateY(${y2}px)`;
+
+                // BLOCO 3: Surge no final (0.75 a 0.90) e fica até o scroll sair
+                let op3 = mapRange(scrollFraction, 0.75, 0.90, 0, 1);
+                let y3 = mapRange(scrollFraction, 0.75, 0.90, 50, 0);
+                
+                // Se quiser que o último bloco suma quando entrar na seção "Presentes", ative o bloco abaixo:
+                /*
+                if(scrollFraction > 0.95) {
+                    op3 = mapRange(scrollFraction, 0.95, 1.0, 1, 0);
+                    y3 = mapRange(scrollFraction, 0.95, 1.0, 0, -30);
+                }
+                */
+                block3.style.opacity = op3;
+                block3.style.transform = `translateY(${y3}px)`;
+                block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
+            });
         });
 
-        // Before/After Slider
+        // Initial trigger to setup states
+        window.dispatchEvent(new Event('scroll'));
+
+        // ─────────────────────────────────────────────────────────
+        // BEFORE/AFTER SLIDER
+        // ─────────────────────────────────────────────────────────
         const sliderContainer = document.getElementById('image-slider');
         const sliderOverlay = document.getElementById('slider-overlay');
         const sliderHandle = document.getElementById('slider-handle');
