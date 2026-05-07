@@ -79,8 +79,57 @@
         .glass-nav { background: rgba(26, 15, 10, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: background 0.3s ease; }
         @media (min-width: 768px) { .glass-nav { background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); } }
 
-        .clay-glass-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; transition: transform 0.3s ease; }
-        @media (min-width: 768px) { .clay-glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2); } }
+        /* =========================================
+           ESTILOS DO CARD ANIMADO (Premium/Apple-style)
+           ========================================= */
+        .clay-glass-card { 
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 1.5rem; 
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease; 
+        }
+        
+        /* Desktop Hover 3D Effect */
+        @media (min-width: 768px) { 
+            .clay-glass-card { 
+                background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); 
+                box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2); 
+            } 
+            .clay-glass-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 30px 60px -15px rgba(198, 139, 63, 0.25), inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.2);
+                border-color: rgba(198, 139, 63, 0.4);
+                z-index: 10;
+            }
+        }
+
+        /* Mobile Touch Haptic Effect */
+        @media (max-width: 767px) {
+            .clay-glass-card:active {
+                transform: scale(0.96);
+                transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+                border-color: rgba(198, 139, 63, 0.5);
+            }
+        }
+
+        /* Image Scale Smooth */
+        .card-img-wrap img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .clay-glass-card:hover .card-img-wrap img { transform: scale(1.08); }
+
+        /* Diagonal Glare (Reflexo de Vidro) */
+        .card-glare {
+            position: absolute; inset: 0; z-index: 25; pointer-events: none;
+            background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.06) 25%, transparent 30%);
+            transform: translateX(-100%); transition: transform 0.8s ease-out;
+        }
+        .clay-glass-card:hover .card-glare { transform: translateX(100%); }
+
+        /* Animation Classes for Intersection Observer */
+        .product-card-reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .product-card-reveal.is-visible { opacity: 1; transform: translateY(0); }
+        /* ========================================= */
 
         @keyframes gold-shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         
@@ -94,26 +143,9 @@
         .hero-cta-secondary { background: rgba(255,255,255,0.05); color: #e8d5b0; padding: 0.85rem 2rem; border-radius: 9999px; font-weight: 500; font-size: 0.95rem; border: 1px solid rgba(198,139,63,0.35); white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
         @media (min-width: 768px) { .hero-cta-secondary { backdrop-filter: blur(8px); } }
 
-        /* CORREÇÃO DO BADGE PARA MOBILE */
-        .hero-badge { 
-            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; 
-            background: rgba(198,139,63,0.1); border: 1px solid rgba(198,139,63,0.3); 
-            padding: 0.5rem 1rem; border-radius: 1.5rem; 
-            font-size: 0.65rem; color: #d1a35f; letter-spacing: 0.05em; text-transform: uppercase; 
-            margin-bottom: 1.5rem; line-height: 1.4; text-align: center; max-width: 100%;
-        }
-        @media (min-width: 768px) { 
-            .hero-badge { 
-                backdrop-filter: blur(12px); font-size: 0.75rem; 
-                border-radius: 9999px; padding: 0.35rem 1.25rem; 
-                letter-spacing: 0.08em; white-space: nowrap; 
-            } 
-        }
-        /* Flex-shrink: 0 impede a bolinha de amassar */
-        .hero-badge-dot { 
-            flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; 
-            background: #c68b3f; box-shadow: 0 0 6px #c68b3f; animation: pulse-dot 2s infinite; 
-        }
+        .hero-badge { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: rgba(198,139,63,0.1); border: 1px solid rgba(198,139,63,0.3); padding: 0.5rem 1rem; border-radius: 1.5rem; font-size: 0.65rem; color: #d1a35f; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; line-height: 1.4; text-align: center; max-width: 100%; }
+        @media (min-width: 768px) { .hero-badge { backdrop-filter: blur(12px); font-size: 0.75rem; border-radius: 9999px; padding: 0.35rem 1.25rem; letter-spacing: 0.08em; white-space: nowrap; } }
+        .hero-badge-dot { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: #c68b3f; box-shadow: 0 0 6px #c68b3f; animation: pulse-dot 2s infinite; }
         @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 4px #c68b3f; } 50% { box-shadow: 0 0 12px #c68b3f; } }
 
         .shimmer-bg { background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; }
@@ -134,15 +166,12 @@
         #hero-canvas { will-change: transform; }
         .scroll-block { will-change: transform, opacity; transform: translateZ(0); position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
-        /* Animação Suave para o Indicador de Scroll */
         @keyframes gentle-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
         .animate-gentle-bounce { animation: gentle-bounce 2s ease-in-out infinite; }
 
-        /* Botão Flutuante Limpo com Imagem 3D */
         .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 64px; height: 64px; z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease-out; border: none; background: transparent; cursor: pointer; outline: none; padding: 0; }
         .whatsapp-float:active { transform: scale(0.92); }
 
-        /* Estilo do Chat App */
         #chat-modal { height: 100dvh; }
         .chat-bubble-bot { background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.25rem 1.25rem 1.25rem 0.25rem; }
         .chat-bubble-user { background-color: rgba(198,139,63,0.2); border: 1px solid rgba(198,139,63,0.3); border-radius: 1.25rem 1.25rem 0.25rem 1.25rem; }
@@ -150,9 +179,7 @@
         .chat-input-active { box-shadow: 0 0 0 2px rgba(198,139,63,0.5); background: rgba(255,255,255,0.1) !important; }
         .safe-pb { padding-bottom: env(safe-area-inset-bottom); }
 
-        @media (max-width: 768px) {
-            .backdrop-blur-md { backdrop-filter: none !important; background: rgba(0, 0, 0, 0.85) !important; }
-        }
+        @media (max-width: 768px) { .backdrop-blur-md { backdrop-filter: none !important; background: rgba(0, 0, 0, 0.85) !important; } }
     </style>
 </head>
 <body class="antialiased selection:bg-gold-500/30 selection:text-gold-100 relative">
@@ -269,17 +296,18 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                 <!-- Card 1 -->
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative product-card-reveal cursor-pointer" onclick="openChat('Aurora Materna')">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div><div class="space-y-2 mt-4"><div class="h-3 w-full shimmer-bg rounded"></div><div class="h-3 w-5/6 shimmer-bg rounded"></div></div></div>
                     </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full relative">
+                        <div class="card-glare"></div>
+                        <div class="card-img-wrap relative h-56 overflow-hidden bg-choco-950">
                             <img src="produtos/aurora materna.jpeg" alt="Aurora Materna" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-gold-300">Premium</div>
                         </div>
-                        <div class="p-5 flex flex-col flex-grow">
+                        <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Aurora Materna</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">Um despertar inesquecível</p>
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
@@ -289,7 +317,7 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button onclick="openChat('Aurora Materna')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors pointer-events-none">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </button>
                             </div>
@@ -298,16 +326,17 @@
                 </article>
 
                 <!-- Card 2 -->
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative product-card-reveal cursor-pointer" onclick="openChat('Doce Essência')">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div></div>
                     </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full relative">
+                        <div class="card-glare"></div>
+                        <div class="card-img-wrap relative h-56 overflow-hidden bg-choco-950">
                             <img src="produtos/Essência Gourmet.jpeg" alt="Essência Gourmet" loading="lazy" decoding="async" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-5 flex flex-col flex-grow">
+                        <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Doce Essência</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">Sofisticação em cada detalhe</p>
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
@@ -317,7 +346,7 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button onclick="openChat('Doce Essência')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors pointer-events-none">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </button>
                             </div>
@@ -326,17 +355,18 @@
                 </article>
 
                 <!-- Card 3 -->
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative product-card-reveal cursor-pointer" onclick="openChat('Encanto Floral')">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div></div>
                     </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full relative">
+                        <div class="card-glare"></div>
+                        <div class="card-img-wrap relative h-56 overflow-hidden bg-choco-950">
                             <img src="produtos/Encanto Floral Luxo.jpeg" alt="Encanto Floral" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-rose-300 flex items-center gap-1"><i data-lucide="heart" class="w-3 h-3 fill-rose-300"></i> Romance</div>
                         </div>
-                        <div class="p-5 flex flex-col flex-grow">
+                        <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Encanto Floral</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">Delicadeza que emociona</p>
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
@@ -346,26 +376,24 @@
                             <div class="mt-auto space-y-3 border-t border-white/10 pt-4">
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Simples</span><div class="text-lg font-bold text-white">R$ 120</div></div>
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Completa</span><div class="text-lg font-bold text-white">R$ 190</div></div>
-                                <button onclick="openChat('Encanto Floral')" class="w-full block text-center py-2 bg-gold-600/20 border border-gold-500/30 rounded-lg text-gold-400 text-sm font-medium cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
-                                    Selecionar Opção
-                                </button>
                             </div>
                         </div>
                     </div>
                 </article>
 
                 <!-- Card 4 -->
-                <article class="clay-glass-card overflow-hidden flex flex-col relative">
+                <article class="clay-glass-card overflow-hidden flex flex-col relative product-card-reveal cursor-pointer" onclick="openChat('Império Cacau')">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
                         <div class="p-6 space-y-4"><div class="h-6 w-3/4 shimmer-bg rounded"></div></div>
                     </div>
-                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full">
-                        <div class="relative h-56 overflow-hidden bg-choco-950">
+                    <div class="real-content opacity-0 transition-opacity duration-1000 flex flex-col h-full relative">
+                        <div class="card-glare"></div>
+                        <div class="card-img-wrap relative h-56 overflow-hidden bg-choco-950">
                             <img src="produtos/Cesta Império do Chocolate.jpeg" alt="Império do Chocolate" loading="lazy" decoding="async" class="w-full h-full object-cover">
                             <div class="absolute top-4 right-4 backdrop-blur-md bg-black/70 px-3 py-1 rounded-full text-xs font-semibold text-gold-300 flex items-center gap-1"><i data-lucide="crown" class="w-3 h-3"></i> Ouro</div>
                         </div>
-                        <div class="p-5 flex flex-col flex-grow">
+                        <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Império Cacau</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">A majestade em uma cesta</p>
                             <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
@@ -374,7 +402,7 @@
                             </ul>
                             <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                                 <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button onclick="openChat('Império Cacau')" class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 cursor-pointer hover:bg-gold-600 hover:text-white transition-colors">
+                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors pointer-events-none">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </button>
                             </div>
@@ -558,6 +586,28 @@
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 
+        // ------------------------------------------
+        // Lógica de Entrada em Cascata dos Cards
+        // ------------------------------------------
+        window.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, index * 100); // 100ms delay entre cada card subindo
+                        cardObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.product-card-reveal').forEach(card => {
+                cardObserver.observe(card);
+            });
+        });
+
+        // Splash e Canvas
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const wrappers = document.querySelectorAll('.skeleton-wrapper');
@@ -700,8 +750,9 @@
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
         }
 
+
         // ==========================================
-        // SISTEMA DE CHAT DE RESERVA
+        // SISTEMA DE CHAT DE RESERVA & REDIRECIONAMENTO WHATSAPP
         // ==========================================
         let chatStep = 0;
         let userData = { name: '', product: '', address: '', date: '' };
@@ -795,7 +846,6 @@
             document.body.style.overflow = '';
         }
 
-        // Função do balão do bot com a FOTO da Camila
         function addBotMessage(text) {
             const msg = document.createElement('div');
             msg.className = 'flex justify-start items-end opacity-0 translate-y-4 transition-all duration-500 mb-3 w-full';
