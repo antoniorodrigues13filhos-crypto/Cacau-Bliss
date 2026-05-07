@@ -165,8 +165,12 @@
             text-align: center;
         }
 
-        @keyframes gentle-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-        .animate-gentle-bounce { animation: gentle-bounce 2s ease-in-out infinite; }
+        /* --- NOVO ÍCONE DE SCROLL ANIMADO --- */
+        @keyframes scroll-wheel {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(14px); opacity: 0; }
+        }
+        .animate-scroll-wheel { animation: scroll-wheel 1.5s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite; }
 
         .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 64px; height: 64px; z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease-out; border: none; background: transparent; cursor: pointer; outline: none; padding: 0; }
         .whatsapp-float:active { transform: scale(0.92); }
@@ -236,7 +240,6 @@
         </div>
     </nav>
 
-    <!-- NOVA ALTURA: Aumentado para 800vh para permitir que todos os frames corram sem o usuário "atropelar" o scroll -->
     <section id="hero-track" class="relative h-[800vh] bg-black">
         <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center hero-content">
             <canvas id="hero-canvas" class="absolute inset-0 z-0"></canvas>
@@ -278,11 +281,15 @@
                     </div>
                 </div>
 
-                <div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center transition-opacity duration-500 z-30 pointer-events-none">
-                    <span class="text-gold-400/70 text-[10px] uppercase tracking-[0.2em] mb-2 font-medium">Role para descobrir</span>
-                    <i data-lucide="mouse" class="w-5 h-5 text-gold-400/70 mb-1 animate-gentle-bounce"></i>
-                    <i data-lucide="chevron-down" class="w-4 h-4 text-gold-400/50 animate-gentle-bounce" style="animation-delay: 0.1s;"></i>
+                <!-- NOVO SCROLL INDICATOR "FOOLPROOF" -->
+                <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center transition-opacity duration-500 z-30 pointer-events-none">
+                    <span class="text-white/80 text-[11px] uppercase tracking-[0.3em] mb-3 font-medium drop-shadow-md">Deslize para baixo</span>
+                    <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1 backdrop-blur-sm">
+                        <div class="w-1 h-2.5 bg-gold-400 rounded-full animate-scroll-wheel shadow-[0_0_8px_rgba(198,139,63,0.8)]"></div>
+                    </div>
                 </div>
+                <!-- FIM DO NOVO SCROLL INDICATOR -->
+
             </div>
         </div>
     </section>
@@ -537,7 +544,6 @@
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 
-        // Card reveal observer
         window.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { threshold: 0.1, rootMargin: '0px 0px 50px 0px' };
             const cardObserver = new IntersectionObserver((entries) => {
@@ -560,7 +566,6 @@
             }, 800);
         });
 
-        // HERO CANVAS
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
         const heroContainer = document.getElementById("hero-track");
@@ -568,13 +573,10 @@
         const block2 = document.getElementById("hero-block-2");
         const block3 = document.getElementById("hero-block-3");
 
-        const maxFrames = 120; // Defina para o número exato de frames que você renderizou
-        
-        // Agora todos os frames rodam tanto no PC quanto no Mobile
+        const maxFrames = 120;
         const frameCount = maxFrames;
 
         const currentFrame = index => {
-            // Removida a trava de "index * 2" para rodar completo
             return `${String(index).padStart(4, '0')}.webp`;
         };
 
@@ -615,9 +617,6 @@
             images.push(img);
         }
 
-        // ============================================================
-        // COREOGRAFIA DE RITMO (LERP Harmonizado)
-        // ============================================================
         const LERP_CANVAS = isMobile ? 0.08 : 0.10;
         const LERP_TEXT   = isMobile ? 0.14 : 0.12;
 
@@ -667,7 +666,6 @@
                     lastDrawnFrame = frameIndex;
                 }
 
-                // Bloco 1 - Fica um pouco mais na tela (0 a 20%)
                 const op1 = mapRange(smoothText, 0.00, 0.20, 1, 0);
                 const y1  = mapRange(smoothText, 0.00, 0.20, 0, -60);
                 const s1  = mapRange(smoothText, 0.00, 0.20, 1, 0.95);
@@ -675,7 +673,6 @@
                 block1.style.transform = `translate3d(0, ${y1}px, 0) scale(${s1})`;
                 block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
 
-                // Bloco 2 - Entra aos 28% e sai aos 75%
                 let op2, y2, s2;
                 if (smoothText < 0.52) {
                     op2 = mapRange(smoothText, 0.28, 0.40, 0, 1);
@@ -689,7 +686,6 @@
                 block2.style.opacity   = Math.max(0, op2);
                 block2.style.transform = `translate3d(0, ${y2}px, 0) scale(${s2})`;
 
-                // Bloco 3 - Entra aos 80% e vai até o fim
                 const op3 = mapRange(smoothText, 0.80, 0.95, 0, 1);
                 const y3  = mapRange(smoothText, 0.80, 0.95, 60, 0);
                 const s3  = mapRange(smoothText, 0.80, 0.95, 1.05, 1);
@@ -701,7 +697,6 @@
         }
         requestAnimationFrame(animateHero);
 
-        // SLIDER
         const sliderContainer = document.getElementById('image-slider');
         const sliderOverlay   = document.getElementById('slider-overlay');
         const sliderHandle    = document.getElementById('slider-handle');
@@ -729,9 +724,6 @@
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
         }
 
-        // ============================================================
-        // CHAT / RESERVA & WEBHOOK INTEGRATION
-        // ============================================================
         let chatStep = 0;
         let userData = { name: '', product: '', address: '', date: '' };
 
@@ -848,9 +840,6 @@
             processStep(text);
         });
 
-        // ==========================================
-        // CÉREBRO DO CHAT E WEBHOOK
-        // ==========================================
         function processStep(text) {
             chatInput.disabled = true;
             setTimeout(() => {
@@ -876,8 +865,7 @@
                     chatForm.classList.add('opacity-50');
                     addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o nosso WhatsApp para confirmarmos a reserva. Aguarde um instante...');
                     
-                    // --- DISPARO DO WEBHOOK INVISÍVEL ---
-                    const webhookUrl = 'SUA_URL_DO_N8N_OU_MAKE_AQUI'; // <--- COLE SUA URL DE WEBHOOK AQUI
+                    const webhookUrl = 'SUA_URL_DO_N8N_OU_MAKE_AQUI'; 
                     
                     if(webhookUrl !== 'SUA_URL_DO_N8N_OU_MAKE_AQUI') {
                         fetch(webhookUrl, {
@@ -894,7 +882,6 @@
                         }).catch(e => console.log('Erro silencioso webhook', e));
                     }
 
-                    // --- REDIRECIONAMENTO WHATSAPP ---
                     setTimeout(() => {
                         const textToEncode = `Olá Camila! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:\n\n🎁 *Produto:* ${userData.product}\n📍 *Endereço:* ${userData.address}\n📅 *Data:* ${userData.date}`;
                         const wppUrl = `https://wa.me/559688091761?text=${encodeURIComponent(textToEncode)}`;
