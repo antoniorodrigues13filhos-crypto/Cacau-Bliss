@@ -281,14 +281,12 @@
                     </div>
                 </div>
 
-                <!-- NOVO SCROLL INDICATOR "FOOLPROOF" -->
                 <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center transition-opacity duration-500 z-30 pointer-events-none">
                     <span class="text-white/80 text-[11px] uppercase tracking-[0.3em] mb-3 font-medium drop-shadow-md">Deslize para baixo</span>
                     <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1 backdrop-blur-sm">
                         <div class="w-1 h-2.5 bg-gold-400 rounded-full animate-scroll-wheel shadow-[0_0_8px_rgba(198,139,63,0.8)]"></div>
                     </div>
                 </div>
-                <!-- FIM DO NOVO SCROLL INDICATOR -->
 
             </div>
         </div>
@@ -724,8 +722,19 @@
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
         }
 
+        // ============================================================
+        // CHAT / RESERVA & INTEGRAÇÃO GOOGLE SHEETS
+        // ============================================================
+        
+        const productCatalog = {
+            'Aurora Materna': 'R$ 250,00',
+            'Doce Essência': 'R$ 140,00',
+            'Encanto Floral': 'A partir de R$ 120,00',
+            'Império Cacau': 'R$ 180,00'
+        };
+
         let chatStep = 0;
-        let userData = { name: '', product: '', address: '', date: '' };
+        let userData = { name: '', product: '', price: '', address: '', date: '' };
 
         const chatModal    = document.getElementById('chat-modal');
         const chatMessages = document.getElementById('chat-messages');
@@ -742,12 +751,12 @@
         function showProductCards() {
             const msg = document.createElement('div');
             msg.className = 'flex justify-start opacity-0 translate-y-4 transition-all duration-500 mb-2 w-full ml-10';
-            const products = [
-                { name: 'Aurora Materna', price: 'R$ 250' },
-                { name: 'Doce Essência',  price: 'R$ 140' },
-                { name: 'Encanto Floral', price: 'R$ 120+' },
-                { name: 'Império Cacau',  price: 'R$ 180' }
-            ];
+            
+            const products = Object.keys(productCatalog).map(key => ({
+                name: key,
+                price: productCatalog[key]
+            }));
+
             let cardsHtml = products.map(p =>
                 `<button onclick="selectProduct('${p.name}')" class="chat-product-btn w-full text-left p-4 mb-3 rounded-xl border border-gold-500/30 bg-[#1a0f0a] hover:bg-gold-600/20 text-gold-200 transition-colors font-medium flex justify-between items-center cursor-pointer shadow-md">
                     <span>${p.name}</span>
@@ -768,7 +777,10 @@
                 b.classList.add('opacity-40', 'cursor-not-allowed');
             });
             addUserMessage(productName);
+            
             userData.product = productName;
+            userData.price = productCatalog[productName] || 'Sob consulta';
+
             chatForm.style.display = 'flex';
             chatInput.disabled = true;
             setTimeout(() => {
@@ -785,7 +797,15 @@
             document.body.style.overflow = 'hidden';
             chatMessages.innerHTML = '';
             chatStep = 0;
-            userData = { name: '', product: preSelectedProduct, address: '', date: '' };
+            
+            userData = { 
+                name: '', 
+                product: preSelectedProduct, 
+                price: productCatalog[preSelectedProduct] || '',
+                address: '', 
+                date: '' 
+            };
+
             chatForm.style.display = 'flex';
             const greeting = getGreeting();
             setTimeout(() => {
@@ -848,6 +868,7 @@
 
                 if (chatStep === 0) {
                     userData.product = text;
+                    userData.price = productCatalog[text] || 'Sob consulta';
                     addBotMessage(`Anotado! Excelente escolha. Para continuarmos, como posso te chamar?`);
                     chatStep = 1;
                 } else if (chatStep === 1) {
@@ -865,25 +886,26 @@
                     chatForm.classList.add('opacity-50');
                     addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o nosso WhatsApp para confirmarmos a reserva. Aguarde um instante...');
                     
-                    const webhookUrl = 'SUA_URL_DO_N8N_OU_MAKE_AQUI'; 
+                    const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbywIK04K1PxpXo5wThBkbE75fwlzDknd3R_tdwZ38VQ-MQB_YRcvFKnDsQco4HXHaGL/exec'; 
                     
-                    if(webhookUrl !== 'SUA_URL_DO_N8N_OU_MAKE_AQUI') {
-                        fetch(webhookUrl, {
+                    if(googleScriptUrl !== '') {
+                        fetch(googleScriptUrl, {
                             method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                             body: JSON.stringify({
-                                origem: 'Chat Cacau Bliss',
                                 nome: userData.name,
                                 produto: userData.product,
+                                preco: userData.price,
                                 endereco: userData.address,
                                 dataEntrega: userData.date,
                                 dataCadastro: new Date().toLocaleString('pt-BR')
                             })
-                        }).catch(e => console.log('Erro silencioso webhook', e));
+                        }).catch(e => console.log('Erro silencioso sheets', e));
                     }
 
                     setTimeout(() => {
-                        const textToEncode = `Olá Camila! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:\n\n🎁 *Produto:* ${userData.product}\n📍 *Endereço:* ${userData.address}\n📅 *Data:* ${userData.date}`;
+                        const textToEncode = `Olá Camila! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:\n\n🎁 *Produto:* ${userData.product} (${userData.price})\n📍 *Endereço:* ${userData.address}\n📅 *Data:* ${userData.date}`;
                         const wppUrl = `https://wa.me/559688091761?text=${encodeURIComponent(textToEncode)}`;
                         
                         if (isMobile) { window.location.href = wppUrl; } else { window.open(wppUrl, '_blank'); }
