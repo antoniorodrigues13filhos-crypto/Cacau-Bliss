@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="Cestas artesanais, chocolates finos e arranjos florais preparados com dedicação.">
     
-    <!-- Preconnects -->
+    <!-- Preconnects para performance 4G -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://buildix-user-images.s3.us-east-2.amazonaws.com">
@@ -69,66 +69,69 @@
         #splash-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #c68b3f; transition: width 0.3s ease-out; }
         @keyframes pulse-glow { 0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 8px rgba(198,139,63,0.3)); } 50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(198,139,63,0.6)); } }
 
+        /* Fundo e Efeitos */
         .bg-fixed-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/75d400a2-e4f7-4388-8f62-8f112aa521d7.webp'); background-size: cover; background-position: center; z-index: -2; }
         .bg-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%); z-index: -1; }
         .noise-overlay { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay; will-change: transform; transform: translateZ(0); }
         @media (max-width: 768px) { .noise-overlay { display: none; } }
-
         .grain-static { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 9998; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 180px 180px; opacity: 0.04; mix-blend-mode: soft-light; }
 
         .glass-nav { background: rgba(26, 15, 10, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: background 0.3s ease; }
         @media (min-width: 768px) { .glass-nav { background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); } }
 
         /* =========================================
-           ESTILOS DO CARD ANIMADO (Premium/Apple-style)
+           NOVA ANIMAÇÃO DE CARDS - FLUIDA E OTIMIZADA
            ========================================= */
         .clay-glass-card { 
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 1.5rem; 
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease; 
+            transition: border-color 0.4s ease;
         }
-        
-        /* Desktop Hover 3D Effect */
-        @media (min-width: 768px) { 
-            .clay-glass-card { 
-                background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); 
-                box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2); 
-            } 
+
+        /* Animação suave de entrada (Scale + Fade) para Desktop e Mobile */
+        .product-card-reveal {
+            opacity: 0.01;
+            transform: scale(0.95) translateY(15px);
+            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+        }
+        .product-card-reveal.is-visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Efeitos apenas para MOUSE (Evita travamentos e estados 'presos' no Mobile) */
+        @media (hover: hover) and (pointer: fine) {
+            .clay-glass-card {
+                background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+                box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.2);
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+            }
             .clay-glass-card:hover {
-                transform: translateY(-8px);
+                transform: translateY(-6px);
                 box-shadow: 0 30px 60px -15px rgba(198, 139, 63, 0.25), inset 0 1px 1px rgba(255,255,255,0.2), inset 0 -1px 1px rgba(0,0,0,0.2);
                 border-color: rgba(198, 139, 63, 0.4);
                 z-index: 10;
             }
+            .clay-glass-card:hover .card-glare { transform: translateX(100%); }
+            .clay-glass-card:hover .card-img-wrap img { transform: scale(1.05); }
         }
 
-        /* Mobile Touch Haptic Effect */
+        /* Efeito de Toque (Haptic) exclusivo para Mobile */
         @media (max-width: 767px) {
+            .clay-glass-card { transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s; }
             .clay-glass-card:active {
-                transform: scale(0.96);
-                transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-                border-color: rgba(198, 139, 63, 0.5);
+                transform: scale(0.97);
+                background-color: rgba(198, 139, 63, 0.1);
             }
         }
 
-        /* Image Scale Smooth */
-        .card-img-wrap img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-        .clay-glass-card:hover .card-img-wrap img { transform: scale(1.08); }
-
-        /* Diagonal Glare (Reflexo de Vidro) */
+        .card-img-wrap img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .card-glare {
             position: absolute; inset: 0; z-index: 25; pointer-events: none;
             background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.06) 25%, transparent 30%);
             transform: translateX(-100%); transition: transform 0.8s ease-out;
         }
-        .clay-glass-card:hover .card-glare { transform: translateX(100%); }
-
-        /* Animation Classes for Intersection Observer */
-        .product-card-reveal {
-            opacity: 0; transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .product-card-reveal.is-visible { opacity: 1; transform: translateY(0); }
         /* ========================================= */
 
         @keyframes gold-shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
@@ -158,12 +161,7 @@
         .slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: #c68b3f; transform: translateX(-50%); z-index: 10; cursor: ew-resize; }
         .slider-handle::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: #c68b3f; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>'); background-position: center; background-repeat: no-repeat; background-size: 20px; }
 
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .accordion-icon { transition: transform 0.3s ease; }
-        .accordion-btn[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); }
-        .accordion-btn[aria-expanded="true"] { background-color: rgba(198, 139, 63, 0.1); }
-
-        #hero-canvas { will-change: transform; }
+        #hero-canvas { will-change: transform; width: 100%; height: 100%; object-fit: cover; }
         .scroll-block { will-change: transform, opacity; transform: translateZ(0); position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
         @keyframes gentle-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
@@ -239,7 +237,7 @@
 
     <section id="hero-track" class="relative h-[600vh] bg-black">
         <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center hero-content">
-            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full object-cover z-0"></canvas>
+            <canvas id="hero-canvas" class="absolute inset-0 z-0"></canvas>
             <div class="hero-vignette"></div>
             <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
 
@@ -310,14 +308,14 @@
                         <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Aurora Materna</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">Um despertar inesquecível</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow pointer-events-none">
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Pães artesanais & Mini sanduíche</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini bolo caseiro & Frutas frescas</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Geleia gourmet & Biscoitos</li>
                             </ul>
-                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
+                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4 pointer-events-none">
                                 <div class="text-lg font-bold text-white">R$ 250<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors pointer-events-none">
+                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </button>
                             </div>
@@ -339,14 +337,14 @@
                         <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Doce Essência</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">Sofisticação em cada detalhe</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow pointer-events-none">
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Trufas artesanais</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mini ovos de chocolate</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Embalagem elegante</li>
                             </ul>
-                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
+                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4 pointer-events-none">
                                 <div class="text-lg font-bold text-white">R$ 140<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors pointer-events-none">
+                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </button>
                             </div>
@@ -369,11 +367,11 @@
                         <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Encanto Floral</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">Delicadeza que emociona</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow pointer-events-none">
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Arranjo de flores</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Chocolates Cacau Bliss</li>
                             </ul>
-                            <div class="mt-auto space-y-3 border-t border-white/10 pt-4">
+                            <div class="mt-auto space-y-3 border-t border-white/10 pt-4 pointer-events-none">
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Simples</span><div class="text-lg font-bold text-white">R$ 120</div></div>
                                 <div class="flex items-center justify-between"><span class="text-sm text-zinc-400">Versão Completa</span><div class="text-lg font-bold text-white">R$ 190</div></div>
                             </div>
@@ -396,13 +394,13 @@
                         <div class="p-5 flex flex-col flex-grow z-10">
                             <h3 class="text-xl font-bold text-white font-serif mb-1">Império Cacau</h3>
                             <p class="text-gold-400 text-sm mb-4 italic">A majestade em uma cesta</p>
-                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow">
+                            <ul class="space-y-2 text-zinc-300 text-sm mb-8 flex-grow pointer-events-none">
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Mix chocolates importados</li>
                                 <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-gold-500"></i> Creme de avelã premium</li>
                             </ul>
-                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
+                            <div class="mt-auto flex items-center justify-between border-t border-white/10 pt-4 pointer-events-none">
                                 <div class="text-lg font-bold text-white">R$ 180<span class="text-sm text-zinc-500 font-normal">,00</span></div>
-                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors pointer-events-none">
+                                <button class="p-2 bg-gold-600/20 border border-gold-500/30 rounded-full text-gold-400 transition-colors">
                                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                                 </button>
                             </div>
@@ -449,66 +447,6 @@
                                 <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-bold text-lg">Personalização</h4>
-                                <p class="text-zinc-400 text-sm mt-1">Opções de cartões escritos à mão e embalagens que refletem a personalidade de quem recebe.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="py-16 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-white mb-3 font-serif">Dúvidas Frequentes</h2>
-                <p class="text-zinc-400 text-sm md:text-base">Tudo o que você precisa saber antes de encomendar.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Com quanta antecedência devo fazer meu pedido?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Recomendamos que os pedidos sejam feitos com pelo menos 48 horas de antecedência para garantirmos a disponibilidade de todos os itens frescos e a personalização adequada.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Vocês entregam em quais regiões?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Atualmente, realizamos entregas em toda a região metropolitana. Para áreas mais afastadas, consulte nossa equipe via WhatsApp para verificar taxas e viabilidade.
-                        </div>
-                    </div>
-                </div>
-                <div class="clay-glass-card overflow-hidden">
-                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" aria-expanded="false">
-                        <span class="text-white font-medium text-sm md:text-base">Posso alterar itens da cesta?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gold-400 accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-5 pt-0 text-zinc-400 text-sm">
-                            Sim! Oferecemos opções de substituição em caso de restrições alimentares (como itens sem glúten ou lactose). Consulte nossa equipe para personalizar sua cesta de acordo com a necessidade.
-                        </div>
                     </div>
                 </div>
             </div>
@@ -544,7 +482,6 @@
 
     <!-- CHAT MODAL NATIVO -->
     <div id="chat-modal" class="fixed inset-0 z-[100000] bg-black/95 backdrop-blur-md hidden flex-col w-full">
-        <!-- Header do Chat com Foto da Camila -->
         <div class="glass-nav px-5 py-4 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
                 <img src="camila.jpg.jpg" alt="Camila - Atendente" class="w-10 h-10 rounded-full object-cover shadow-lg border border-gold-500/30">
@@ -558,12 +495,8 @@
             </button>
         </div>
 
-        <!-- Área de Mensagens -->
-        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10">
-            <!-- Mensagens injetadas via JS -->
-        </div>
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10"></div>
 
-        <!-- Input Fixo no Rodapé -->
         <div class="bg-[#0f0805] border-t border-white/10 p-3 shrink-0 safe-pb">
             <form id="chat-form" class="flex gap-2 max-w-3xl mx-auto w-full relative">
                 <input type="text" id="chat-input" class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-4 text-white text-base focus:outline-none focus:border-gold-500 chat-input-active transition-all" placeholder="Digite aqui..." autocomplete="off">
@@ -587,16 +520,14 @@
         initLucide();
 
         // ------------------------------------------
-        // Lógica de Entrada em Cascata dos Cards
+        // Animação dos Cards - Suave e sem Stagger (Garante fluidez no Mobile)
         // ------------------------------------------
         window.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px 50px 0px' };
             const cardObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
+                entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('is-visible');
-                        }, index * 100); // 100ms delay entre cada card subindo
+                        entry.target.classList.add('is-visible');
                         cardObserver.unobserve(entry.target);
                     }
                 });
@@ -646,13 +577,10 @@
                 loadedCount++;
                 if(progressBar) progressBar.style.width = `${(loadedCount / frameCount) * 100}%`;
 
+                // Removido o cálculo de DPR para evitar engasgos no mobile. Deixa o CSS object-fit fazer o trabalho duro via placa de vídeo.
                 if(i === 1) {
-                    const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 1.5) : window.devicePixelRatio || 1;
-                    canvas.width = img.width * dpr;
-                    canvas.height = img.height * dpr;
-                    context.scale(dpr, dpr);
-                    canvas.style.width = '100%';
-                    canvas.style.height = '100%';
+                    canvas.width = img.width;
+                    canvas.height = img.height;
                     context.drawImage(img, 0, 0, img.width, img.height);
                 }
 
@@ -706,7 +634,8 @@
             const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothScrollCanvas * frameCount)));
             
             if (frameIndex !== lastDrawnFrame && images[frameIndex] && images[frameIndex].complete) {
-                context.drawImage(images[frameIndex], 0, 0, images[frameIndex].width, images[frameIndex].height);
+                // Desenha a imagem perfeitamente mapeada no canvas
+                context.drawImage(images[frameIndex], 0, 0, canvas.width, canvas.height);
                 lastDrawnFrame = frameIndex; 
             }
 
@@ -749,7 +678,6 @@
             window.addEventListener('touchmove', (e) => { if (!isDragging) return; moveSlider(e.touches[0].clientX); }, {passive: true});
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
         }
-
 
         // ==========================================
         // SISTEMA DE CHAT DE RESERVA & REDIRECIONAMENTO WHATSAPP
