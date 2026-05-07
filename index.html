@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="Cestas artesanais, chocolates finos e arranjos florais preparados com dedicação.">
     
-    <!-- Preconnects para performance 4G -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://buildix-user-images.s3.us-east-2.amazonaws.com">
@@ -36,7 +35,6 @@
     </style>
 
     <style>
-        /* Otimizações Touch "Apple-level" */
         * { -webkit-tap-highlight-color: transparent; }
         ::-webkit-scrollbar { display: none; }
         @media (min-width: 768px) { 
@@ -53,7 +51,6 @@
             -webkit-font-smoothing: antialiased; overflow-x: hidden; overscroll-behavior-y: none;
         }
 
-        /* Splash Screen */
         #splash-screen {
             position: fixed; inset: 0; z-index: 99999; background-color: #0f0805;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -69,7 +66,6 @@
         #splash-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #c68b3f; transition: width 0.3s ease-out; }
         @keyframes pulse-glow { 0%, 100% { opacity: 0.8; filter: drop-shadow(0 0 8px rgba(198,139,63,0.3)); } 50% { opacity: 1; filter: drop-shadow(0 0 16px rgba(198,139,63,0.6)); } }
 
-        /* Fundo e Efeitos */
         .bg-fixed-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: url('https://buildix-user-images.s3.us-east-2.amazonaws.com/ai-generated/75d400a2-e4f7-4388-8f62-8f112aa521d7.webp'); background-size: cover; background-position: center; z-index: -2; }
         .bg-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, rgba(15,8,5,0.6) 0%, rgba(15,8,5,0.95) 100%); z-index: -1; }
         .noise-overlay { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; opacity: 0.035; mix-blend-mode: overlay; will-change: transform; transform: translateZ(0); }
@@ -79,16 +75,12 @@
         .glass-nav { background: rgba(26, 15, 10, 0.85); border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: background 0.3s ease; }
         @media (min-width: 768px) { .glass-nav { background: rgba(26, 15, 10, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); } }
 
-        /* =========================================
-           NOVA ANIMAÇÃO DE CARDS - FLUIDA E OTIMIZADA
-           ========================================= */
         .clay-glass-card { 
             background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 1.5rem; 
             transition: border-color 0.4s ease;
         }
 
-        /* Animação suave de entrada (Scale + Fade) para Desktop e Mobile */
         .product-card-reveal {
             opacity: 0.01;
             transform: scale(0.95) translateY(15px);
@@ -100,7 +92,6 @@
             transform: scale(1) translateY(0);
         }
 
-        /* Efeitos apenas para MOUSE (Evita travamentos e estados 'presos' no Mobile) */
         @media (hover: hover) and (pointer: fine) {
             .clay-glass-card {
                 background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -117,7 +108,6 @@
             .clay-glass-card:hover .card-img-wrap img { transform: scale(1.05); }
         }
 
-        /* Efeito de Toque (Haptic) exclusivo para Mobile */
         @media (max-width: 767px) {
             .clay-glass-card { transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s; }
             .clay-glass-card:active {
@@ -132,7 +122,6 @@
             background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.06) 25%, transparent 30%);
             transform: translateX(-100%); transition: transform 0.8s ease-out;
         }
-        /* ========================================= */
 
         @keyframes gold-shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
         
@@ -162,7 +151,19 @@
         .slider-handle::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: #c68b3f; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>'); background-position: center; background-repeat: no-repeat; background-size: 20px; }
 
         #hero-canvas { will-change: transform; width: 100%; height: 100%; object-fit: cover; }
-        .scroll-block { will-change: transform, opacity; transform: translateZ(0); position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+        .scroll-block {
+            will-change: opacity, transform;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            position: absolute;
+            left: 0; right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
         @keyframes gentle-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
         .animate-gentle-bounce { animation: gentle-bounce 2s ease-in-out infinite; }
@@ -447,6 +448,24 @@
                                 <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
                             </div>
                         </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Personalização</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Opções de cartões escritos à mão e embalagens que refletem a personalidade de quem recebe.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -475,7 +494,6 @@
         </div>
     </footer>
 
-    <!-- BOTÃO FLUTUANTE 3D (Aciona o Chatbot) -->
     <button onclick="openChat()" class="whatsapp-float hover:scale-105" aria-label="Abrir Atendimento">
         <img src="3d-icon-social-media-app.png" alt="Chat" class="w-full h-full object-contain drop-shadow-2xl">
     </button>
@@ -519,9 +537,7 @@
         function initLucide(){if(window.lucide){lucide.createIcons()}else{setTimeout(initLucide,200)}}
         initLucide();
 
-        // ------------------------------------------
-        // Animação dos Cards - Suave e sem Stagger (Garante fluidez no Mobile)
-        // ------------------------------------------
+        // Card reveal observer
         window.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { threshold: 0.1, rootMargin: '0px 0px 50px 0px' };
             const cardObserver = new IntersectionObserver((entries) => {
@@ -532,37 +548,34 @@
                     }
                 });
             }, observerOptions);
-
-            document.querySelectorAll('.product-card-reveal').forEach(card => {
-                cardObserver.observe(card);
-            });
+            document.querySelectorAll('.product-card-reveal').forEach(card => cardObserver.observe(card));
         });
 
-        // Splash e Canvas
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const wrappers = document.querySelectorAll('.skeleton-wrapper');
                 const contents = document.querySelectorAll('.real-content');
                 wrappers.forEach(w => w.style.opacity = '0');
-                setTimeout(() => { wrappers.forEach(w => w.style.display = 'none'); contents.forEach(c => c.style.opacity = '1'); }, 400); 
-            }, 800); 
+                setTimeout(() => { wrappers.forEach(w => w.style.display = 'none'); contents.forEach(c => c.style.opacity = '1'); }, 400);
+            }, 800);
         });
 
+        // HERO CANVAS
         const canvas = document.getElementById("hero-canvas");
         const context = canvas.getContext("2d");
-        const heroContainer = document.getElementById("hero-track"); 
+        const heroContainer = document.getElementById("hero-track");
         const block1 = document.getElementById("hero-block-1");
         const block2 = document.getElementById("hero-block-2");
         const block3 = document.getElementById("hero-block-3");
 
         const maxFrames = 120;
-        const frameCount = isMobile ? Math.floor(maxFrames / 2) : maxFrames; 
-        
+        const frameCount = isMobile ? Math.floor(maxFrames / 2) : maxFrames;
+
         const currentFrame = index => {
             const mappedIndex = isMobile ? index * 2 : index;
             return `${String(mappedIndex).padStart(4, '0')}.webp`;
         };
-        
+
         const images = [];
         let loadedCount = 0;
         const splashScreen = document.getElementById('splash-screen');
@@ -575,189 +588,204 @@
             img.src = currentFrame(i);
             img.onload = () => {
                 loadedCount++;
-                if(progressBar) progressBar.style.width = `${(loadedCount / frameCount) * 100}%`;
-
-                // Removido o cálculo de DPR para evitar engasgos no mobile. Deixa o CSS object-fit fazer o trabalho duro via placa de vídeo.
-                if(i === 1) {
+                if (progressBar) progressBar.style.width = `${(loadedCount / frameCount) * 100}%`;
+                if (i === 1) {
                     canvas.width = img.width;
                     canvas.height = img.height;
                     context.drawImage(img, 0, 0, img.width, img.height);
                 }
-
-                if(loadedCount >= thresholdToUnlock && !isUnlocked) {
+                if (loadedCount >= thresholdToUnlock && !isUnlocked) {
                     isUnlocked = true;
                     setTimeout(() => {
                         splashScreen.style.opacity = '0';
                         splashScreen.style.transform = 'scale(1.05)';
                         setTimeout(() => splashScreen.remove(), 1000);
-                    }, 400); 
+                    }, 400);
                 }
             };
             img.onerror = () => {
-                if(!isUnlocked) {
+                if (!isUnlocked) {
                     isUnlocked = true;
                     splashScreen.style.opacity = '0';
                     setTimeout(() => splashScreen.remove(), 1000);
                 }
-            }
+            };
             images.push(img);
         }
 
-        let targetScroll = 0; let smoothScrollCanvas = 0; let smoothScrollText = 0; let lastDrawnFrame = -1;
+        const LERP_CANVAS = isMobile ? 0.06 : 0.11;
+        const LERP_TEXT   = isMobile ? 0.30 : 0.09;
+
+        let targetScroll   = 0;
+        let smoothCanvas   = 0;
+        let smoothText     = 0;
+        let lastDrawnFrame = -1;
+        let lastTime       = 0;
+
         const scrollIndicator = document.getElementById('scroll-indicator');
 
         window.addEventListener('scroll', () => {
-            if(!heroContainer) return;
+            if (!heroContainer) return;
             const scrollTop = window.scrollY;
             const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
-            let frac = scrollTop / maxScrollTop;
-            targetScroll = Math.max(0, Math.min(frac, 1));
-
-            if(scrollIndicator) {
+            targetScroll = Math.max(0, Math.min(scrollTop / maxScrollTop, 1));
+            if (scrollIndicator) {
                 scrollIndicator.style.opacity = targetScroll > 0.02 ? '0' : '1';
             }
         }, { passive: true });
 
         let isHeroVisible = true;
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { isHeroVisible = entry.isIntersecting; }); });
-        if (heroContainer) observer.observe(heroContainer);
+        const heroObserver = new IntersectionObserver(
+            (entries) => entries.forEach(e => { isHeroVisible = e.isIntersecting; }),
+            { threshold: 0 }
+        );
+        if (heroContainer) heroObserver.observe(heroContainer);
 
-        const lerpCanvas = 0.12; const lerpText = 0.08;
+        function dtLerp(current, target, factor, dt) {
+            const adjusted = 1 - Math.pow(1 - factor, dt / (1000 / 60));
+            return current + (target - current) * adjusted;
+        }
 
-        function animateHero() {
-            if(!heroContainer) return;
-            if (!isHeroVisible) { requestAnimationFrame(animateHero); return; }
+        function animateHero(timestamp) {
+            if (!heroContainer) { requestAnimationFrame(animateHero); return; }
 
-            smoothScrollCanvas += (targetScroll - smoothScrollCanvas) * lerpCanvas;
-            smoothScrollText += (targetScroll - smoothScrollText) * lerpText;
+            const dt = lastTime ? Math.min(timestamp - lastTime, 64) : 16;
+            lastTime = timestamp;
 
-            const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothScrollCanvas * frameCount)));
-            
-            if (frameIndex !== lastDrawnFrame && images[frameIndex] && images[frameIndex].complete) {
-                // Desenha a imagem perfeitamente mapeada no canvas
-                context.drawImage(images[frameIndex], 0, 0, canvas.width, canvas.height);
-                lastDrawnFrame = frameIndex; 
+            if (isHeroVisible) {
+                smoothCanvas = dtLerp(smoothCanvas, targetScroll, LERP_CANVAS, dt);
+                smoothText   = dtLerp(smoothText,   targetScroll, LERP_TEXT,   dt);
+
+                const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.floor(smoothCanvas * frameCount)));
+                if (frameIndex !== lastDrawnFrame && images[frameIndex] && images[frameIndex].complete) {
+                    context.drawImage(images[frameIndex], 0, 0, canvas.width, canvas.height);
+                    lastDrawnFrame = frameIndex;
+                }
+
+                const op1 = mapRange(smoothText, 0.0, 0.22, 1, 0);
+                const y1  = mapRange(smoothText, 0.0, 0.22, 0, -100);
+                block1.style.opacity   = Math.max(0, op1);
+                block1.style.transform = `translate3d(0, ${y1}px, 0)`;
+                block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
+
+                let op2, y2;
+                if (smoothText < 0.52) {
+                    op2 = mapRange(smoothText, 0.25, 0.50, 0, 1);
+                    y2  = mapRange(smoothText, 0.25, 0.50, 90, 0);
+                } else {
+                    op2 = mapRange(smoothText, 0.56, 0.78, 1, 0);
+                    y2  = mapRange(smoothText, 0.56, 0.78, 0, -90);
+                }
+                block2.style.opacity   = Math.max(0, op2);
+                block2.style.transform = `translate3d(0, ${y2}px, 0)`;
+
+                const op3 = mapRange(smoothText, 0.80, 1.0, 0, 1);
+                const y3  = mapRange(smoothText, 0.80, 1.0, 90, 0);
+                block3.style.opacity   = Math.max(0, op3);
+                block3.style.transform = `translate3d(0, ${y3}px, 0)`;
+                block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
             }
-
-            let op1 = mapRange(smoothScrollText, 0.0, 0.25, 1, 0); let y1 = mapRange(smoothScrollText, 0.0, 0.25, 0, -120);
-            block1.style.opacity = Math.max(0, op1); block1.style.transform = `translate3d(0px, ${y1}px, 0px)`; block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
-
-            let op2, y2;
-            if (smoothScrollText < 0.50) { op2 = mapRange(smoothScrollText, 0.25, 0.50, 0, 1); y2 = mapRange(smoothScrollText, 0.25, 0.50, 120, 0); } 
-            else { op2 = mapRange(smoothScrollText, 0.55, 0.80, 1, 0); y2 = mapRange(smoothScrollText, 0.55, 0.80, 0, -120); }
-            block2.style.opacity = Math.max(0, op2); block2.style.transform = `translate3d(0px, ${y2}px, 0px)`;
-
-            let op3 = mapRange(smoothScrollText, 0.80, 1.0, 0, 1); let y3 = mapRange(smoothScrollText, 0.80, 1.0, 120, 0);
-            block3.style.opacity = Math.max(0, op3); block3.style.transform = `translate3d(0px, ${y3}px, 0px)`; block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
-
             requestAnimationFrame(animateHero);
         }
-        animateHero();
+        requestAnimationFrame(animateHero);
 
-        // Slider
+        // SLIDER
         const sliderContainer = document.getElementById('image-slider');
-        const sliderOverlay = document.getElementById('slider-overlay');
-        const sliderHandle = document.getElementById('slider-handle');
-        const sliderImgAfter = document.getElementById('slider-img-after');
+        const sliderOverlay   = document.getElementById('slider-overlay');
+        const sliderHandle    = document.getElementById('slider-handle');
+        const sliderImgAfter  = document.getElementById('slider-img-after');
         let isDragging = false;
 
-        function updateSliderWidth() { if(sliderContainer) sliderImgAfter.style.width = sliderContainer.offsetWidth + 'px'; }
+        function updateSliderWidth() { if (sliderContainer) sliderImgAfter.style.width = sliderContainer.offsetWidth + 'px'; }
         updateSliderWidth(); window.addEventListener('resize', updateSliderWidth);
 
         function moveSlider(clientX) {
             const rect = sliderContainer.getBoundingClientRect();
             let xPos = Math.max(0, Math.min(clientX - rect.left, rect.width));
-            const percentage = (xPos / rect.width) * 100;
-            sliderOverlay.style.width = `${percentage}%`; sliderHandle.style.left = `${percentage}%`;
+            const pct = (xPos / rect.width) * 100;
+            sliderOverlay.style.width = `${pct}%`;
+            sliderHandle.style.left   = `${pct}%`;
         }
 
-        if(sliderContainer) {
-            sliderHandle.addEventListener('mousedown', () => { isDragging = true; }); window.addEventListener('mouseup', () => { isDragging = false; });
+        if (sliderContainer) {
+            sliderHandle.addEventListener('mousedown', () => { isDragging = true; });
+            window.addEventListener('mouseup',   () => { isDragging = false; });
             window.addEventListener('mousemove', (e) => { if (isDragging) moveSlider(e.clientX); });
-            sliderHandle.addEventListener('touchstart', () => { isDragging = true; }, {passive: true}); window.addEventListener('touchend', () => { isDragging = false; });
-            window.addEventListener('touchmove', (e) => { if (!isDragging) return; moveSlider(e.touches[0].clientX); }, {passive: true});
+            sliderHandle.addEventListener('touchstart', () => { isDragging = true; }, { passive: true });
+            window.addEventListener('touchend',  () => { isDragging = false; });
+            window.addEventListener('touchmove', (e) => { if (!isDragging) return; moveSlider(e.touches[0].clientX); }, { passive: true });
             sliderContainer.addEventListener('click', (e) => { moveSlider(e.clientX); });
         }
 
-        // ==========================================
-        // SISTEMA DE CHAT DE RESERVA & REDIRECIONAMENTO WHATSAPP
-        // ==========================================
+        // ============================================================
+        // CHAT / RESERVA & WEBHOOK INTEGRATION
+        // ============================================================
         let chatStep = 0;
         let userData = { name: '', product: '', address: '', date: '' };
-        
-        const chatModal = document.getElementById('chat-modal');
+
+        const chatModal    = document.getElementById('chat-modal');
         const chatMessages = document.getElementById('chat-messages');
-        const chatInput = document.getElementById('chat-input');
-        const chatForm = document.getElementById('chat-form');
+        const chatInput    = document.getElementById('chat-input');
+        const chatForm     = document.getElementById('chat-form');
 
         function getGreeting() {
-            const hour = new Date().getHours();
-            if (hour >= 5 && hour < 12) return 'Bom dia';
-            if (hour >= 12 && hour < 18) return 'Boa tarde';
+            const h = new Date().getHours();
+            if (h >= 5  && h < 12) return 'Bom dia';
+            if (h >= 12 && h < 18) return 'Boa tarde';
             return 'Boa noite';
         }
 
         function showProductCards() {
             const msg = document.createElement('div');
             msg.className = 'flex justify-start opacity-0 translate-y-4 transition-all duration-500 mb-2 w-full ml-10';
-            
             const products = [
                 { name: 'Aurora Materna', price: 'R$ 250' },
-                { name: 'Doce Essência', price: 'R$ 140' },
+                { name: 'Doce Essência',  price: 'R$ 140' },
                 { name: 'Encanto Floral', price: 'R$ 120+' },
-                { name: 'Império Cacau', price: 'R$ 180' }
+                { name: 'Império Cacau',  price: 'R$ 180' }
             ];
-            
-            let cardsHtml = products.map(p => 
+            let cardsHtml = products.map(p =>
                 `<button onclick="selectProduct('${p.name}')" class="chat-product-btn w-full text-left p-4 mb-3 rounded-xl border border-gold-500/30 bg-[#1a0f0a] hover:bg-gold-600/20 text-gold-200 transition-colors font-medium flex justify-between items-center cursor-pointer shadow-md">
                     <span>${p.name}</span>
                     <span class="text-xs text-gold-400/80 px-2 py-1 bg-white/5 rounded-md">${p.price}</span>
                 </button>`
             ).join('');
-
             msg.innerHTML = `<div class="w-full max-w-[85%] mt-2">${cardsHtml}</div>`;
             chatMessages.appendChild(msg);
             scrollToBottom();
             setTimeout(() => msg.classList.remove('opacity-0', 'translate-y-4'), 50);
-            
             chatForm.style.display = 'none';
         }
 
         function selectProduct(productName) {
-            if(chatStep !== 0) return;
-            
+            if (chatStep !== 0) return;
             document.querySelectorAll('.chat-product-btn').forEach(b => {
                 b.disabled = true;
                 b.classList.add('opacity-40', 'cursor-not-allowed');
             });
-            
             addUserMessage(productName);
             userData.product = productName;
-            
-            chatForm.style.display = 'flex'; 
+            chatForm.style.display = 'flex';
             chatInput.disabled = true;
-            
             setTimeout(() => {
                 chatInput.disabled = false;
                 addBotMessage(`Uau, excelente escolha! A <strong>${productName}</strong> é uma maravilha. ✨<br><br>Para continuarmos com a sua reserva, como posso te chamar?`);
                 chatStep = 1;
                 chatInput.focus();
-            }, 600);
+            }, 400);
         }
 
         function openChat(preSelectedProduct = '') {
             chatModal.classList.remove('hidden');
             chatModal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; 
-            
+            document.body.style.overflow = 'hidden';
             chatMessages.innerHTML = '';
             chatStep = 0;
             userData = { name: '', product: preSelectedProduct, address: '', date: '' };
             chatForm.style.display = 'flex';
             const greeting = getGreeting();
-            
             setTimeout(() => {
-                if(preSelectedProduct) {
+                if (preSelectedProduct) {
                     addBotMessage(`${greeting}! Que excelente escolha a <strong>${preSelectedProduct}</strong>! 🥰 Para iniciarmos sua reserva, como posso te chamar?`);
                     chatStep = 1;
                     setTimeout(() => chatInput.focus(), 100);
@@ -802,52 +830,64 @@
         chatForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const text = chatInput.value.trim();
-            if(!text) return;
-            
+            if (!text) return;
             addUserMessage(text);
             chatInput.value = '';
             processStep(text);
         });
 
+        // ==========================================
+        // CÉREBRO DO CHAT E WEBHOOK
+        // ==========================================
         function processStep(text) {
             chatInput.disabled = true;
-            
             setTimeout(() => {
                 chatInput.disabled = false;
                 chatInput.focus();
 
-                if(chatStep === 0) {
+                if (chatStep === 0) {
                     userData.product = text;
                     addBotMessage(`Anotado! Excelente escolha. Para continuarmos, como posso te chamar?`);
                     chatStep = 1;
-                } 
-                else if(chatStep === 1) {
+                } else if (chatStep === 1) {
                     userData.name = text;
                     addBotMessage(`Prazer, ${userData.name}! Para onde devemos enviar a sua ${userData.product}? (Me passe o endereço completo com ponto de referência)`);
                     chatStep = 2;
-                }
-                else if(chatStep === 2) {
+                } else if (chatStep === 2) {
                     userData.address = text;
                     addBotMessage('Perfeito. E para qual data e horário você deseja agendar a entrega?');
                     chatStep = 3;
-                }
-                else if(chatStep === 3) {
+                } else if (chatStep === 3) {
                     userData.date = text;
-                    chatInput.disabled = true; 
-                    chatInput.placeholder = "Redirecionando...";
+                    chatInput.disabled = true;
+                    chatInput.placeholder = "Processando reserva...";
                     chatForm.classList.add('opacity-50');
-                    
                     addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o nosso WhatsApp para confirmarmos a reserva. Aguarde um instante...');
                     
+                    // --- DISPARO DO WEBHOOK INVISÍVEL ---
+                    const webhookUrl = 'SUA_URL_DO_N8N_OU_MAKE_AQUI'; // <--- COLE SUA URL DE WEBHOOK AQUI
+                    
+                    if(webhookUrl !== 'SUA_URL_DO_N8N_OU_MAKE_AQUI') {
+                        fetch(webhookUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                origem: 'Chat Cacau Bliss',
+                                nome: userData.name,
+                                produto: userData.product,
+                                endereco: userData.address,
+                                dataEntrega: userData.date,
+                                dataCadastro: new Date().toLocaleString('pt-BR')
+                            })
+                        }).catch(e => console.log('Erro silencioso webhook', e));
+                    }
+
+                    // --- REDIRECIONAMENTO WHATSAPP ---
                     setTimeout(() => {
                         const textToEncode = `Olá Camila! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:\n\n🎁 *Produto:* ${userData.product}\n📍 *Endereço:* ${userData.address}\n📅 *Data:* ${userData.date}`;
                         const wppUrl = `https://wa.me/559688091761?text=${encodeURIComponent(textToEncode)}`;
                         
-                        if (isMobile) {
-                            window.location.href = wppUrl;
-                        } else {
-                            window.open(wppUrl, '_blank');
-                        }
+                        if (isMobile) { window.location.href = wppUrl; } else { window.open(wppUrl, '_blank'); }
                         
                         closeChat();
                         chatStep = 0;
@@ -856,7 +896,7 @@
                         chatInput.placeholder = "Digite aqui...";
                     }, 2500);
                 }
-            }, 600);
+            }, 400); 
         }
     </script>
 </body>
