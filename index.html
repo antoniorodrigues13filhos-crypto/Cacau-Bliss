@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta name="description" content="Cestas artesanais, chocolates finos e arranjos florais preparados com dedicação.">
     
+    <!-- Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://buildix-user-images.s3.us-east-2.amazonaws.com">
@@ -116,18 +117,24 @@
         #hero-canvas { will-change: transform; }
         .scroll-block { will-change: transform, opacity; transform: translateZ(0); position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
+        /* Animação Suave para o Indicador de Scroll */
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+        .animate-gentle-bounce { animation: gentle-bounce 2s ease-in-out infinite; }
+
         /* Botão Flutuante Limpo com Imagem 3D */
         .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 64px; height: 64px; z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease-out; border: none; background: transparent; cursor: pointer; outline: none; padding: 0; }
         .whatsapp-float:active { transform: scale(0.92); }
 
         /* Estilo do Chat App */
         #chat-modal {
-            height: 100dvh; /* Crava a interface no Mobile sem ser empurrada pelo teclado de forma nativa */
+            height: 100dvh;
         }
         .chat-bubble-bot { background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.05); border-radius: 1.25rem 1.25rem 1.25rem 0.25rem; }
         .chat-bubble-user { background-color: rgba(198,139,63,0.2); border: 1px solid rgba(198,139,63,0.3); border-radius: 1.25rem 1.25rem 0.25rem 1.25rem; }
         
-        /* Destaque Visual Fixo no Input */
         .chat-input-active {
             box-shadow: 0 0 0 2px rgba(198,139,63,0.5);
             background: rgba(255,255,255,0.1) !important;
@@ -235,6 +242,13 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- INDICADOR DE ROLAGEM MINIMALISTA -->
+                <div id="scroll-indicator" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center transition-opacity duration-500 z-30 pointer-events-none">
+                    <span class="text-gold-400/70 text-[10px] uppercase tracking-[0.2em] mb-2 font-medium">Role para descobrir</span>
+                    <i data-lucide="mouse" class="w-5 h-5 text-gold-400/70 mb-1 animate-gentle-bounce"></i>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-gold-400/50 animate-gentle-bounce" style="animation-delay: 0.1s;"></i>
+                </div>
             </div>
         </div>
     </section>
@@ -247,6 +261,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- Card 1 -->
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
@@ -275,6 +290,7 @@
                     </div>
                 </article>
 
+                <!-- Card 2 -->
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
@@ -302,6 +318,7 @@
                     </div>
                 </article>
 
+                <!-- Card 3 -->
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
@@ -330,6 +347,7 @@
                     </div>
                 </article>
 
+                <!-- Card 4 -->
                 <article class="clay-glass-card overflow-hidden flex flex-col relative">
                     <div class="skeleton-wrapper absolute inset-0 z-20 bg-[#1a0f0a] rounded-1.5rem">
                         <div class="w-full h-56 shimmer-bg"></div>
@@ -360,6 +378,7 @@
             </div>
         </section>
 
+        <!-- (Seção de Experiência mantida) -->
         <section id="experiencia" class="py-12 px-5 sm:px-6 lg:px-8 max-w-5xl mx-auto">
             <div class="clay-glass-card p-5 md:p-10">
                 <div class="text-center mb-6">
@@ -396,11 +415,30 @@
                                 <p class="text-zinc-400 text-sm mt-1">Garantimos que a surpresa chegue no momento perfeito, logo nas primeiras horas do dia.</p>
                             </div>
                         </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Qualidade Premium</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Ingredientes selecionados, chocolates artesanais e flores frescas de produtores locais.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-full bg-gold-600/20 flex items-center justify-center flex-shrink-0 border border-gold-500/30">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Personalização</h4>
+                                <p class="text-zinc-400 text-sm mt-1">Opções de cartões escritos à mão e embalagens que refletem a personalidade de quem recebe.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Contato mantido apontando para o botão de Chat -->
         <section id="contato" class="py-12 px-5 sm:px-6 lg:px-8 max-w-3xl mx-auto">
             <div class="clay-glass-card p-8 md:p-12 text-center">
                 <div class="w-16 h-16 mx-auto bg-gold-600/20 rounded-full flex items-center justify-center border border-gold-500/30 mb-6">
@@ -421,14 +459,18 @@
             <span class="text-xl font-bold font-serif text-white tracking-wide opacity-80 block mb-2">Cacau Bliss</span>
             <p class="text-zinc-600 text-xs mb-2">Criando momentos inesquecíveis através de sabores e aromas selecionados com amor.</p>
             <p class="text-zinc-600 text-xs">&copy; 2024 Cacau Bliss. Todos os direitos reservados.</p>
+            <div class="mt-4 text-gold-400 text-sm animate-pulse">👇 Clique no ícone abaixo para falar com a gente!</div>
         </div>
     </footer>
 
+    <!-- BOTÃO FLUTUANTE 3D (Aciona o Chatbot) -->
     <button onclick="openChat()" class="whatsapp-float hover:scale-105" aria-label="Abrir Atendimento">
         <img src="3d-icon-social-media-app.png" alt="Chat" class="w-full h-full object-contain drop-shadow-2xl">
     </button>
 
+    <!-- CHAT MODAL NATIVO -->
     <div id="chat-modal" class="fixed inset-0 z-[100000] bg-black/95 backdrop-blur-md hidden flex-col w-full">
+        <!-- Header do Chat -->
         <div class="glass-nav px-5 py-4 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-gold-600 flex items-center justify-center shadow-lg">
@@ -444,12 +486,16 @@
             </button>
         </div>
 
+        <!-- Área de Mensagens -->
         <div id="chat-messages" class="flex-1 overflow-y-auto p-5 space-y-4 w-full max-w-3xl mx-auto scroll-smooth pb-10">
-            </div>
+            <!-- Mensagens injetadas via JS -->
+        </div>
 
+        <!-- Input Fixo no Rodapé -->
         <div class="bg-[#0f0805] border-t border-white/10 p-3 shrink-0 safe-pb">
             <form id="chat-form" class="flex gap-2 max-w-3xl mx-auto w-full relative">
                 <input type="text" id="chat-input" class="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-4 text-white text-base focus:outline-none focus:border-gold-500 chat-input-active transition-all" placeholder="Digite aqui..." autocomplete="off">
+                <!-- Botão Destaque para indicar a ação -->
                 <button type="submit" id="chat-submit" class="w-14 h-14 rounded-full bg-gold-600 text-white flex items-center justify-center shrink-0 hover:bg-gold-500 transition-colors shadow-[0_0_15px_rgba(198,139,63,0.4)] cursor-pointer">
                     <i data-lucide="send" class="w-6 h-6 ml-1"></i>
                 </button>
@@ -538,6 +584,7 @@
         }
 
         let targetScroll = 0; let smoothScrollCanvas = 0; let smoothScrollText = 0; let lastDrawnFrame = -1;
+        const scrollIndicator = document.getElementById('scroll-indicator');
 
         window.addEventListener('scroll', () => {
             if(!heroContainer) return;
@@ -545,6 +592,12 @@
             const maxScrollTop = heroContainer.scrollHeight - window.innerHeight;
             let frac = scrollTop / maxScrollTop;
             targetScroll = Math.max(0, Math.min(frac, 1));
+
+            // Fade out the scroll indicator smoothly when scrolling starts
+            if(scrollIndicator) {
+                scrollIndicator.style.opacity = targetScroll > 0.02 ? '0' : '1';
+            }
+
         }, { passive: true });
 
         let isHeroVisible = true;
@@ -766,11 +819,9 @@
                     addBotMessage('Tudo certinho! ✨ Estou te transferindo agora mesmo para o nosso WhatsApp para confirmarmos a reserva. Aguarde um instante...');
                     
                     setTimeout(() => {
-                        // Formatação garantida com encodeURIComponent
                         const textToEncode = `Olá! Me chamo ${userData.name}. Gostaria de confirmar minha reserva:\n\n🎁 *Produto:* ${userData.product}\n📍 *Endereço:* ${userData.address}\n📅 *Data:* ${userData.date}`;
                         const wppUrl = `https://wa.me/559688091761?text=${encodeURIComponent(textToEncode)}`;
                         
-                        // Resolução de Pop-up Block para Mobile (Redirecionamento nativo direto)
                         if (isMobile) {
                             window.location.href = wppUrl;
                         } else {
