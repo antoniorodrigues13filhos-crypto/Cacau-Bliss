@@ -151,19 +151,7 @@
         .slider-handle::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; background: #c68b3f; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 10px rgba(0,0,0,0.5); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18-6-6 6-6"/><path d="m15 18 6-6-6-6"/></svg>'); background-position: center; background-repeat: no-repeat; background-size: 20px; }
 
         #hero-canvas { will-change: transform; width: 100%; height: 100%; object-fit: cover; }
-
-        .scroll-block {
-            will-change: opacity, transform;
-            transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            position: absolute;
-            left: 0; right: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+        .scroll-block { will-change: transform, opacity; transform: translate3d(0, 0, 0); position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
         @keyframes gentle-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
         .animate-gentle-bounce { animation: gentle-bounce 2s ease-in-out infinite; }
@@ -498,7 +486,6 @@
         <img src="3d-icon-social-media-app.png" alt="Chat" class="w-full h-full object-contain drop-shadow-2xl">
     </button>
 
-    <!-- CHAT MODAL NATIVO -->
     <div id="chat-modal" class="fixed inset-0 z-[100000] bg-black/95 backdrop-blur-md hidden flex-col w-full">
         <div class="glass-nav px-5 py-4 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
@@ -613,8 +600,11 @@
             images.push(img);
         }
 
-        const LERP_CANVAS = isMobile ? 0.06 : 0.11;
-        const LERP_TEXT   = isMobile ? 0.30 : 0.09;
+        // ============================================================
+        // COREOGRAFIA DE RITMO (LERP Harmonizado)
+        // ============================================================
+        const LERP_CANVAS = isMobile ? 0.08 : 0.10;
+        const LERP_TEXT   = isMobile ? 0.14 : 0.12;
 
         let targetScroll   = 0;
         let smoothCanvas   = 0;
@@ -662,27 +652,34 @@
                     lastDrawnFrame = frameIndex;
                 }
 
-                const op1 = mapRange(smoothText, 0.0, 0.22, 1, 0);
-                const y1  = mapRange(smoothText, 0.0, 0.22, 0, -100);
+                // Bloco 1
+                const op1 = mapRange(smoothText, 0.05, 0.20, 1, 0);
+                const y1  = mapRange(smoothText, 0.05, 0.20, 0, -60);
+                const s1  = mapRange(smoothText, 0.05, 0.20, 1, 0.95);
                 block1.style.opacity   = Math.max(0, op1);
-                block1.style.transform = `translate3d(0, ${y1}px, 0)`;
+                block1.style.transform = `translate3d(0, ${y1}px, 0) scale(${s1})`;
                 block1.style.pointerEvents = op1 > 0.5 ? 'auto' : 'none';
 
-                let op2, y2;
-                if (smoothText < 0.52) {
-                    op2 = mapRange(smoothText, 0.25, 0.50, 0, 1);
-                    y2  = mapRange(smoothText, 0.25, 0.50, 90, 0);
+                // Bloco 2
+                let op2, y2, s2;
+                if (smoothText < 0.50) {
+                    op2 = mapRange(smoothText, 0.25, 0.40, 0, 1);
+                    y2  = mapRange(smoothText, 0.25, 0.40, 60, 0);
+                    s2  = mapRange(smoothText, 0.25, 0.40, 1.05, 1);
                 } else {
-                    op2 = mapRange(smoothText, 0.56, 0.78, 1, 0);
-                    y2  = mapRange(smoothText, 0.56, 0.78, 0, -90);
+                    op2 = mapRange(smoothText, 0.60, 0.75, 1, 0);
+                    y2  = mapRange(smoothText, 0.60, 0.75, 0, -60);
+                    s2  = mapRange(smoothText, 0.60, 0.75, 1, 0.95);
                 }
                 block2.style.opacity   = Math.max(0, op2);
-                block2.style.transform = `translate3d(0, ${y2}px, 0)`;
+                block2.style.transform = `translate3d(0, ${y2}px, 0) scale(${s2})`;
 
-                const op3 = mapRange(smoothText, 0.80, 1.0, 0, 1);
-                const y3  = mapRange(smoothText, 0.80, 1.0, 90, 0);
+                // Bloco 3
+                const op3 = mapRange(smoothText, 0.80, 0.95, 0, 1);
+                const y3  = mapRange(smoothText, 0.80, 0.95, 60, 0);
+                const s3  = mapRange(smoothText, 0.80, 0.95, 1.05, 1);
                 block3.style.opacity   = Math.max(0, op3);
-                block3.style.transform = `translate3d(0, ${y3}px, 0)`;
+                block3.style.transform = `translate3d(0, ${y3}px, 0) scale(${s3})`;
                 block3.style.pointerEvents = op3 > 0.5 ? 'auto' : 'none';
             }
             requestAnimationFrame(animateHero);
